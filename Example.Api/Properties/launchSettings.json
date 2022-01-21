@@ -20,8 +20,15 @@
     "MrPapaya.Api": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast/index",
       "applicationUrl": "https://localhost:5001;http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Example.Api": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:35858;http://localhost:35065",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

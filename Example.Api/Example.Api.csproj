@@ -7,11 +7,17 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'MrPapaya.Api' " />
   <ItemGroup>
     <None Remove="Views\" />
-    <None Remove="Views\WeatherForecast\" />
+    <None Remove="Controllers\" />
+    <None Remove="Views\App\" />
+    <None Remove="Views\Components\" />
+    <None Remove="Model\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
-    <Folder Include="Views\WeatherForecast\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Views\App\" />
+    <Folder Include="Views\Components\" />
+    <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JeyDotC.JustCs.Mvc\JeyDotC.JustCs.Mvc.csproj">

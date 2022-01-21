@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using Example.Api.Views.Components;
 using JeyDotC.JustCs;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 
-namespace MrPapaya.Api.Views
+namespace Example.Api.Views
 {
     public struct PageProps : IElementAttributes
     {
@@ -13,35 +12,34 @@ namespace MrPapaya.Api.Views
 
         public string Title { get; init; }
 
-        public IEnumerable<string> Css { get; init; }
+        public Fragment Head { get; init; }
 
-        public IEnumerable<string> Scripts { get; init; }
+        public string Page { get; init; }
     }
 
     public class Page : ComponentElement<PageProps>
     {
-        private static IEnumerable<Element> Links(IEnumerable<string> cssFiles)
-            => (cssFiles ?? Array.Empty<string>())
-                .Select(css => _<Link>(new Attrs { Href = css, Rel = "stylesheet" }));
-
-        private static IEnumerable<Element> Scripts(IEnumerable<string> scripts)
-            => (scripts ?? Array.Empty<string>()).Select(script => _<Script>(new Attrs {
-                Src = script,
-                Type = "module",
-            }));
-
-        protected override Element Render(PageProps props) =>
-
-            _<Html>(new Attrs { Lang = props.Lang ?? "en" },
-
+        protected override Element Render(PageProps props)
+            => _<Html>(
+                    new Attrs { Lang = props.Lang ?? "en" },
                 _<Head>(
-                    _<Title>(props.Title),
-                    _(Links(props.Css))
-                ),
+                    _<Meta>(new Attrs { Charset = "utf-8" }),
+                    _<Meta>(new Attrs { Name = "viewport", Content = "width=device-width, initial-scale=1" }),
 
+                    _<Link>(new Attrs { Href= "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css", Rel= "stylesheet", }),
+
+                    props.Head ?? _(),
+
+                    _<Title>(props.Title)
+                ),
                 _<Body>(
+                    _<NavBar>(new NavBarProps {
+                        Page = props.Page
+                    }),
+
                     _(Children),
-                    _(Scripts(props.Scripts))
+
+                    _<Script>(new Attrs { Src = "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" })
                 )
             );
     }
