@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Html\" />
+    <None Remove="Microsoft.AspNetCore.Mvc.Abstractions" />
+    <None Remove="Html\Attributes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Html\" />
+    <Folder Include="Html\Attributes\" />
+  </ItemGroup>
+</Project>
