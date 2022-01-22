@@ -61,7 +61,7 @@ namespace JeyDotC.JustCs
 
             RenderChildren(node.Children, builder);
 
-            builder.AppendLine($"</{node.Tag}>");
+            builder.Append($"</{node.Tag}>\n");
         }
 
         private static void RenderChildren(IEnumerable<Element> children, StringBuilder builder)

@@ -225,8 +225,7 @@ namespace JeyDotC.JustCs.Tests
                         new A()
                     },
                 },
-                @"<div><a></a>
-</div>",
+                "<div><a></a>\n</div>",
             };
 
             // Simple with multiple children.
@@ -239,10 +238,7 @@ namespace JeyDotC.JustCs.Tests
                         new A(),
                     },
                 },
-                @"<div><a></a>
-<a></a>
-<a></a>
-</div>",
+                "<div><a></a>\n<a></a>\n<a></a>\n</div>",
             };
 
             // Nested children.
@@ -261,11 +257,7 @@ namespace JeyDotC.JustCs.Tests
                         new A(),
                     },
                 },
-                @"<div><div><a></a>
-<a></a>
-</div>
-<a></a>
-</div>",
+                "<div><div><a></a>\n<a></a>\n</div>\n<a></a>\n</div>",
             };
 
             // Text nodes
@@ -305,8 +297,7 @@ namespace JeyDotC.JustCs.Tests
                         -300,
                     },
                 },
-                @"<div>String<a></a>
--300</div>",
+                "<div>String<a></a>\n-300</div>",
             };
 
             // Fragment special element
@@ -325,10 +316,7 @@ namespace JeyDotC.JustCs.Tests
                         },
                     },
                 },
-                @"<div><a></a>
-<a></a>
-<a></a>
-</div>",
+                "<div><a></a>\n<a></a>\n<a></a>\n</div>",
             };
         }
 

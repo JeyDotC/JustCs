@@ -20,8 +20,8 @@ namespace JeyDotC.JustCs.Html
             return string.Join(' ', styleParts);
         }
 
-        public static string Px(this object value) => $"{value}px";
-        public static string Percent(this object value) => $"{value}%";
-        public static string Em(this object value) => $"{value}em";
+        public static string Px(this object value) => FormattableString.Invariant($"{value}px");
+        public static string Percent(this object value) => FormattableString.Invariant($"{value}%");
+        public static string Em(this object value) => FormattableString.Invariant($"{value}em");
     }
 }
