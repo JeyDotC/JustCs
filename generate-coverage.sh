@@ -11,7 +11,10 @@ if [ ! -f "./tools/reportgenerator" ]; then
     dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools && "reportgenerator installed."
 fi
 
-rm -R ./coverage
+if [ -d ./coverage ]; then
+    echo "Removing coverage folder...";
+    rm -R ./coverage
+fi
 echo "Collecting coverage data: " && dotnet coverage collect "dotnet test" -f cobertura -s ./CoverageSettings.xml && \
 echo "Generating report: " && ./tools/reportgenerator "-reports:output.cobertura.xml" "-targetdir:coverage" && \
 rm ./output.cobertura.xml
