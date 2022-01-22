@@ -33,6 +33,10 @@ public class MyPageController : ControllerBase
 
 ## Installation
 
+```shell
+dotnet add package JeyDotC.JustCs.Mvc --version 1.0.0
+```
+
 ## Setup
 
 At your Startup.cs file, add this to your controller options:
