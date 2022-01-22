@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <Authors>Jeysson Guevara (JeyDotC)</Authors>
+    <Company>JeyDotC</Company>
+    <Description>Library to render HTML using just C#.</Description>
+    <Copyright>Jeysson Guevara (JeyDotC) 2022</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/JeyDotC/JustCs</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/JeyDotC/JustCs</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
