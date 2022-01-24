@@ -861,6 +861,10 @@ namespace JeyDotC.JustCs.Html.Attributes
         /// </summary>
         public bool? Download { get; init; }
 
+        public AriaRoles? Role { get; init; }
+
+        public AriaAttrs Aria { get; init; }
+
         public override bool Equals(object obj)
         {
             var other = obj as Attrs;
@@ -1034,7 +1038,8 @@ namespace JeyDotC.JustCs.Html.Attributes
                     Rel == other.Rel &&
                     Href == other.Href &&
                     Target == other.Target &&
-                    Download == other.Download;
+                    Download == other.Download &&
+                    Role == other.Role;
 
         }
 
@@ -1218,6 +1223,7 @@ namespace JeyDotC.JustCs.Html.Attributes
                 Href,
                 Target,
                 Download,
+                Role,
             };
             var allHashCodes = allAttributes.Where(a => a != null).Select(a => a.GetHashCode());
             _generatedHashCode = allHashCodes.Sum();
