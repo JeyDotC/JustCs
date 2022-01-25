@@ -390,6 +390,67 @@ namespace JeyDotC.JustCs.Tests
         }
 
         [Fact]
+        public void RenderAsHtml_ShouldHandleAriaProperties()
+        {
+            // Arrange
+            var ariaProperties = new AriaAttrs
+            {
+                Activedescendant = "value",
+                Atomic = BooleanValues.True,
+                Autocomplete = AriaAutoCompleteValues.Both,
+                Busy = BooleanValues.False,
+                Checked = TriState.Mixed,
+                Controls = "value",
+                Describedby = "value",
+                Disabled = BooleanValues.False,
+                Dropeffect = AriaDropEffectValues.Move,
+                Expanded = BooleanValues.False,
+                Flowto = "value",
+                Grabbed = BooleanValues.False,
+                Haspopup = BooleanValues.False,
+                Hidden = BooleanValues.False,
+                Invalid = AriaInvalidValues.Grammar,
+                Label = "value",
+                Labelledby = "value",
+                Level = 10,
+                Live = AriaLiveValues.Polite,
+                Multiline = BooleanValues.False,
+                Multiselectable = BooleanValues.False,
+                Orientation = AriaOrientationValues.Vertical,
+                Owns = "value",
+                Posinset = 10,
+                Pressed = TriState.Mixed,
+                Readonly = BooleanValues.False,
+                Relevant = "value",
+                Required = BooleanValues.False,
+                Selected = BooleanValues.False,
+                Setsize = 10,
+                Sort = AriaSortValues.Ascending,
+                Valuemax = 10,
+                Valuemin = 10,
+                Valuenow = 10,
+                Valuetext = "value",
+            };
+
+            var element = new Div
+            {
+                Attributes = new Attrs
+                {
+                    Aria = ariaProperties,
+                },
+            };
+
+            // Act
+            var result = element.RenderAsHtml();
+
+            // Assert
+            Assert.Equal(
+                "<div aria-activedescendant=\"value\" aria-atomic=\"true\" aria-autocomplete=\"both\" aria-busy=\"false\" aria-checked=\"mixed\" aria-controls=\"value\" aria-describedby=\"value\" aria-disabled=\"false\" aria-dropeffect=\"move\" aria-expanded=\"false\" aria-flowto=\"value\" aria-grabbed=\"false\" aria-haspopup=\"false\" aria-hidden=\"false\" aria-invalid=\"grammar\" aria-label=\"value\" aria-labelledby=\"value\" aria-level=\"10\" aria-live=\"polite\" aria-multiline=\"false\" aria-multiselectable=\"false\" aria-orientation=\"vertical\" aria-owns=\"value\" aria-posinset=\"10\" aria-pressed=\"mixed\" aria-readonly=\"false\" aria-relevant=\"value\" aria-required=\"false\" aria-selected=\"false\" aria-setsize=\"10\" aria-sort=\"ascending\" aria-valuemax=\"10\" aria-valuemin=\"10\" aria-valuenow=\"10\" aria-valuetext=\"value\"></div>",
+                result.TrimEnd('\n')
+            );
+        }
+
+        [Fact]
         public void RenderAsHtml_ShouldThrowWhenElementIsNull()
         {
             // Arrange

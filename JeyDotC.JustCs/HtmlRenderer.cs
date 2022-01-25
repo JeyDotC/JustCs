@@ -117,7 +117,16 @@ namespace JeyDotC.JustCs
                 return;
             }
 
-            if(name.Equals("HttpEquiv", StringComparison.CurrentCultureIgnoreCase))
+            if (name.Equals("Aria", StringComparison.CurrentCultureIgnoreCase))
+            {
+                foreach (var dataAttribute in value.GetType().GetProperties())
+                {
+                    RenderAttribute($"aria-{dataAttribute.Name}", dataAttribute.GetValue(value), builder);
+                }
+                return;
+            }
+
+            if (name.Equals("HttpEquiv", StringComparison.CurrentCultureIgnoreCase))
             {
                 RenderAttribute("http-equiv", value, builder);
                 return;

@@ -36,7 +36,7 @@ namespace JeyDotC.JustCs.Tests.Html.Attributes
             // Arrange
             var className = "some-class";
             var dir = DirValues.Ltr;
-            var expectedHashCode = className.GetHashCode() + dir.GetHashCode();
+            var expectedHashCode = className.GetHashCode() ^ dir.GetHashCode();
             var attrs = new Attrs
             {
                 Class = className,
@@ -50,6 +50,19 @@ namespace JeyDotC.JustCs.Tests.Html.Attributes
             // Assert
             Assert.Equal(expectedHashCode, actualHashCode);
             Assert.Equal(expectedHashCode, secondAttempt);
+        }
+
+        [Fact]
+        public void Equals_ShouldReturnTrueWhenComparedToSelf()
+        {
+            // Arrange
+            var attrs = new Attrs();
+
+            // Act
+            var result = attrs.Equals(attrs);
+
+            // Assert
+            Assert.True(result);
         }
     }
 }
