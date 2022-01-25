@@ -868,8 +868,16 @@ namespace JeyDotC.JustCs.Html.Attributes
         public override bool Equals(object obj)
         {
             var other = obj as Attrs;
+            if (other == null)
+            {
+                return false;
+            }
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
 
-            return other != null &&
+            return 
 #pragma warning disable CS0618 // Type or member is obsolete
                     Align == other.Align &&
                     Bgcolor == other.Bgcolor &&
@@ -1039,8 +1047,8 @@ namespace JeyDotC.JustCs.Html.Attributes
                     Href == other.Href &&
                     Target == other.Target &&
                     Download == other.Download &&
-                    Role == other.Role;
-
+                    Role == other.Role &&
+                    Aria == other.Aria;
         }
 
         private int? _generatedHashCode;
@@ -1052,181 +1060,7 @@ namespace JeyDotC.JustCs.Html.Attributes
                 return _generatedHashCode.Value;
             }
 
-            var allAttributes = new object[]
-            {
-#pragma warning disable CS0618 // Type or member is obsolete
-                Align,
-                Bgcolor,
-                Border,
-                Color,
-#pragma warning restore CS0618 // Type or member is obsolete
-                Accesskey,
-                Class,
-                Contenteditable,
-                DataSet,
-                Dir,
-                Draggable,
-                Hidden,
-                Id,
-                Lang,
-                Spellcheck,
-                Style,
-                Tabindex,
-                Title,
-                Translate,
-                Onblur,
-                Onchange,
-                Onclick,
-                Oncontextmenu,
-                Oncopy,
-                Oncut,
-                Ondblclick,
-                Ondrag,
-                Ondragend,
-                Ondragenter,
-                Ondragleave,
-                Ondragover,
-                Ondragstart,
-                Ondrop,
-                Onfocus,
-                Oninput,
-                Oninvalid,
-                Onkeydown,
-                Onkeypress,
-                Onkeyup,
-                Onmousedown,
-                Onmousemove,
-                Onmouseout,
-                Onmouseover,
-                Onmouseup,
-                Onmousewheel,
-                Onpaste,
-                Onscroll,
-                Onselect,
-                Onwheel,
-                Muted,
-                Poster,
-                Label,
-                Default,
-                Kind,
-                Oncuechange,
-                Srclang,
-                Scope,
-                Cols,
-                Rows,
-                Wrap,
-                Colspan,
-                Headers,
-                Rowspan,
-                Async,
-                Defer,
-                Selected,
-                Reversed,
-                Start,
-                Data,
-                High,
-                Low,
-                Optimum,
-                Charset,
-                Content,
-                HttpEquiv,
-                For,
-                Dirname,
-                Maxlength,
-                Placeholder,
-                Readonly,
-                Required,
-                Multiple,
-                Size,
-                Max,
-                Min,
-                Accept,
-                Checked,
-                List,
-                Onsearch,
-                Pattern,
-                Step,
-                Srcset,
-                Usemap,
-                Sizes,
-                Ismap,
-                Sandbox,
-                Srcdoc,
-                Autocomplete,
-                AcceptCharset,
-                Action,
-                Enctype,
-                Method,
-                Novalidate,
-                Onreset,
-                Onsubmit,
-                Ontoggle,
-                Open,
-                Datetime,
-                Span,
-                Height,
-                Width,
-                Autofocus,
-                Value,
-                Formaction,
-                Disabled,
-                Form,
-                Name,
-                Onload,
-                Onafterprint,
-                Onbeforeprint,
-                Onbeforeunload,
-                Onhashchange,
-                Onoffline,
-                Ononline,
-                Onpagehide,
-                Onpageshow,
-                Onpopstate,
-                Onresize,
-                Onstorage,
-                Onunload,
-                Cite,
-                Autoplay,
-                Controls,
-                Loop,
-                Oncanplaythrough,
-                Ondurationchange,
-                Onemptied,
-                Onended,
-                Onloadeddata,
-                Onloadedmetadata,
-                Onloadstart,
-                Onpause,
-                Onplay,
-                Onplaying,
-                Onprogress,
-                Onratechange,
-                Onseeked,
-                Onseeking,
-                Onstalled,
-                Onsuspend,
-                Ontimeupdate,
-                Onvolumechange,
-                Onwaiting,
-                Preload,
-                Oncanplay,
-                Onabort,
-                Src,
-                Onerror,
-                Alt,
-                Coords,
-                Shape,
-                Type,
-                Media,
-                Hreflang,
-                Rel,
-                Href,
-                Target,
-                Download,
-                Role,
-            };
-            var allHashCodes = allAttributes.Where(a => a != null).Select(a => a.GetHashCode());
-            _generatedHashCode = allHashCodes.Sum();
+            _generatedHashCode = this.HeavyGenerateHashCode();
 
             return _generatedHashCode.Value;
         }

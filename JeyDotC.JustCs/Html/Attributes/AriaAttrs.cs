@@ -177,5 +177,71 @@ namespace JeyDotC.JustCs.Html.Attributes
         /// Defines the human readable text alternative of aria-valuenow for a range widget.
         /// </summary>
         public string Valuetext { get; init; }
+
+        private int? _generatedHashCode;
+
+        public override bool Equals(object obj)
+        {
+            var otherAria = obj as AriaAttrs;
+
+            if (otherAria == null)
+            {
+                return false;
+            }
+
+            if (ReferenceEquals(this, obj))
+            {
+                return true;
+            }
+
+            return Activedescendant == otherAria.Activedescendant &&
+                Atomic == otherAria.Atomic &&
+                Autocomplete == otherAria.Autocomplete &&
+                Busy == otherAria.Busy &&
+                Checked == otherAria.Checked &&
+                Controls == otherAria.Controls &&
+                Describedby == otherAria.Describedby &&
+                Disabled == otherAria.Disabled &&
+                Dropeffect == otherAria.Dropeffect &&
+                Expanded == otherAria.Expanded &&
+                Flowto == otherAria.Flowto &&
+                Grabbed == otherAria.Grabbed &&
+                Haspopup == otherAria.Haspopup &&
+                Hidden == otherAria.Hidden &&
+                Invalid == otherAria.Invalid &&
+                Label == otherAria.Label &&
+                Labelledby == otherAria.Labelledby &&
+                Level == otherAria.Level &&
+                Live == otherAria.Live &&
+                Multiline == otherAria.Multiline &&
+                Multiselectable == otherAria.Multiselectable &&
+                Orientation == otherAria.Orientation &&
+                Owns == otherAria.Owns &&
+                Posinset == otherAria.Posinset &&
+                Pressed == otherAria.Pressed &&
+                Readonly == otherAria.Readonly &&
+                Relevant == otherAria.Relevant &&
+                Required == otherAria.Required &&
+                Selected == otherAria.Selected &&
+                Setsize == otherAria.Setsize &&
+                Sort == otherAria.Sort &&
+                Valuemax == otherAria.Valuemax &&
+                Valuemin == otherAria.Valuemin &&
+                Valuenow == otherAria.Valuenow &&
+                Valuetext == otherAria.Valuetext;
+
+        }
+
+        public override int GetHashCode()
+        {
+            if (_generatedHashCode.HasValue)
+            {
+                return _generatedHashCode.Value;
+            }
+
+            _generatedHashCode = this.HeavyGenerateHashCode();
+
+            return _generatedHashCode.Value;
+        }
     }
 }
