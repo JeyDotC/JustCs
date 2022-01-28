@@ -29,29 +29,6 @@ namespace JeyDotC.JustCs.Tests.Html.Attributes
         }
 
         [Fact]
-        public void GetHashCode_ShouldReturnCodeBasedOnSetProperties()
-        {
-            // Arrange
-            var activeDescendant = "some-class";
-            var @checked = TriState.Mixed;
-            var expectedHashCode = activeDescendant.GetHashCode() ^ @checked.GetHashCode();
-
-            var attrs = new AriaAttrs
-            {
-                Activedescendant = activeDescendant,
-                Checked = @checked,
-            };
-
-            // Act
-            var actualHashCode = attrs.GetHashCode();
-            var secondAttempt = attrs.GetHashCode();
-
-            // Assert
-            Assert.Equal(expectedHashCode, actualHashCode);
-            Assert.Equal(expectedHashCode, secondAttempt);
-        }
-
-        [Fact]
         public void Equals_ShouldReturnTrueWhenComparedToSelf()
         {
             // Arrange

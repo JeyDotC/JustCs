@@ -31,28 +31,6 @@ namespace JeyDotC.JustCs.Tests.Html.Attributes
         }
 
         [Fact]
-        public void GetHashCode_ShouldReturnCodeBasedOnSetProperties()
-        {
-            // Arrange
-            var className = "some-class";
-            var dir = DirValues.Ltr;
-            var expectedHashCode = className.GetHashCode() ^ dir.GetHashCode();
-            var attrs = new Attrs
-            {
-                Class = className,
-                Dir = dir,
-            };
-
-            // Act
-            var actualHashCode = attrs.GetHashCode();
-            var secondAttempt = attrs.GetHashCode();
-
-            // Assert
-            Assert.Equal(expectedHashCode, actualHashCode);
-            Assert.Equal(expectedHashCode, secondAttempt);
-        }
-
-        [Fact]
         public void Equals_ShouldReturnTrueWhenComparedToSelf()
         {
             // Arrange

@@ -53,7 +53,7 @@ namespace JeyDotC.JustCs
 
             if (node.SelfClosed)
             {
-                builder.Append(" />");
+                builder.Append(" />\n");
                 return;
             }
 

@@ -10,9 +10,10 @@
     <RepositoryType>Git</RepositoryType>
     <Authors>Jeysson Guevara (JeyDotC)</Authors>
     <Company>JeyDotC</Company>
-    <PackageVersion>1.0.1</PackageVersion>
+    <PackageVersion>1.0.2</PackageVersion>
     <Owners>Jeysson Guevara (JeyDotC) </Owners>
-    <PackageReleaseNotes>V1.0.1 Added support for WAI ARIA attributes.</PackageReleaseNotes>
+    <PackageReleaseNotes>V1.0.2 Switched Attrs and AriaAttrs from class to record.
+V1.0.1 Added support for WAI ARIA attributes.</PackageReleaseNotes>
     <Summary>Library to render HTML using just C#</Summary>
     <PackageTags>HTML, Razor Alternative, React-Inspired</PackageTags>
     <Title>JustCs</Title>
