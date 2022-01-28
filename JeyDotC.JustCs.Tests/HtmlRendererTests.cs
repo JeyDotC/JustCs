@@ -6,212 +6,217 @@ using JeyDotC.JustCs.Html.Attributes;
 
 namespace JeyDotC.JustCs.Tests
 {
+    record AttrsExtra : Attrs
+    {
+        public string Nonce { get; init; }
+    }
+
     public class HtmlRendererTests
     {
         public static IEnumerable<object[]> AllTagsNoAttributes()
         {
-            yield return new object[] { new A(), "<a></a>" };
-            yield return new object[] { new Abbr(), "<abbr></abbr>" };
-            yield return new object[] { new Acronym(), "<acronym></acronym>" };
-            yield return new object[] { new Address(), "<address></address>" };
-            yield return new object[] { new Applet(), "<applet></applet>" };
-            yield return new object[] { new Area(), "<area></area>" };
-            yield return new object[] { new Article(), "<article></article>" };
-            yield return new object[] { new Aside(), "<aside></aside>" };
-            yield return new object[] { new Audio(), "<audio></audio>" };
-            yield return new object[] { new B(), "<b></b>" };
-            yield return new object[] { new Base(), "<base></base>" };
-            yield return new object[] { new Basefont(), "<basefont></basefont>" };
-            yield return new object[] { new Bb(), "<bb></bb>" };
-            yield return new object[] { new Bdo(), "<bdo></bdo>" };
-            yield return new object[] { new Big(), "<big></big>" };
-            yield return new object[] { new Blockquote(), "<blockquote></blockquote>" };
-            yield return new object[] { new Body(), "<body></body>" };
-            yield return new object[] { new Br(), "<br />" };
-            yield return new object[] { new Button(), "<button></button>" };
-            yield return new object[] { new Canvas(), "<canvas></canvas>" };
-            yield return new object[] { new Caption(), "<caption></caption>" };
-            yield return new object[] { new Center(), "<center></center>" };
-            yield return new object[] { new Cite(), "<cite></cite>" };
-            yield return new object[] { new Code(), "<code></code>" };
-            yield return new object[] { new Col(), "<col></col>" };
-            yield return new object[] { new Colgroup(), "<colgroup></colgroup>" };
-            yield return new object[] { new Command(), "<command></command>" };
-            yield return new object[] { new Datagrid(), "<datagrid></datagrid>" };
-            yield return new object[] { new Datalist(), "<datalist></datalist>" };
-            yield return new object[] { new Dd(), "<dd></dd>" };
-            yield return new object[] { new Del(), "<del></del>" };
-            yield return new object[] { new Details(), "<details></details>" };
-            yield return new object[] { new Dfn(), "<dfn></dfn>" };
-            yield return new object[] { new Dialog(), "<dialog></dialog>" };
-            yield return new object[] { new Dir(), "<dir></dir>" };
-            yield return new object[] { new Div(), "<div></div>" };
-            yield return new object[] { new Dl(), "<dl></dl>" };
-            yield return new object[] { new Dt(), "<dt></dt>" };
-            yield return new object[] { new Em(), "<em></em>" };
-            yield return new object[] { new Embed(), "<embed></embed>" };
-            yield return new object[] { new Eventsource(), "<eventsource></eventsource>" };
-            yield return new object[] { new Fieldset(), "<fieldset></fieldset>" };
-            yield return new object[] { new Figcaption(), "<figcaption></figcaption>" };
-            yield return new object[] { new Figure(), "<figure></figure>" };
-            yield return new object[] { new Font(), "<font></font>" };
-            yield return new object[] { new Footer(), "<footer></footer>" };
-            yield return new object[] { new Form(), "<form></form>" };
-            yield return new object[] { new Frame(), "<frame></frame>" };
-            yield return new object[] { new Frameset(), "<frameset></frameset>" };
-            yield return new object[] { new H1(), "<h1></h1>" };
-            yield return new object[] { new H2(), "<h2></h2>" };
-            yield return new object[] { new H3(), "<h3></h3>" };
-            yield return new object[] { new H4(), "<h4></h4>" };
-            yield return new object[] { new H5(), "<h5></h5>" };
-            yield return new object[] { new H6(), "<h6></h6>" };
-            yield return new object[] { new Head(), "<head></head>" };
-            yield return new object[] { new Header(), "<header></header>" };
-            yield return new object[] { new Hgroup(), "<hgroup></hgroup>" };
-            yield return new object[] { new Hr(), "<hr />" };
-            yield return new object[] { new JustCs.Html.Html(), "<html></html>" };
-            yield return new object[] { new I(), "<i></i>" };
-            yield return new object[] { new Iframe(), "<iframe></iframe>" };
-            yield return new object[] { new Img(), "<img />" };
-            yield return new object[] { new Input(), "<input />" };
-            yield return new object[] { new Ins(), "<ins></ins>" };
-            yield return new object[] { new Isindex(), "<isindex></isindex>" };
-            yield return new object[] { new Kbd(), "<kbd></kbd>" };
-            yield return new object[] { new Keygen(), "<keygen></keygen>" };
-            yield return new object[] { new Label(), "<label></label>" };
-            yield return new object[] { new Legend(), "<legend></legend>" };
-            yield return new object[] { new Li(), "<li></li>" };
-            yield return new object[] { new Link(), "<link />" };
-            yield return new object[] { new Map(), "<map></map>" };
-            yield return new object[] { new Mark(), "<mark></mark>" };
-            yield return new object[] { new Menu(), "<menu></menu>" };
-            yield return new object[] { new Meta(), "<meta />" };
-            yield return new object[] { new Meter(), "<meter></meter>" };
-            yield return new object[] { new Nav(), "<nav></nav>" };
-            yield return new object[] { new Noframes(), "<noframes></noframes>" };
-            yield return new object[] { new Noscript(), "<noscript></noscript>" };
-            yield return new object[] { new JustCs.Html.Object(), "<object></object>" };
-            yield return new object[] { new Ol(), "<ol></ol>" };
-            yield return new object[] { new Optgroup(), "<optgroup></optgroup>" };
-            yield return new object[] { new Option(), "<option></option>" };
-            yield return new object[] { new Output(), "<output></output>" };
-            yield return new object[] { new P(), "<p></p>" };
-            yield return new object[] { new Param(), "<param></param>" };
-            yield return new object[] { new Pre(), "<pre></pre>" };
-            yield return new object[] { new Progress(), "<progress></progress>" };
-            yield return new object[] { new Q(), "<q></q>" };
-            yield return new object[] { new Rp(), "<rp></rp>" };
-            yield return new object[] { new Rt(), "<rt></rt>" };
-            yield return new object[] { new Ruby(), "<ruby></ruby>" };
-            yield return new object[] { new S(), "<s></s>" };
-            yield return new object[] { new Samp(), "<samp></samp>" };
-            yield return new object[] { new Script(), "<script></script>" };
-            yield return new object[] { new Section(), "<section></section>" };
-            yield return new object[] { new Select(), "<select></select>" };
-            yield return new object[] { new Small(), "<small></small>" };
-            yield return new object[] { new Source(), "<source></source>" };
-            yield return new object[] { new Span(), "<span></span>" };
-            yield return new object[] { new Strike(), "<strike></strike>" };
-            yield return new object[] { new Strong(), "<strong></strong>" };
-            yield return new object[] { new Style(), "<style></style>" };
-            yield return new object[] { new Sub(), "<sub></sub>" };
-            yield return new object[] { new Sup(), "<sup></sup>" };
-            yield return new object[] { new Table(), "<table></table>" };
-            yield return new object[] { new Tbody(), "<tbody></tbody>" };
-            yield return new object[] { new Td(), "<td></td>" };
-            yield return new object[] { new Textarea(), "<textarea></textarea>" };
-            yield return new object[] { new Tfoot(), "<tfoot></tfoot>" };
-            yield return new object[] { new Th(), "<th></th>" };
-            yield return new object[] { new Thead(), "<thead></thead>" };
-            yield return new object[] { new Time(), "<time></time>" };
-            yield return new object[] { new Title(), "<title></title>" };
-            yield return new object[] { new Tr(), "<tr></tr>" };
-            yield return new object[] { new Track(), "<track></track>" };
-            yield return new object[] { new Tt(), "<tt></tt>" };
-            yield return new object[] { new U(), "<u></u>" };
-            yield return new object[] { new Ul(), "<ul></ul>" };
-            yield return new object[] { new Variable(), "<variable></variable>" };
-            yield return new object[] { new Video(), "<video></video>" };
-            yield return new object[] { new Wbr(), "<wbr></wbr>" };
+            yield return new object[] { new A(), "<a></a>\n" };
+            yield return new object[] { new Abbr(), "<abbr></abbr>\n" };
+            yield return new object[] { new Acronym(), "<acronym></acronym>\n" };
+            yield return new object[] { new Address(), "<address></address>\n" };
+            yield return new object[] { new Applet(), "<applet></applet>\n" };
+            yield return new object[] { new Area(), "<area></area>\n" };
+            yield return new object[] { new Article(), "<article></article>\n" };
+            yield return new object[] { new Aside(), "<aside></aside>\n" };
+            yield return new object[] { new Audio(), "<audio></audio>\n" };
+            yield return new object[] { new B(), "<b></b>\n" };
+            yield return new object[] { new Base(), "<base></base>\n" };
+            yield return new object[] { new Basefont(), "<basefont></basefont>\n" };
+            yield return new object[] { new Bb(), "<bb></bb>\n" };
+            yield return new object[] { new Bdo(), "<bdo></bdo>\n" };
+            yield return new object[] { new Big(), "<big></big>\n" };
+            yield return new object[] { new Blockquote(), "<blockquote></blockquote>\n" };
+            yield return new object[] { new Body(), "<body></body>\n" };
+            yield return new object[] { new Br(), "<br />\n" };
+            yield return new object[] { new Button(), "<button></button>\n" };
+            yield return new object[] { new Canvas(), "<canvas></canvas>\n" };
+            yield return new object[] { new Caption(), "<caption></caption>\n" };
+            yield return new object[] { new Center(), "<center></center>\n" };
+            yield return new object[] { new Cite(), "<cite></cite>\n" };
+            yield return new object[] { new Code(), "<code></code>\n" };
+            yield return new object[] { new Col(), "<col></col>\n" };
+            yield return new object[] { new Colgroup(), "<colgroup></colgroup>\n" };
+            yield return new object[] { new Command(), "<command></command>\n" };
+            yield return new object[] { new Datagrid(), "<datagrid></datagrid>\n" };
+            yield return new object[] { new Datalist(), "<datalist></datalist>\n" };
+            yield return new object[] { new Dd(), "<dd></dd>\n" };
+            yield return new object[] { new Del(), "<del></del>\n" };
+            yield return new object[] { new Details(), "<details></details>\n" };
+            yield return new object[] { new Dfn(), "<dfn></dfn>\n" };
+            yield return new object[] { new Dialog(), "<dialog></dialog>\n" };
+            yield return new object[] { new Dir(), "<dir></dir>\n" };
+            yield return new object[] { new Div(), "<div></div>\n" };
+            yield return new object[] { new Dl(), "<dl></dl>\n" };
+            yield return new object[] { new Dt(), "<dt></dt>\n" };
+            yield return new object[] { new Em(), "<em></em>\n" };
+            yield return new object[] { new Embed(), "<embed></embed>\n" };
+            yield return new object[] { new Eventsource(), "<eventsource></eventsource>\n" };
+            yield return new object[] { new Fieldset(), "<fieldset></fieldset>\n" };
+            yield return new object[] { new Figcaption(), "<figcaption></figcaption>\n" };
+            yield return new object[] { new Figure(), "<figure></figure>\n" };
+            yield return new object[] { new Font(), "<font></font>\n" };
+            yield return new object[] { new Footer(), "<footer></footer>\n" };
+            yield return new object[] { new Form(), "<form></form>\n" };
+            yield return new object[] { new Frame(), "<frame></frame>\n" };
+            yield return new object[] { new Frameset(), "<frameset></frameset>\n" };
+            yield return new object[] { new H1(), "<h1></h1>\n" };
+            yield return new object[] { new H2(), "<h2></h2>\n" };
+            yield return new object[] { new H3(), "<h3></h3>\n" };
+            yield return new object[] { new H4(), "<h4></h4>\n" };
+            yield return new object[] { new H5(), "<h5></h5>\n" };
+            yield return new object[] { new H6(), "<h6></h6>\n" };
+            yield return new object[] { new Head(), "<head></head>\n" };
+            yield return new object[] { new Header(), "<header></header>\n" };
+            yield return new object[] { new Hgroup(), "<hgroup></hgroup>\n" };
+            yield return new object[] { new Hr(), "<hr />\n" };
+            yield return new object[] { new JustCs.Html.Html(), "<html></html>\n" };
+            yield return new object[] { new I(), "<i></i>\n" };
+            yield return new object[] { new Iframe(), "<iframe></iframe>\n" };
+            yield return new object[] { new Img(), "<img />\n" };
+            yield return new object[] { new Input(), "<input />\n" };
+            yield return new object[] { new Ins(), "<ins></ins>\n" };
+            yield return new object[] { new Isindex(), "<isindex></isindex>\n" };
+            yield return new object[] { new Kbd(), "<kbd></kbd>\n" };
+            yield return new object[] { new Keygen(), "<keygen></keygen>\n" };
+            yield return new object[] { new Label(), "<label></label>\n" };
+            yield return new object[] { new Legend(), "<legend></legend>\n" };
+            yield return new object[] { new Li(), "<li></li>\n" };
+            yield return new object[] { new Link(), "<link />\n" };
+            yield return new object[] { new Map(), "<map></map>\n" };
+            yield return new object[] { new Mark(), "<mark></mark>\n" };
+            yield return new object[] { new Menu(), "<menu></menu>\n" };
+            yield return new object[] { new Meta(), "<meta />\n" };
+            yield return new object[] { new Meter(), "<meter></meter>\n" };
+            yield return new object[] { new Nav(), "<nav></nav>\n" };
+            yield return new object[] { new Noframes(), "<noframes></noframes>\n" };
+            yield return new object[] { new Noscript(), "<noscript></noscript>\n" };
+            yield return new object[] { new JustCs.Html.Object(), "<object></object>\n" };
+            yield return new object[] { new Ol(), "<ol></ol>\n" };
+            yield return new object[] { new Optgroup(), "<optgroup></optgroup>\n" };
+            yield return new object[] { new Option(), "<option></option>\n" };
+            yield return new object[] { new Output(), "<output></output>\n" };
+            yield return new object[] { new P(), "<p></p>\n" };
+            yield return new object[] { new Param(), "<param></param>\n" };
+            yield return new object[] { new Pre(), "<pre></pre>\n" };
+            yield return new object[] { new Progress(), "<progress></progress>\n" };
+            yield return new object[] { new Q(), "<q></q>\n" };
+            yield return new object[] { new Rp(), "<rp></rp>\n" };
+            yield return new object[] { new Rt(), "<rt></rt>\n" };
+            yield return new object[] { new Ruby(), "<ruby></ruby>\n" };
+            yield return new object[] { new S(), "<s></s>\n" };
+            yield return new object[] { new Samp(), "<samp></samp>\n" };
+            yield return new object[] { new Script(), "<script></script>\n" };
+            yield return new object[] { new Section(), "<section></section>\n" };
+            yield return new object[] { new Select(), "<select></select>\n" };
+            yield return new object[] { new Small(), "<small></small>\n" };
+            yield return new object[] { new Source(), "<source></source>\n" };
+            yield return new object[] { new Span(), "<span></span>\n" };
+            yield return new object[] { new Strike(), "<strike></strike>\n" };
+            yield return new object[] { new Strong(), "<strong></strong>\n" };
+            yield return new object[] { new Style(), "<style></style>\n" };
+            yield return new object[] { new Sub(), "<sub></sub>\n" };
+            yield return new object[] { new Sup(), "<sup></sup>\n" };
+            yield return new object[] { new Table(), "<table></table>\n" };
+            yield return new object[] { new Tbody(), "<tbody></tbody>\n" };
+            yield return new object[] { new Td(), "<td></td>\n" };
+            yield return new object[] { new Textarea(), "<textarea></textarea>\n" };
+            yield return new object[] { new Tfoot(), "<tfoot></tfoot>\n" };
+            yield return new object[] { new Th(), "<th></th>\n" };
+            yield return new object[] { new Thead(), "<thead></thead>\n" };
+            yield return new object[] { new Time(), "<time></time>\n" };
+            yield return new object[] { new Title(), "<title></title>\n" };
+            yield return new object[] { new Tr(), "<tr></tr>\n" };
+            yield return new object[] { new Track(), "<track></track>\n" };
+            yield return new object[] { new Tt(), "<tt></tt>\n" };
+            yield return new object[] { new U(), "<u></u>\n" };
+            yield return new object[] { new Ul(), "<ul></ul>\n" };
+            yield return new object[] { new Variable(), "<variable></variable>\n" };
+            yield return new object[] { new Video(), "<video></video>\n" };
+            yield return new object[] { new Wbr(), "<wbr></wbr>\n" };
         }
 
         public static IEnumerable<object[]> TagsWithAttributes()
         {
             #region String Attributes
             // No Attribute set
-            yield return new object[] { new A(), "<a></a>" };
-            yield return new object[] { new Img(), "<img />" };
+            yield return new object[] { new A(), "<a></a>\n" };
+            yield return new object[] { new Img(), "<img />\n" };
 
             // Attribute set to null
-            yield return new object[] { new A { Attributes = new Attrs { Src = null } }, "<a></a>" };
-            yield return new object[] { new Img { Attributes = new Attrs { Src = null } }, "<img />" };
+            yield return new object[] { new A { Attributes = new Attrs { Src = null } }, "<a></a>\n" };
+            yield return new object[] { new Img { Attributes = new Attrs { Src = null } }, "<img />\n" };
 
             // Attribute set to empty
-            yield return new object[] { new A { Attributes = new Attrs { Src = "" } }, "<a src=\"\"></a>" };
-            yield return new object[] { new Img { Attributes = new Attrs { Src = "" } }, "<img src=\"\" />" };
+            yield return new object[] { new A { Attributes = new Attrs { Src = "" } }, "<a src=\"\"></a>\n" };
+            yield return new object[] { new Img { Attributes = new Attrs { Src = "" } }, "<img src=\"\" />\n" };
 
             // Attribute include quote
-            yield return new object[] { new A { Attributes = new Attrs { Src = "\"" } }, "<a src=\"&quot;\"></a>" };
-            yield return new object[] { new Img { Attributes = new Attrs { Src = "\"" } }, "<img src=\"&quot;\" />" };
+            yield return new object[] { new A { Attributes = new Attrs { Src = "\"" } }, "<a src=\"&quot;\"></a>\n" };
+            yield return new object[] { new Img { Attributes = new Attrs { Src = "\"" } }, "<img src=\"&quot;\" />\n" };
 
             // Attribute set to a value
-            yield return new object[] { new A { Attributes = new Attrs { Src = "foo" } }, "<a src=\"foo\"></a>" };
-            yield return new object[] { new Img { Attributes = new Attrs { Src = "foo" } }, "<img src=\"foo\" />" };
+            yield return new object[] { new A { Attributes = new Attrs { Src = "foo" } }, "<a src=\"foo\"></a>\n" };
+            yield return new object[] { new Img { Attributes = new Attrs { Src = "foo" } }, "<img src=\"foo\" />\n" };
             #endregion
 
             #region Boolean Attributes
 
             // Attribute set to null
-            yield return new object[] { new A { Attributes = new Attrs { Contenteditable = null } }, "<a></a>" };
-            yield return new object[] { new Img { Attributes = new Attrs { Contenteditable = null } }, "<img />" };
+            yield return new object[] { new A { Attributes = new Attrs { Contenteditable = null } }, "<a></a>\n" };
+            yield return new object[] { new Img { Attributes = new Attrs { Contenteditable = null } }, "<img />\n" };
 
             // Attribute set to true
-            yield return new object[] { new A { Attributes = new Attrs { Contenteditable = true } }, "<a contenteditable></a>" };
-            yield return new object[] { new Img { Attributes = new Attrs { Contenteditable = true } }, "<img contenteditable />" };
+            yield return new object[] { new A { Attributes = new Attrs { Contenteditable = true } }, "<a contenteditable></a>\n" };
+            yield return new object[] { new Img { Attributes = new Attrs { Contenteditable = true } }, "<img contenteditable />\n" };
 
             // Attribute set to false
-            yield return new object[] { new A { Attributes = new Attrs { Contenteditable = false } }, "<a></a>" };
-            yield return new object[] { new Img { Attributes = new Attrs { Contenteditable = false } }, "<img />" };
+            yield return new object[] { new A { Attributes = new Attrs { Contenteditable = false } }, "<a></a>\n" };
+            yield return new object[] { new Img { Attributes = new Attrs { Contenteditable = false } }, "<img />\n" };
             #endregion
 
             #region Int Attributes
 
             // Attribute set to null
-            yield return new object[] { new A { Attributes = new Attrs { Tabindex = null } }, "<a></a>" };
-            yield return new object[] { new Img { Attributes = new Attrs { Tabindex = null } }, "<img />" };
+            yield return new object[] { new A { Attributes = new Attrs { Tabindex = null } }, "<a></a>\n" };
+            yield return new object[] { new Img { Attributes = new Attrs { Tabindex = null } }, "<img />\n" };
 
             // Attribute set to 1
-            yield return new object[] { new A { Attributes = new Attrs { Tabindex = 1 } }, "<a tabindex=\"1\"></a>" };
-            yield return new object[] { new Img { Attributes = new Attrs { Tabindex = 1 } }, "<img tabindex=\"1\" />" };
+            yield return new object[] { new A { Attributes = new Attrs { Tabindex = 1 } }, "<a tabindex=\"1\"></a>\n" };
+            yield return new object[] { new Img { Attributes = new Attrs { Tabindex = 1 } }, "<img tabindex=\"1\" />\n" };
 
             // Attribute set to 0
-            yield return new object[] { new A { Attributes = new Attrs { Tabindex = 0 } }, "<a tabindex=\"0\"></a>" };
-            yield return new object[] { new Img { Attributes = new Attrs { Tabindex = 0 } }, "<img tabindex=\"0\" />" };
+            yield return new object[] { new A { Attributes = new Attrs { Tabindex = 0 } }, "<a tabindex=\"0\"></a>\n" };
+            yield return new object[] { new Img { Attributes = new Attrs { Tabindex = 0 } }, "<img tabindex=\"0\" />\n" };
             #endregion
 
             #region Enum Attributes
 
             // Attribute set to null
-            yield return new object[] { new A { Attributes = new Attrs { Dir = null } }, "<a></a>" };
-            yield return new object[] { new Img { Attributes = new Attrs { Dir = null } }, "<img />" };
+            yield return new object[] { new A { Attributes = new Attrs { Dir = null } }, "<a></a>\n" };
+            yield return new object[] { new Img { Attributes = new Attrs { Dir = null } }, "<img />\n" };
 
             // Attribute set to auto
-            yield return new object[] { new A { Attributes = new Attrs { Dir = DirValues.Auto } }, "<a dir=\"auto\"></a>" };
-            yield return new object[] { new Img { Attributes = new Attrs { Dir = DirValues.Auto } }, "<img dir=\"auto\" />" };
+            yield return new object[] { new A { Attributes = new Attrs { Dir = DirValues.Auto } }, "<a dir=\"auto\"></a>\n" };
+            yield return new object[] { new Img { Attributes = new Attrs { Dir = DirValues.Auto } }, "<img dir=\"auto\" />\n" };
 
             // Attribute set to ltr
-            yield return new object[] { new A { Attributes = new Attrs { Dir = DirValues.Ltr } }, "<a dir=\"ltr\"></a>" };
-            yield return new object[] { new Img { Attributes = new Attrs { Dir = DirValues.Ltr } }, "<img dir=\"ltr\" />" };
+            yield return new object[] { new A { Attributes = new Attrs { Dir = DirValues.Ltr } }, "<a dir=\"ltr\"></a>\n" };
+            yield return new object[] { new Img { Attributes = new Attrs { Dir = DirValues.Ltr } }, "<img dir=\"ltr\" />\n" };
 
             // Attribute set to rtl
-            yield return new object[] { new A { Attributes = new Attrs { Dir = DirValues.Rtl } }, "<a dir=\"rtl\"></a>" };
-            yield return new object[] { new Img { Attributes = new Attrs { Dir = DirValues.Rtl } }, "<img dir=\"rtl\" />" };
+            yield return new object[] { new A { Attributes = new Attrs { Dir = DirValues.Rtl } }, "<a dir=\"rtl\"></a>\n" };
+            yield return new object[] { new Img { Attributes = new Attrs { Dir = DirValues.Rtl } }, "<img dir=\"rtl\" />\n" };
             #endregion
 
             #region Special-named Attributes
 
-            yield return new object[] { new Form { Attributes = new Attrs { AcceptCharset = "utf-8" } }, "<form accept-charset=\"utf-8\"></form>" };
-            yield return new object[] { new Meta { Attributes = new Attrs { HttpEquiv = "content-type" } }, "<meta http-equiv=\"content-type\" />" };
+            yield return new object[] { new Form { Attributes = new Attrs { AcceptCharset = "utf-8" } }, "<form accept-charset=\"utf-8\"></form>\n" };
+            yield return new object[] { new Meta { Attributes = new Attrs { HttpEquiv = "content-type" } }, "<meta http-equiv=\"content-type\" />\n" };
             #endregion
         }
 
@@ -225,7 +230,8 @@ namespace JeyDotC.JustCs.Tests
                         new A()
                     },
                 },
-                "<div><a></a>\n</div>",
+                "<div><a></a>\n" +
+                "</div>\n",
             };
 
             // Simple with multiple children.
@@ -238,7 +244,10 @@ namespace JeyDotC.JustCs.Tests
                         new A(),
                     },
                 },
-                "<div><a></a>\n<a></a>\n<a></a>\n</div>",
+                "<div><a></a>\n" +
+                "<a></a>\n" +
+                "<a></a>\n" +
+                "</div>\n",
             };
 
             // Nested children.
@@ -257,7 +266,11 @@ namespace JeyDotC.JustCs.Tests
                         new A(),
                     },
                 },
-                "<div><div><a></a>\n<a></a>\n</div>\n<a></a>\n</div>",
+                "<div><div><a></a>\n" +
+                "<a></a>\n" +
+                "</div>\n" +
+                "<a></a>\n" +
+                "</div>\n",
             };
 
             // Text nodes
@@ -284,7 +297,7 @@ namespace JeyDotC.JustCs.Tests
                         (string)null
                     },
                 },
-                @"<div>StringTrue5-5-200200-300300-60060000a10.110.2</div>",
+                "<div>StringTrue5-5-200200-300300-60060000a10.110.2</div>\n",
             };
 
             // Mix Text and element nodes
@@ -297,7 +310,8 @@ namespace JeyDotC.JustCs.Tests
                         -300,
                     },
                 },
-                "<div>String<a></a>\n-300</div>",
+                "<div>String<a></a>\n" +
+                "-300</div>\n",
             };
 
             // Fragment special element
@@ -316,7 +330,10 @@ namespace JeyDotC.JustCs.Tests
                         },
                     },
                 },
-                "<div><a></a>\n<a></a>\n<a></a>\n</div>",
+                "<div><a></a>\n" +
+                "<a></a>\n" +
+                "<a></a>\n" +
+                "</div>\n",
             };
         }
 
@@ -328,7 +345,7 @@ namespace JeyDotC.JustCs.Tests
             var result = element.RenderAsHtml();
 
             // Assert
-            Assert.Equal(expectedResult, result.TrimEnd('\n'));
+            Assert.Equal(expectedResult, result);
         }
 
         [Theory]
@@ -339,7 +356,7 @@ namespace JeyDotC.JustCs.Tests
             var result = element.RenderAsHtml();
 
             // Assert
-            Assert.Equal(expectedResult, result.TrimEnd('\n'));
+            Assert.Equal(expectedResult, result);
         }
 
         [Theory]
@@ -350,7 +367,7 @@ namespace JeyDotC.JustCs.Tests
             var result = element.RenderAsHtml();
 
             // Assert
-            Assert.Equal(expectedResult, result.TrimEnd('\n'));
+            Assert.Equal(expectedResult, result);
         }
 
         [Fact]
@@ -384,8 +401,8 @@ namespace JeyDotC.JustCs.Tests
 
             // Assert
             Assert.Equal(
-                "<div data-simple=\"value\" data-simple2=\"value2\" data-to-dash-case=\"value3\" data-true data-number=\"100\"></div>",
-                result.TrimEnd('\n')
+                "<div data-simple=\"value\" data-simple2=\"value2\" data-to-dash-case=\"value3\" data-true data-number=\"100\"></div>\n",
+                result
             );
         }
 
@@ -445,8 +462,8 @@ namespace JeyDotC.JustCs.Tests
 
             // Assert
             Assert.Equal(
-                "<div aria-activedescendant=\"value\" aria-atomic=\"true\" aria-autocomplete=\"both\" aria-busy=\"false\" aria-checked=\"mixed\" aria-controls=\"value\" aria-describedby=\"value\" aria-disabled=\"false\" aria-dropeffect=\"move\" aria-expanded=\"false\" aria-flowto=\"value\" aria-grabbed=\"false\" aria-haspopup=\"false\" aria-hidden=\"false\" aria-invalid=\"grammar\" aria-label=\"value\" aria-labelledby=\"value\" aria-level=\"10\" aria-live=\"polite\" aria-multiline=\"false\" aria-multiselectable=\"false\" aria-orientation=\"vertical\" aria-owns=\"value\" aria-posinset=\"10\" aria-pressed=\"mixed\" aria-readonly=\"false\" aria-relevant=\"value\" aria-required=\"false\" aria-selected=\"false\" aria-setsize=\"10\" aria-sort=\"ascending\" aria-valuemax=\"10\" aria-valuemin=\"10\" aria-valuenow=\"10\" aria-valuetext=\"value\"></div>",
-                result.TrimEnd('\n')
+                "<div aria-activedescendant=\"value\" aria-atomic=\"true\" aria-autocomplete=\"both\" aria-busy=\"false\" aria-checked=\"mixed\" aria-controls=\"value\" aria-describedby=\"value\" aria-disabled=\"false\" aria-dropeffect=\"move\" aria-expanded=\"false\" aria-flowto=\"value\" aria-grabbed=\"false\" aria-haspopup=\"false\" aria-hidden=\"false\" aria-invalid=\"grammar\" aria-label=\"value\" aria-labelledby=\"value\" aria-level=\"10\" aria-live=\"polite\" aria-multiline=\"false\" aria-multiselectable=\"false\" aria-orientation=\"vertical\" aria-owns=\"value\" aria-posinset=\"10\" aria-pressed=\"mixed\" aria-readonly=\"false\" aria-relevant=\"value\" aria-required=\"false\" aria-selected=\"false\" aria-setsize=\"10\" aria-sort=\"ascending\" aria-valuemax=\"10\" aria-valuemin=\"10\" aria-valuenow=\"10\" aria-valuetext=\"value\"></div>\n",
+                result
             );
         }
 
@@ -462,6 +479,23 @@ namespace JeyDotC.JustCs.Tests
             // Assert
             var exception = Assert.Throws<ArgumentNullException>(action);
             Assert.Equal("element", exception.ParamName);
+        }
+
+        [Fact]
+        public void RenderAsHtml_ShouldAcceptExtendedAttributes()
+        {
+            // Arrange
+            var attrsExtra = new AttrsExtra { Nonce = "extra-info", Src = "source" };
+            var script = new Script
+            {
+                Attributes = attrsExtra
+            };
+
+            // Act
+            var result = script.RenderAsHtml();
+
+            // Assert
+            Assert.Equal("<script nonce=\"extra-info\" src=\"source\"></script>\n", result);
         }
     }
 }
