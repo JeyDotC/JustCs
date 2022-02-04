@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace JeyDotC.JustCs.Html.Attributes
@@ -864,5 +865,11 @@ namespace JeyDotC.JustCs.Html.Attributes
         public AriaRoles? Role { get; init; }
 
         public AriaAttrs Aria { get; init; }
+
+        /// <summary>
+        /// Set an object to this property to add any attribute that is not part
+        /// of the ones above.
+        /// </summary>
+        public object _ { get; init; }
     }
 }

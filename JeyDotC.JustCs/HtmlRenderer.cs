@@ -126,6 +126,16 @@ namespace JeyDotC.JustCs
                 return;
             }
 
+            if (name.Equals("_"))
+            {
+                foreach (var dataAttribute in value.GetType().GetProperties())
+                {
+                    var dataName = dataAttribute.Name.ToDashCase();
+                    RenderAttribute(dataName, dataAttribute.GetValue(value), builder);
+                }
+                return;
+            }
+
             if (name.Equals("HttpEquiv", StringComparison.CurrentCultureIgnoreCase))
             {
                 RenderAttribute("http-equiv", value, builder);

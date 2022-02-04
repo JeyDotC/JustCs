@@ -30,5 +30,7 @@ namespace JeyDotC.JustCs
         public static implicit operator Element(char data) => new TextElement { Data = FormattableString.Invariant($"{data}") };
         public static implicit operator Element(double data) => new TextElement { Data = FormattableString.Invariant($"{data}") };
         public static implicit operator Element(float data) => new TextElement { Data = FormattableString.Invariant($"{data}") };
+        public static implicit operator Element(ValueTuple<bool, Element> data) => data.Item1 ? data.Item2 : new TextElement();
+        public static implicit operator Element(ValueTuple<bool, Func<Element>> data) => data.Item1 ? data.Item2() : new TextElement();
     }
 }

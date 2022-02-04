@@ -23,11 +23,9 @@ V1.0.1 Added support for WAI ARIA attributes.</PackageReleaseNotes>
     <None Remove="Html\" />
     <None Remove="Microsoft.AspNetCore.Mvc.Abstractions" />
     <None Remove="Html\Attributes\" />
-    <None Remove="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Html\" />
     <Folder Include="Html\Attributes\" />
-    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>
