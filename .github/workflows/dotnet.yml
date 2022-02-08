@@ -24,7 +24,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish NuGet
-    - uses: brandedoutcast/publish-nuget@v2.5.5
+      uses: brandedoutcast/publish-nuget@v2.5.5
       with:
         PROJECT_FILE_PATH: JeyDotC.JustCs/JeyDotC.JustCs.csproj
         PACKAGE_NAME: JeyDotC.JustCs
