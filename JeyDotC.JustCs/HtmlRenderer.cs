@@ -32,6 +32,11 @@ namespace JeyDotC.JustCs
 
         private static void RenderNode(Element node, StringBuilder builder)
         {
+            if(node is null)
+            {
+                return;
+            }
+
             var textNode = node as TextElement;
             var isTextNode = textNode != null;
 

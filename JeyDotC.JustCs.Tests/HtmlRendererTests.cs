@@ -365,6 +365,23 @@ namespace JeyDotC.JustCs.Tests
                 "<p>Func Paragraph</p>\n" +
                 "</div>\n",
             };
+
+            // Tag with null children
+            yield return new object[]
+            {
+                new Div
+                {
+                    Children = new Element[]
+                    {
+                        new A(),
+                        null,
+                        new A(),
+                    }
+                },
+                "<div><a></a>\n" +
+                "<a></a>\n" +
+                "</div>\n",
+            };
         }
 
         [Theory]
