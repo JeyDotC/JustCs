@@ -335,6 +335,53 @@ namespace JeyDotC.JustCs.Tests
                 "<a></a>\n" +
                 "</div>\n",
             };
+
+            // Conditionally rendered elements
+            yield return new object[] {
+                new Div
+                {
+                    Children = new Element[]{
+                        // All the types bellow get implicitly converted into TextElement objects.
+                        // Only the tuples which first element is boolean true will be rendered.
+                        (true, "Text"),
+                        (false, "Text (Not added!)"),
+
+                        (true, new P{ Children = new Element[]{ "Paragraph" }}),
+                        (false, new P{ Children = new Element[]{ "Paragraph (Not added!)" }}),
+
+                        // This is the func version of the above, the given func will be called only
+                        // if the first guple's element is true.
+                        (true, () => "Func Text"),
+                        (false, () => "Func Text (Not added!)"),
+
+                        (true, new P{ Children = new Element[]{ "Func Paragraph" }}),
+                        (false, new P{ Children = new Element[]{ "Func Paragraph (Not added!)" }})
+                    },
+                },
+                "<div>" +
+                "Text" +
+                "<p>Paragraph</p>\n" +
+                "Func Text" +
+                "<p>Func Paragraph</p>\n" +
+                "</div>\n",
+            };
+
+            // Tag with null children
+            yield return new object[]
+            {
+                new Div
+                {
+                    Children = new Element[]
+                    {
+                        new A(),
+                        null,
+                        new A(),
+                    }
+                },
+                "<div><a></a>\n" +
+                "<a></a>\n" +
+                "</div>\n",
+            };
         }
 
         [Theory]
@@ -496,6 +543,37 @@ namespace JeyDotC.JustCs.Tests
 
             // Assert
             Assert.Equal("<script nonce=\"extra-info\" src=\"source\"></script>\n", result);
+        }
+
+        [Fact]
+        public void RenderAsHtml_ShouldAcceptAppendedAttributes()
+        {
+            // Arrange
+            var attributes = new Attrs
+            {
+                Id = "my-id",
+                DataSet = new
+                {
+                    SomeValue = "value"
+                },
+                Aria = new AriaAttrs
+                {
+                    Hidden = BooleanValues.False,
+                },
+                _ = new
+                {
+                    Nonce = "some-value",
+                    ArbitraryValue = "arbitrary"
+                }
+            };
+            var div = new Div { Attributes = attributes };
+
+            // Act
+            var result = div.RenderAsHtml();
+
+            // Assert
+            Assert.Equal("<div data-some-value=\"value\" id=\"my-id\" aria-hidden=\"false\" nonce=\"some-value\" arbitrary-value=\"arbitrary\"></div>\n", result);
+
         }
     }
 }

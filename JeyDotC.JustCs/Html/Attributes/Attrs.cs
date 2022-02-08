@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace JeyDotC.JustCs.Html.Attributes
@@ -861,8 +862,26 @@ namespace JeyDotC.JustCs.Html.Attributes
         /// </summary>
         public bool? Download { get; init; }
 
+        #region Aria Attributes
+        /// <summary>
+        /// Applies to: All visible elements
+        /// Specifies this element's role according to WAI ARIA specs.
+        /// </summary>
         public AriaRoles? Role { get; init; }
 
+        /// <summary>
+        /// Applies to: All visible elements
+        /// All properties in this object will be rendered as aria-* attributes.
+        /// </summary>
         public AriaAttrs Aria { get; init; }
+        #endregion
+
+        /// <summary>
+        /// Set an object to this property to add any attribute that is not part
+        /// of the ones above. Properties in this object will be converted to
+        /// dash-case and their values converted to string. E.g. MyArbitraryProperty
+        /// will be rendered as my-arbitrary-property
+        /// </summary>
+        public object _ { get; init; }
     }
 }

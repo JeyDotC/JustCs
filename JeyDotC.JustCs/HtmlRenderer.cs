@@ -32,6 +32,11 @@ namespace JeyDotC.JustCs
 
         private static void RenderNode(Element node, StringBuilder builder)
         {
+            if(node is null)
+            {
+                return;
+            }
+
             var textNode = node as TextElement;
             var isTextNode = textNode != null;
 
@@ -122,6 +127,16 @@ namespace JeyDotC.JustCs
                 foreach (var dataAttribute in value.GetType().GetProperties())
                 {
                     RenderAttribute($"aria-{dataAttribute.Name}", dataAttribute.GetValue(value), builder);
+                }
+                return;
+            }
+
+            if (name.Equals("_"))
+            {
+                foreach (var dataAttribute in value.GetType().GetProperties())
+                {
+                    var dataName = dataAttribute.Name.ToDashCase();
+                    RenderAttribute(dataName, dataAttribute.GetValue(value), builder);
                 }
                 return;
             }
