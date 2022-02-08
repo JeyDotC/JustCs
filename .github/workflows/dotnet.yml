@@ -29,4 +29,5 @@ jobs:
         PROJECT_FILE_PATH: JeyDotC.JustCs/JeyDotC.JustCs.csproj
         PACKAGE_NAME: JeyDotC.JustCs
         VERSION_REGEX: ^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
         INCLUDE_SYMBOLS: true
