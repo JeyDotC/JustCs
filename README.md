@@ -34,7 +34,7 @@ public class MyPageController : ControllerBase
 ## Installation
 
 ```shell
-dotnet add package JeyDotC.JustCs --version 1.0.2
+dotnet add package JeyDotC.JustCs --version 1.0.3
 dotnet add package JeyDotC.JustCs.Mvc --version 1.0.0
 ```
 
