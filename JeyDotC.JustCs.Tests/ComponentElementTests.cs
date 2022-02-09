@@ -78,6 +78,18 @@ namespace JeyDotC.JustCs.Tests
          => _<ElementFromParams>(new MyComponentProps());
     }
 
+    class ElementWithBadProps : ComponentElement
+    {
+        protected override Element Render(IElementAttributes props)
+            => _<ElementFromIEnumerableWithAttributes>(new Attrs { });
+    }
+
+    class ElementWithNullProps : ComponentElement
+    {
+        protected override Element Render(IElementAttributes props)
+            => _<ElementFromIEnumerableWithAttributes>();
+    }
+
     public class ComponentElementTests
     {
         public static IEnumerable<object[]> TestedComponents()
@@ -143,6 +155,32 @@ namespace JeyDotC.JustCs.Tests
             Assert.Equal(expectedTag, component.Tag);
             Assert.Equal(expectedElement, element.GetType());
             Assert.Equal(expectedAttributes, element.Attributes);
+        }
+
+        [Fact]
+        public void ToElement_ShouldThrowWhenStronglyTypedRecivesWrongType()
+        {
+            // Arrange
+            var elementWithBadProps = new ElementWithBadProps();
+
+            // Act
+            Action action = () => elementWithBadProps.RenderAsElement();
+
+            // Assert
+            Assert.Throws<InvalidOperationException>(action);
+        }
+
+        [Fact]
+        public void ToElement_ShouldThrowWhenStronglyTypedRecivesNull()
+        {
+            // Arrange
+            var elementWithBadProps = new ElementWithNullProps();
+
+            // Act
+            Action action = () => elementWithBadProps.RenderAsElement();
+
+            // Assert
+            Assert.Throws<InvalidOperationException>(action);
         }
     }
 }
