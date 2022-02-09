@@ -19,5 +19,33 @@ namespace JeyDotC.JustCs.Tests
             Assert.Equal(System.Net.HttpStatusCode.OK, view.StatusCode);
             Assert.Equal("<div id=\"app\"></div>\n", view.GetElement().RenderAsHtml());
         }
+
+        [Fact]
+        public void View_ShoulThrowWhenProvidingWrongAttributeTypeToStronglyTypedComponent()
+        {
+            // Arrange
+            var view = new View<ElementFromParams>(new Attrs { Id = "app" });
+            var component = view.GetElement() as ElementFromParams;
+
+            // Act
+            Action action = () => component.RenderAsElement();
+
+            // Assert
+            Assert.Throws<InvalidOperationException>(action);
+        }
+
+        [Fact]
+        public void View_ShoulThrowWhenProvidingNullToStronglyTypedComponent()
+        {
+            // Arrange
+            var view = new View<ElementFromParams>();
+            var component = view.GetElement() as ElementFromParams;
+
+            // Act
+            Action action = () => component.RenderAsElement();
+
+            // Assert
+            Assert.Throws<InvalidOperationException>(action);
+        }
     }
 }
