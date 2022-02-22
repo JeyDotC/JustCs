@@ -575,5 +575,23 @@ namespace JeyDotC.JustCs.Tests
             Assert.Equal("<div data-some-value=\"value\" id=\"my-id\" aria-hidden=\"false\" nonce=\"some-value\" arbitrary-value=\"arbitrary\"></div>\n", result);
 
         }
+
+        class MaliciousElement : Element
+        {
+            public override string Tag => "malicious /> <script>alert('evil!');</script> <malicious";
+        }
+
+        [Fact]
+        public void RenderAsHtml_ShouldThrowOnInvalidTagNames()
+        {
+            // Arrange
+            var maliciousElement = new MaliciousElement { };
+
+            // Act
+            Action action = () => maliciousElement.RenderAsHtml();
+
+            // Assert
+            Assert.Throws<InvalidOperationException>(action);
+        }
     }
 }

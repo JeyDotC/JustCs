@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using JeyDotC.JustCs.Html;
 
 namespace JeyDotC.JustCs
 {
     public static class HtmlRenderer
     {
+        private static readonly Regex _tagNameCheck = new Regex("^[A-Za-z]([A-Za-z0-9-]*[A-Za-z0-9])?$", RegexOptions.IgnoreCase);
+
         public static Element RenderAsElement(this ComponentElement component)
             => component.ToElement();
 
@@ -50,6 +53,11 @@ namespace JeyDotC.JustCs
             {
                 RenderChildren(node.Children, builder);
                 return;
+            }
+            
+            if (!_tagNameCheck.IsMatch(node.Tag))
+            {
+                throw new InvalidOperationException($"Invalid HTML tag name '{node.Tag}'");
             }
 
             builder.Append($"<{node.Tag}");
