@@ -572,7 +572,7 @@ namespace JeyDotC.JustCs.Tests
             var result = div.RenderAsHtml();
 
             // Assert
-            Assert.Equal("<div data-some-value=\"value\" id=\"my-id\" aria-hidden=\"false\" nonce=\"some-value\" arbitrary-value=\"arbitrary\"></div>\n", result);
+            Assert.Equal("<div aria-hidden=\"false\" data-some-value=\"value\" id=\"my-id\" nonce=\"some-value\" arbitrary-value=\"arbitrary\"></div>\n", result);
 
         }
 
