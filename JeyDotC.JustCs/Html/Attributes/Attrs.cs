@@ -851,7 +851,6 @@ namespace JeyDotC.JustCs.Html.Attributes
         /// </summary>
         public object _ { get; init; }
 
-
         #region Obsolete Attributes
         /// <summary>
         /// Applies to: Not supported in HTML 5.

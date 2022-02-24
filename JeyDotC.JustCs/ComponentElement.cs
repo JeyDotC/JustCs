@@ -11,7 +11,16 @@ namespace JeyDotC.JustCs
     {
         public override string Tag => GetType().Name;
 
-        internal Element ToElement() => Render(Attributes ?? new EmptyProps());
+        internal Element ToElement()
+        {
+            var result = Render(Attributes ?? new EmptyProps());
+            if (result is ComponentElement)
+            {
+                return ((ComponentElement)result).ToElement();
+            }
+
+            return result;
+        }
 
         protected abstract Element Render(IElementAttributes attributes);
 
@@ -38,17 +47,8 @@ namespace JeyDotC.JustCs
          => CreateElement<TElement>(attributes, children);
 
         private static Element CreateElement<TElement>(IElementAttributes? attributes, IEnumerable<Element> children)
-            where TElement : Element, new()
-        {
-            var element = new TElement() { Attributes = attributes, Children = children };
-            var component = element as ComponentElement;
-
-            if (component != null)
-            {
-                return component.Render(component.Attributes);
-            }
-            return element;
-        }
+            where TElement : Element, new() 
+            => new TElement() { Attributes = attributes, Children = children };
     }
 
     public abstract class ComponentElement<TAttributes> : ComponentElement
