@@ -400,10 +400,10 @@ namespace JeyDotC.JustCs.Tests
             yield return new object[] { new A { Attributes = new Attrs { Href = "A", _ = new { href = "B", _ = new { href = "C" } } } }, "<a href=\"C\"></a>\n" };
 
             // Oveerride aria attributes
-            yield return new object[] { new A { Attributes = new Attrs { Aria = new AriaAttrs { Describedby = "something" }, _ = new { AriaDescribedby = "nothing", } } }, "<a aria-describedby=\"nothing\"></a>\n" };
+            yield return new object[] { new A { Attributes = new Attrs { Aria = new AriaAttrs { Describedby = "something" }, _ = new { Aria = new { Describedby = "nothing" }, } } }, "<a aria-describedby=\"nothing\"></a>\n" };
 
             // Oveerride data attributes
-            yield return new object[] { new A { Attributes = new Attrs { DataSet = new { Describedby = "something" }, _ = new { DataDescribedby = "nothing", } } }, "<a data-describedby=\"nothing\"></a>\n" };
+            yield return new object[] { new A { Attributes = new Attrs { DataSet = new { Describedby = "something" }, _ = new { DataSet = new { Describedby = "nothing" }, } } }, "<a data-describedby=\"nothing\"></a>\n" };
         }
 
         [Theory]
@@ -594,7 +594,7 @@ namespace JeyDotC.JustCs.Tests
             var result = div.RenderAsHtml();
 
             // Assert
-            Assert.Equal("<div aria-hidden=\"false\" data-some-value=\"value\" id=\"my-id\" nonce=\"some-value\" arbitrary-value=\"arbitrary\"></div>\n", result);
+            Assert.Equal("<div aria-hidden=\"false\" data-some-value=\"value\" id=\"my-id\" nonce=\"some-value\" arbitraryvalue=\"arbitrary\"></div>\n", result);
 
         }
 
