@@ -395,7 +395,8 @@ namespace JeyDotC.JustCs.Tests
             // Multiple oveerrides
             yield return new object[] { new A { Attributes = new Attrs { Href = "A", _ = new { href = "B", Href="C" } } }, "<a href=\"C\"></a>\n" };
 
-            // Deep oveerrides (Looks like a **very bad** practice, but it is possible)
+            // Deep oveerrides (Looks like a **very bad**
+            // practice, but it is possible)
             yield return new object[] { new A { Attributes = new Attrs { Href = "A", _ = new { href = "B", _ = new { href = "C" } } } }, "<a href=\"C\"></a>\n" };
 
             // Oveerride aria attributes
