@@ -28,7 +28,6 @@ V1.0.1 Added support for WAI ARIA attributes.</PackageReleaseNotes>
     <None Remove="Html\Attributes\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Html\" />
     <Folder Include="Html\Attributes\" />
   </ItemGroup>
 </Project>
