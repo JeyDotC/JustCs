@@ -384,6 +384,27 @@ namespace JeyDotC.JustCs.Tests
             };
         }
 
+        public static IEnumerable<object[]> ElementsWithOverridenAttributes()
+        {
+            // Basic scenario
+            yield return new object[] { new A { Attributes = new Attrs { Href = "A", _ = new { Href = "B" } } }, "<a href=\"B\"></a>\n" };
+
+            // Different casing
+            yield return new object[] { new A { Attributes = new Attrs { Href = "A", _ = new { href = "B" } } }, "<a href=\"B\"></a>\n" };
+
+            // Multiple oveerrides
+            yield return new object[] { new A { Attributes = new Attrs { Href = "A", _ = new { href = "B", Href="C" } } }, "<a href=\"C\"></a>\n" };
+
+            // Deep oveerrides (Looks like a **very bad** practice, but it is possible)
+            yield return new object[] { new A { Attributes = new Attrs { Href = "A", _ = new { href = "B", _ = new { href = "C" } } } }, "<a href=\"C\"></a>\n" };
+
+            // Oveerride aria attributes
+            yield return new object[] { new A { Attributes = new Attrs { Aria = new AriaAttrs { Describedby = "something" }, _ = new { AriaDescribedby = "nothing", } } }, "<a aria-describedby=\"nothing\"></a>\n" };
+
+            // Oveerride data attributes
+            yield return new object[] { new A { Attributes = new Attrs { DataSet = new { Describedby = "something" }, _ = new { DataDescribedby = "nothing", } } }, "<a data-describedby=\"nothing\"></a>\n" };
+        }
+
         [Theory]
         [MemberData(nameof(AllTagsNoAttributes))]
         public void RenderAsHtml_ShouldRenderTagsWithoutAttributes(Element element, string expectedResult)
@@ -592,6 +613,17 @@ namespace JeyDotC.JustCs.Tests
 
             // Assert
             Assert.Throws<InvalidOperationException>(action);
+        }
+
+        [Theory]
+        [MemberData(nameof(ElementsWithOverridenAttributes))]
+        public void RenderAsHtml_AttributesDefinedAtSpreadPropertyShouldOverridePreviousOnes(Element element, string expectedResult)
+        {
+            // Act
+            var result = element.RenderAsHtml();
+
+            // Assert
+            Assert.Equal(expectedResult, result);
         }
     }
 }

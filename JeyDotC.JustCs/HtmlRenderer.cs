@@ -131,7 +131,7 @@ namespace JeyDotC.JustCs
             {
                 foreach (var dataAttribute in value.GetType().GetProperties())
                 {
-                    var dataName = $"data-{dataAttribute.Name.ToDashCase()}";
+                    var dataName = $"data-{dataAttribute.Name.ToDashCase().ToLower()}";
                     ProcessAttribute(dataName, dataAttribute.GetValue(value), attributesDictionary);
                 }
                 return;
@@ -141,7 +141,7 @@ namespace JeyDotC.JustCs
             {
                 foreach (var dataAttribute in value.GetType().GetProperties())
                 {
-                    var ariaName = $"aria-{dataAttribute.Name}";
+                    var ariaName = $"aria-{dataAttribute.Name.ToLower()}";
                     ProcessAttribute(ariaName, dataAttribute.GetValue(value), attributesDictionary);
                 }
                 return;
@@ -151,7 +151,7 @@ namespace JeyDotC.JustCs
             {
                 foreach (var dataAttribute in value.GetType().GetProperties())
                 {
-                    var dataName = dataAttribute.Name.ToDashCase();
+                    var dataName = dataAttribute.Name.ToDashCase().ToLower();
                     ProcessAttribute(dataName, dataAttribute.GetValue(value), attributesDictionary);
                 }
                 return;
@@ -169,7 +169,7 @@ namespace JeyDotC.JustCs
                 return;
             }
 
-            attributesDictionary[name] = value;
+            attributesDictionary[name.ToLower()] = value;
         }
 
         private static void RenderAttributesDictionary(IDictionary<string, object> attributesDictionary, StringBuilder builder)
@@ -181,7 +181,7 @@ namespace JeyDotC.JustCs
 
                 if(value is bool)
                 {
-                    builder.Append($" {name.ToLower()}");
+                    builder.Append($" {name}");
                     continue;
                 }
 
@@ -194,7 +194,7 @@ namespace JeyDotC.JustCs
                     sanitizedValue = sanitizedValue.ToLower();
                 }
 
-                builder.Append(@$" {name.ToLower()}=""{sanitizedValue}""");
+                builder.Append(@$" {name}=""{sanitizedValue}""");
             }
         }
     }
