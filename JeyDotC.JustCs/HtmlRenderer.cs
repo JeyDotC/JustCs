@@ -151,7 +151,7 @@ namespace JeyDotC.JustCs
             {
                 foreach (var dataAttribute in value.GetType().GetProperties())
                 {
-                    var dataName = dataAttribute.Name.ToDashCase().ToLower();
+                    var dataName = dataAttribute.Name.ToLower();
                     ProcessAttribute(dataName, dataAttribute.GetValue(value), attributesDictionary);
                 }
                 return;
