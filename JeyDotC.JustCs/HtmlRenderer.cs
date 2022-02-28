@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using JeyDotC.JustCs.Html;
@@ -130,6 +131,13 @@ namespace JeyDotC.JustCs
 
             if (value is bool && (bool)value == false)
             {
+                return;
+            }
+
+            var valueAstTuple = value as ITuple;
+            if(valueAstTuple != null && valueAstTuple.Length == 2 && valueAstTuple[1] is NameTransform)
+            {
+                ProcessAttribute(name, valueAstTuple[0], new AttrAttribute((NameTransform)valueAstTuple[1]), attributesDictionary);
                 return;
             }
 
