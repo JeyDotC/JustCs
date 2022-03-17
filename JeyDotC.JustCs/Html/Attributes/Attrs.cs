@@ -1,4 +1,5 @@
-﻿using System;
+﻿using JeyDotC.JustCs.Html.Annotations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,6 +20,7 @@ namespace JeyDotC.JustCs.Html.Attributes
         /// Applies to: form.
         /// Specifies the character encodings that are to be used for the form submission
         /// </summary>
+        [Attr(NameTransform.DashCase)]
         public string AcceptCharset { get; init; }
         /// <summary>
         /// Applies to: All Elements.
@@ -217,6 +219,7 @@ namespace JeyDotC.JustCs.Html.Attributes
         /// Applies to: meta.
         /// Provides an HTTP header for the information/value of the content attribute
         /// </summary>
+        [Attr(NameTransform.DashCase)]
         public string HttpEquiv { get; init; }
         /// <summary>
         /// Applies to: All Elements.
