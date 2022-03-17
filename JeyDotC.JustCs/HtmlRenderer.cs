@@ -185,12 +185,13 @@ namespace JeyDotC.JustCs
                 return;
             }
 
-            if(attributeMetadata.NameTransform == NameTransform.DashCase)
+            name = (attributeMetadata.NameTransform switch
             {
-                name = name.ToDashCase();
-            }
+                NameTransform.DashCase => name.ToDashCase(),
+               _ => name
+            }).ToLower();
 
-            attributesDictionary[name.ToLower()] = value;
+            attributesDictionary[name] = value;
         }
 
         private static void RenderAttributesDictionary(IDictionary<string, object> attributesDictionary, StringBuilder builder)

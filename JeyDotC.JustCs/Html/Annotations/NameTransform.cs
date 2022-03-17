@@ -8,7 +8,7 @@ namespace JeyDotC.JustCs.Html.Annotations
 {
     public enum NameTransform
     {
+        DashCase,
         LowerCase,
-        DashCase
     }
 }
