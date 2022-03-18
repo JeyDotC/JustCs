@@ -24,7 +24,6 @@ V1.0.2 Switched Attrs and AriaAttrs from class to record.
 V1.0.1 Added support for WAI ARIA attributes.</PackageReleaseNotes>
     <Summary>Library to render HTML using just C#</Summary>
     <PackageTags>HTML, Razor Alternative, React-Inspired</PackageTags>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
     <Title>JustCs</Title>
   </PropertyGroup>
 
