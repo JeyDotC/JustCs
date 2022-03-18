@@ -1,7 +1,7 @@
 ﻿using System;
 namespace JeyDotC.JustCs.Html
 {
-    public class TextElement : Element
+    public sealed class TextElement : Element
     {
         private readonly string _data;
 

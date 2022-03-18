@@ -10,9 +10,15 @@
     <RepositoryType>Git</RepositoryType>
     <Authors>Jeysson Guevara (JeyDotC)</Authors>
     <Company>JeyDotC</Company>
-    <PackageVersion>1.0.3</PackageVersion>
+    <PackageVersion>1.1.0</PackageVersion>
     <Owners>Jeysson Guevara (JeyDotC) </Owners>
-    <PackageReleaseNotes>V1.0.3 Added the lodash (_) property to Attrs so user can add extra attributes without inheriting the record.
+    <PackageReleaseNotes>v1.1.0 Names are now just lowercased by default.
+            Added the Attr attribute that allows to override name transform behavior.
+            Added name transform tuple machinsm to override name transform on dynamic properties e.g. (_).
+            HtmlRenderer won't allow repeated attributes.
+            Tag names are now validated in order to avoid scripting injection.
+            Attrs properties are now arranged alphabetically.
+V1.0.3 Added the lodash (_) property to Attrs so user can add extra attributes without inheriting the record.
             Added conditional rendering via ValueTuple&lt;boolean, Element&gt; implicit conversion.
 V1.0.2 Switched Attrs and AriaAttrs from class to record.
 V1.0.1 Added support for WAI ARIA attributes.</PackageReleaseNotes>
@@ -27,7 +33,6 @@ V1.0.1 Added support for WAI ARIA attributes.</PackageReleaseNotes>
     <None Remove="Html\Attributes\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Html\" />
     <Folder Include="Html\Attributes\" />
   </ItemGroup>
 </Project>

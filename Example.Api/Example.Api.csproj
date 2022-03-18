@@ -11,6 +11,7 @@
     <None Remove="Views\App\" />
     <None Remove="Views\Components\" />
     <None Remove="Model\" />
+    <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
@@ -23,5 +24,8 @@
     <ProjectReference Include="..\JeyDotC.JustCs.Mvc\JeyDotC.JustCs.Mvc.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 </Project>
