@@ -10,7 +10,7 @@ namespace JeyDotC.JustCs.Html.Annotations
     public sealed class AttrAttribute : Attribute
     {
         // This is a positional argument
-        public AttrAttribute(NameTransform nameTransform = NameTransform.DashCase)
+        public AttrAttribute(NameTransform nameTransform = NameTransform.LowerCase)
         {
            NameTransform = nameTransform;
         }
