@@ -1,20 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using JeyDotC.JustCs.Html;
+using JeyDotC.JustCs.Html.Annotations;
 
 namespace JeyDotC.JustCs
 {
     public static class HtmlRenderer
     {
+        private static readonly Regex _tagNameCheck = new Regex("^[A-Za-z]([A-Za-z0-9-]*[A-Za-z0-9])?$", RegexOptions.IgnoreCase);
+
         public static Element RenderAsElement(this ComponentElement component)
             => component.ToElement();
 
         public static string RenderAsHtml<TElement>(this TElement element)
             where TElement : Element
         {
-            if(element == null)
+            if (element == null)
             {
                 throw new ArgumentNullException(nameof(element));
             }
@@ -32,7 +38,7 @@ namespace JeyDotC.JustCs
 
         private static void RenderNode(Element node, StringBuilder builder)
         {
-            if(node is null)
+            if (node is null)
             {
                 return;
             }
@@ -46,10 +52,15 @@ namespace JeyDotC.JustCs
                 return;
             }
 
-            if(node is Fragment)
+            if (node is Fragment)
             {
                 RenderChildren(node.Children, builder);
                 return;
+            }
+
+            if (!_tagNameCheck.IsMatch(node.Tag))
+            {
+                throw new InvalidOperationException($"Invalid HTML tag name '{node.Tag}'");
             }
 
             builder.Append($"<{node.Tag}");
@@ -82,42 +93,65 @@ namespace JeyDotC.JustCs
 
         private static void RenderAttributes(object attributes, StringBuilder builder)
         {
-            if(attributes == null)
+            if (attributes == null)
             {
                 return;
             }
+
+            var attributesDictionary = GenerateAttributesDictionary(attributes);
+
+            RenderAttributesDictionary(attributesDictionary, builder);
+        }
+
+        private static AttrAttribute GetAttrMetadata(this PropertyInfo property, NameTransform defaultTransform = NameTransform.LowerCase)
+            => property.GetCustomAttributes(typeof(AttrAttribute), true).FirstOrDefault() as AttrAttribute ?? new AttrAttribute(defaultTransform);
+
+        private static IDictionary<string, object> GenerateAttributesDictionary(object attributes)
+        {
+            var attributesDictionary = new Dictionary<string, object>();
 
             foreach (var attribute in attributes.GetType().GetProperties())
             {
                 var name = attribute.Name;
                 var value = attribute.GetValue(attributes);
+                var attrMetadata = attribute.GetAttrMetadata();
 
-                RenderAttribute(name, value, builder);
+                ProcessAttribute(name, value, attrMetadata, attributesDictionary);
             }
+
+            return attributesDictionary;
         }
 
-        private static void RenderAttribute(string name, object value, StringBuilder builder)
+        private static void ProcessAttribute(string name, object value, AttrAttribute attributeMetadata, IDictionary<string, object> attributesDictionary)
         {
-            if(value == null)
+            if (value == null)
             {
                 return;
             }
 
-            if(value is bool)
+            if (value is bool && (bool)value == false)
             {
-                if ((bool)value)
-                {
-                    builder.Append($" {name.ToLower()}");
-                }
+                return;
+            }
+
+            var valueAstTuple = value as ITuple;
+            if(valueAstTuple != null && valueAstTuple.Length == 2 && valueAstTuple[1] is NameTransform)
+            {
+                ProcessAttribute(name, valueAstTuple[0], new AttrAttribute((NameTransform)valueAstTuple[1]), attributesDictionary);
                 return;
             }
 
             if (name.Equals("DataSet", StringComparison.CurrentCultureIgnoreCase))
             {
-                foreach(var dataAttribute in value.GetType().GetProperties())
+                foreach (var dataAttribute in value.GetType().GetProperties())
                 {
-                    var dataName = dataAttribute.Name.ToDashCase();
-                    RenderAttribute($"data-{dataName}", dataAttribute.GetValue(value), builder);
+                    var dataName = $"data-{dataAttribute.Name}";
+                    ProcessAttribute(
+                        dataName, 
+                        dataAttribute.GetValue(value), 
+                        dataAttribute.GetAttrMetadata(NameTransform.DashCase), 
+                        attributesDictionary
+                    );
                 }
                 return;
             }
@@ -126,7 +160,13 @@ namespace JeyDotC.JustCs
             {
                 foreach (var dataAttribute in value.GetType().GetProperties())
                 {
-                    RenderAttribute($"aria-{dataAttribute.Name}", dataAttribute.GetValue(value), builder);
+                    var ariaName = $"aria-{dataAttribute.Name.ToLower()}";
+                    ProcessAttribute(
+                        ariaName, 
+                        dataAttribute.GetValue(value), 
+                        dataAttribute.GetAttrMetadata(),
+                        attributesDictionary
+                    );
                 }
                 return;
             }
@@ -135,34 +175,49 @@ namespace JeyDotC.JustCs
             {
                 foreach (var dataAttribute in value.GetType().GetProperties())
                 {
-                    var dataName = dataAttribute.Name.ToDashCase();
-                    RenderAttribute(dataName, dataAttribute.GetValue(value), builder);
+                    ProcessAttribute(
+                        dataAttribute.Name,
+                        dataAttribute.GetValue(value),
+                        dataAttribute.GetAttrMetadata(),
+                        attributesDictionary
+                    );
                 }
                 return;
             }
 
-            if (name.Equals("HttpEquiv", StringComparison.CurrentCultureIgnoreCase))
+            name = (attributeMetadata.NameTransform switch
             {
-                RenderAttribute("http-equiv", value, builder);
-                return;
-            }
+                NameTransform.DashCase => name.ToDashCase(),
+               _ => name
+            }).ToLower();
 
-            if (name.Equals("AcceptCharset", StringComparison.CurrentCultureIgnoreCase))
+            attributesDictionary[name] = value;
+        }
+
+        private static void RenderAttributesDictionary(IDictionary<string, object> attributesDictionary, StringBuilder builder)
+        {
+
+            foreach (var entry in attributesDictionary)
             {
-                RenderAttribute("accept-charset", value, builder);
-                return;
+                var (name, value) = entry;
+
+                if(value is bool)
+                {
+                    builder.Append($" {name}");
+                    continue;
+                }
+
+                var stringValue = value.ToString();
+
+                var sanitizedValue = stringValue.Replace("\"", "&quot;");
+
+                if (value is Enum)
+                {
+                    sanitizedValue = sanitizedValue.ToLower();
+                }
+
+                builder.Append(@$" {name}=""{sanitizedValue}""");
             }
-
-            var stringValue = value.ToString();
-
-            var sanitizedValue = stringValue.Replace("\"", "&quot;");
-
-            if(value is Enum)
-            {
-                sanitizedValue = sanitizedValue.ToLower();
-            }
-
-            builder.Append(@$" {name.ToLower()}=""{sanitizedValue}""");
         }
     }
 }

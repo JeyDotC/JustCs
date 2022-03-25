@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Xunit;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
+using JeyDotC.JustCs.Html.Annotations;
 
 namespace JeyDotC.JustCs.Tests
 {
@@ -285,7 +286,7 @@ namespace JeyDotC.JustCs.Tests
                         (sbyte)-5,
                         (short)-200,
                         (ushort)200,
-                        -300, 
+                        -300,
                         (uint)300,
                         (long)-600,
                         (ulong)600,
@@ -382,6 +383,48 @@ namespace JeyDotC.JustCs.Tests
                 "<a></a>\n" +
                 "</div>\n",
             };
+        }
+
+        public static IEnumerable<object[]> ElementsWithOverridenAttributes()
+        {
+            // Basic scenario
+            yield return new object[] { new A { Attributes = new Attrs { Href = "A", _ = new { Href = "B" } } }, "<a href=\"B\"></a>\n" };
+
+            // Different casing
+            yield return new object[] { new A { Attributes = new Attrs { Href = "A", _ = new { href = "B" } } }, "<a href=\"B\"></a>\n" };
+
+            // Multiple oveerrides
+            yield return new object[] { new A { Attributes = new Attrs { Href = "A", _ = new { href = "B", Href = "C" } } }, "<a href=\"C\"></a>\n" };
+
+            // Deep oveerrides (Looks like a **very bad**
+            // practice, but it is possible)
+            yield return new object[] { new A { Attributes = new Attrs { Href = "A", _ = new { href = "B", _ = new { href = "C" } } } }, "<a href=\"C\"></a>\n" };
+
+            // Oveerride aria attributes
+            yield return new object[] { new A { Attributes = new Attrs { Aria = new AriaAttrs { Describedby = "something" }, _ = new { Aria = new { Describedby = "nothing" }, } } }, "<a aria-describedby=\"nothing\"></a>\n" };
+
+            // Oveerride data attributes
+            yield return new object[] { new A { Attributes = new Attrs { DataSet = new { Describedby = "something" }, _ = new { DataSet = new { Describedby = "nothing" }, } } }, "<a data-describedby=\"nothing\"></a>\n" };
+        }
+
+        record MyAttributes : IElementAttributes
+        {
+            public string LowerCasedAttr { get; init; }
+
+            [Attr(NameTransform.DashCase)]
+            public string DashCasedAttr { get; init; }
+        }
+
+        public static IEnumerable<object[]> ElementsWithOverridenAttributeNames()
+        {
+            // Basic scenario
+            yield return new object[] { new Meta { Attributes = new Attrs { AcceptCharset = "utf8", HttpEquiv = "Content-Type" } }, "<meta accept-charset=\"utf8\" http-equiv=\"Content-Type\" />\n" };
+
+            // Override with Attr annotation
+            yield return new object[] { new Div { Attributes = new MyAttributes { LowerCasedAttr = "lowercased", DashCasedAttr = "dash-cased" } }, "<div lowercasedattr=\"lowercased\" dash-cased-attr=\"dash-cased\"></div>\n" };
+
+            // Dynamic attribute name override
+            yield return new object[] { new Div { Attributes = new Attrs { _ = new { LowerCasedAttr = "lowercased", DashCasedAttr = ("dash-cased", NameTransform.DashCase) } } }, "<div lowercasedattr=\"lowercased\" dash-cased-attr=\"dash-cased\"></div>\n" };
         }
 
         [Theory]
@@ -572,8 +615,48 @@ namespace JeyDotC.JustCs.Tests
             var result = div.RenderAsHtml();
 
             // Assert
-            Assert.Equal("<div data-some-value=\"value\" id=\"my-id\" aria-hidden=\"false\" nonce=\"some-value\" arbitrary-value=\"arbitrary\"></div>\n", result);
+            Assert.Equal("<div aria-hidden=\"false\" data-some-value=\"value\" id=\"my-id\" nonce=\"some-value\" arbitraryvalue=\"arbitrary\"></div>\n", result);
 
+        }
+
+        class MaliciousElement : Element
+        {
+            public override string Tag => "malicious /> <script>alert('evil!');</script> <malicious";
+        }
+
+        [Fact]
+        public void RenderAsHtml_ShouldThrowOnInvalidTagNames()
+        {
+            // Arrange
+            var maliciousElement = new MaliciousElement { };
+
+            // Act
+            Action action = () => maliciousElement.RenderAsHtml();
+
+            // Assert
+            Assert.Throws<InvalidOperationException>(action);
+        }
+
+        [Theory]
+        [MemberData(nameof(ElementsWithOverridenAttributes))]
+        public void RenderAsHtml_AttributesDefinedAtSpreadPropertyShouldOverridePreviousOnes(Element element, string expectedResult)
+        {
+            // Act
+            var result = element.RenderAsHtml();
+
+            // Assert
+            Assert.Equal(expectedResult, result);
+        }
+
+        [Theory]
+        [MemberData(nameof(ElementsWithOverridenAttributeNames))]
+        public void RenderAsHtml_AttributesWithAttrAnnotationShouldBeAbleToOverrideDefaultBehavior(Element element, string expectedResult)
+        {
+            // Act
+            var result = element.RenderAsHtml();
+
+            // Assert
+            Assert.Equal(expectedResult, result);
         }
     }
 }
