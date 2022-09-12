@@ -12,13 +12,17 @@
     <None Remove="Views\Components\" />
     <None Remove="Model\" />
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
+    <None Remove="Model\Models\" />
+    <None Remove="Model\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Views\App\" />
+    <Folder Include="Views\Home\" />
     <Folder Include="Views\Components\" />
     <Folder Include="Model\" />
+    <Folder Include="Model\Models\" />
+    <Folder Include="Model\Repositories\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JeyDotC.JustCs.Mvc\JeyDotC.JustCs.Mvc.csproj">
