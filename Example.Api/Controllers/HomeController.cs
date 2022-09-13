@@ -28,7 +28,9 @@ namespace Example.Api.Controllers
 
             return new View<Index>(new IndexProps
             {
-                Foos = allFoos
+                Foos = allFoos,
+                // Manually add our antiforgery token
+                __RequestVerificationToken = _antiforgery.GetTokens(HttpContext).RequestToken
             });
         }
 
@@ -103,6 +105,23 @@ namespace Example.Api.Controllers
                 FooId = editProps.Id,
                 Name = editProps.Name,
             });
+
+            return Redirect("/");
+        }
+
+        [Route("/Delete")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete([FromForm] DeleteFooData deleteData)
+        {
+            var foo = _foosRepository.FindById(deleteData.Id);
+
+            if(foo == null)
+            {
+                return NotFound();
+            }
+
+            _foosRepository.DeleteFoo(foo.FooId);
 
             return Redirect("/");
         }

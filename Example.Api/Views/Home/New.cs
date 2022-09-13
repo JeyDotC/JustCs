@@ -14,9 +14,9 @@ namespace Example.Api.Views.Home
     public record NewProps : IValidatedProps
     {
         [Required]
-        public string Name { get; set; }
+        public string Name { get; init; }
 
-        public string __RequestVerificationToken { get; set; }
+        public string __RequestVerificationToken { get; init; }
 
         [BindNever]
         public ModelStateDictionary Validation { get; init; }
@@ -27,6 +27,7 @@ namespace Example.Api.Views.Home
         protected override Element Render(NewProps attributes)
             => _<Page>(new PageProps { Title = "Create Foo", Page = "Home/Index", },
                 _<A>(new Attrs { Href = "/" }, "< Return"),
+                _<H1>("New Foo"),
                 _<Form>(new Attrs { Action = "/New", Method="POST" },
 
                     _<Input>(new Attrs { Type="hidden", Value = attributes.__RequestVerificationToken, Name=nameof(attributes.__RequestVerificationToken)}),

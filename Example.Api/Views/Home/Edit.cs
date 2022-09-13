@@ -27,6 +27,8 @@ namespace Example.Api.Views.Home
         protected override Element Render(EditProps attributes)
             => _<Page>(new PageProps { Title = "Edit Foo", Page = "Home/Index", },
                 _<A>(new Attrs { Href = "/" }, "< Return"),
+
+                _<H1>($"Edit '{attributes.Name}'"),
                 _<Form>(new Attrs { Action = "/Edit", Method = "POST" },
 
                     _<Input>(new Attrs { Type = "hidden", Value = attributes.__RequestVerificationToken, Name = nameof(attributes.__RequestVerificationToken) }),

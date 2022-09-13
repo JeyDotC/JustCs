@@ -13,7 +13,7 @@ namespace Example.Api.Views.Components
     public class NavBar : ComponentElement<NavBarProps>
     {
         protected override Element Render(NavBarProps props)
-            => _<Nav>(new Attrs { Class = ClassNames.From("navbar navbar-expand-lg navbar-dark bg-danger") },
+            => _<Nav>(new Attrs { Class = ClassNames.From("navbar navbar-expand-lg navbar-dark bg-dark") },
                     _<Div>(new Attrs { Class = "container-fluid" },
                         _<A>(new Attrs { Class = "navbar-brand", Href = "/" }, "JustCs"),
                         _<Button>(new Attrs

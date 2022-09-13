@@ -11,6 +11,15 @@ namespace Example.Api.Views.Home
     public record IndexProps : IElementAttributes
     {
         public IEnumerable<Foo> Foos { get; init; }
+
+        public string __RequestVerificationToken { get; init; }
+    }
+
+    public record DeleteFooData
+    {
+        public int Id { get; init; }
+
+        public string __RequestVerificationToken { get; init; }
     }
 
     public class Index : ComponentElement<IndexProps>
@@ -32,8 +41,15 @@ namespace Example.Api.Views.Home
                                 () => _(attributes.Foos.Select(foo => _<Tr>(
                                     _<Td>(new Attrs { Class = "text-end" }, foo.FooId),
                                     _<Td>(foo.Name),
-                                    _<Td>(new Attrs { Class = "text-end" },
-                                        _<A>(new Attrs { Href = $"/Edit/{foo.FooId}" }, "Edit")
+                                    _<Td>(new Attrs { Class = "hstack gap-3" },
+                                        _<A>(new Attrs { Href = $"/Edit/{foo.FooId}", Class = "ms-auto"}, "Edit"),
+                                        _<Div>(new Attrs { Class = "vr"}),
+                                        _<Form>(new Attrs { Action = $"/Delete", Method = "POST" },
+                                            _<Input>(new Attrs { Type = "hidden", Value = attributes.__RequestVerificationToken, Name = nameof(attributes.__RequestVerificationToken) }),
+                                            _<Input>(new Attrs { Type = "hidden", Value = foo.FooId.ToString(), Name = "Id" }),
+
+                                            _<Button>(new Attrs { Type="submit", Class="btn btn-danger btn-sm" }, "Delete")
+                                        )
                                     )
                                 )))
                             ),
