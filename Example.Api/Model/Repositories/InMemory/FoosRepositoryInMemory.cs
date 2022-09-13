@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using Example.Api.Model.Models;
 
-namespace Example.Api.Model.Repositories
+namespace Example.Api.Model.Repositories.InMemory
 {
-    public class FoosRepositoryInMemory : IFoosRepository
+    internal class FoosRepositoryInMemory : IFoosRepository
     {
         private readonly Store _store;
 
         public FoosRepositoryInMemory(Store store)
         {
             _store = store;
+        }
+
+        public void UpdateFoo(Foo foo)
+        {
+            _store.FoosTable[foo.FooId] = new ValueTuple<string>(foo.Name);
         }
 
         public void AddFoo(Foo foo)
@@ -26,7 +31,14 @@ namespace Example.Api.Model.Repositories
 
         public Foo FindById(int fooId)
         {
-            var name = _store.FoosTable[fooId].Item1;
+            ValueTuple<string>? fooRow = _store.FoosTable[fooId];
+
+            if(!fooRow.HasValue)
+            {
+                return null;
+            }
+
+            var name = fooRow.Value.Item1;
             var bars = _store.BarsTable.Where(kv => kv.Value.Item2 == fooId).Select(kv => new Bar
             {
                 BarId = kv.Key,
@@ -40,5 +52,7 @@ namespace Example.Api.Model.Repositories
             FooId = kv.Key,
             Name = kv.Value.Item1
         });
+
+        public void DeleteFoo(int fooId) => _store.FoosTable.Remove(fooId);
     }
 }

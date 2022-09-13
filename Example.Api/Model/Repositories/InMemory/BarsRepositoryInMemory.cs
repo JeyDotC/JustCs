@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Example.Api.Model.Models;
 
-namespace Example.Api.Model.Repositories
+namespace Example.Api.Model.Repositories.InMemory
 {
-    public class BarsRepositoryInMemory : IBarsRepository
+    internal class BarsRepositoryInMemory : IBarsRepository
     {
         private readonly Store _store;
 

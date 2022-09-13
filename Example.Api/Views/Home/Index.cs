@@ -22,7 +22,7 @@ namespace Example.Api.Views.Home
                         _<Caption>($"Presenting {attributes.Foos.Count()} Foos"),
                         _<Thead>(
                             _<Tr>(
-                                _<Th>(new Attrs { Class="text-right" }, "Id"),
+                                _<Th>(new Attrs { Class="text-end" }, "Id"),
                                 _<Th>("Name"),
                                 _<Th>()
                             )
@@ -30,9 +30,11 @@ namespace Example.Api.Views.Home
                         _<Tbody>(
                             (attributes.Foos.Any(),
                                 () => _(attributes.Foos.Select(foo => _<Tr>(
-                                    _<Td>(new Attrs { Class = "text-right" }, foo.FooId),
+                                    _<Td>(new Attrs { Class = "text-end" }, foo.FooId),
                                     _<Td>(foo.Name),
-                                    _<Td>()
+                                    _<Td>(new Attrs { Class = "text-end" },
+                                        _<A>(new Attrs { Href = $"/Edit/{foo.FooId}" }, "Edit")
+                                    )
                                 )))
                             ),
                             (!attributes.Foos.Any(),

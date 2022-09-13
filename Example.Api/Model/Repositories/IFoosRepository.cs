@@ -10,6 +10,9 @@ namespace Example.Api.Model.Repositories
 
         IEnumerable<Foo> ListFoos();
 
+        void UpdateFoo(Foo foo);
+
         void AddFoo(Foo foo);
+        void DeleteFoo(int fooId);
     }
 }
