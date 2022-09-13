@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Example.Mvc.Model.Repositories;
+using Example.Mvc.Model.Repositories.InMemory;
 using JeyDotC.JustCs.Mvc;
+using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace MrPapaya.Api
+namespace Example.Mvc
 {
     public class Startup
     {
@@ -30,6 +34,13 @@ namespace MrPapaya.Api
             {
                 options.WithJustCs();
             });
+
+            // Add our fake repositories.
+            services.AddSingleton<Store>();
+            services.AddScoped<IFoosRepository, FoosRepositoryInMemory>();
+
+            // Necessary to add anti-forgery.
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

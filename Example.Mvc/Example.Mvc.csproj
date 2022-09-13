@@ -12,13 +12,21 @@
     <None Remove="Views\Components\" />
     <None Remove="Model\" />
     <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
+    <None Remove="Model\Models\" />
+    <None Remove="Model\Repositories\" />
+    <None Remove="Extensions\" />
+    <None Remove="Model\Repositories\MemoryStore\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Views\App\" />
+    <Folder Include="Views\Home\" />
     <Folder Include="Views\Components\" />
     <Folder Include="Model\" />
+    <Folder Include="Model\Models\" />
+    <Folder Include="Model\Repositories\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Model\Repositories\InMemory\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JeyDotC.JustCs.Mvc\JeyDotC.JustCs.Mvc.csproj">

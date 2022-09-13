@@ -1,10 +1,10 @@
 ﻿using System;
-using Example.Api.Views.Components;
+using Example.Mvc.Views.Components;
 using JeyDotC.JustCs;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 
-namespace Example.Api.Views
+namespace Example.Mvc.Views
 {
     public struct PageProps : IElementAttributes
     {
@@ -37,7 +37,7 @@ namespace Example.Api.Views
                         Page = props.Page
                     }),
 
-                    _(Children),
+                    _<Div>(new Attrs { Class = "container" }, _(Children)),
 
                     _<Script>(new Attrs { Src = "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" })
                 )
