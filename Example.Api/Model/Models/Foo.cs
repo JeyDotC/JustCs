@@ -8,7 +8,5 @@ namespace Example.Api.Model.Models
         public int FooId { get; set; }
 
         public string Name { get; set; }
-
-        public IEnumerable<Bar> Bars { get; set; }
     }
 }

@@ -38,7 +38,6 @@ namespace MrPapaya.Api
             // Add our fake repositories.
             services.AddSingleton<Store>();
             services.AddScoped<IFoosRepository, FoosRepositoryInMemory>();
-            services.AddScoped<IBarsRepository, BarsRepositoryInMemory>();
 
             // Necessary to add anti-forgery.
             services.AddControllersWithViews();

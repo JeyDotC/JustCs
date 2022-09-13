@@ -39,13 +39,8 @@ namespace Example.Api.Model.Repositories.InMemory
             }
 
             var name = fooRow.Value.Item1;
-            var bars = _store.BarsTable.Where(kv => kv.Value.Item2 == fooId).Select(kv => new Bar
-            {
-                BarId = kv.Key,
-                Name = kv.Value.Item1
-            });
 
-            return new Foo { Name = name, FooId = fooId, Bars = bars };
+            return new Foo { Name = name, FooId = fooId };
         }
 
         public IEnumerable<Foo> ListFoos() => _store.FoosTable.Select(kv => new Foo {

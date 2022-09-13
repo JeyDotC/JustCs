@@ -13,6 +13,7 @@ namespace Example.Api.Model.Repositories
         void UpdateFoo(Foo foo);
 
         void AddFoo(Foo foo);
+
         void DeleteFoo(int fooId);
     }
 }
