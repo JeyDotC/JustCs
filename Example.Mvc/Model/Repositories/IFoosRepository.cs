@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using Example.Api.Model.Models;
+using Example.Mvc.Model.Models;
 
-namespace Example.Api.Model.Repositories
+namespace Example.Mvc.Model.Repositories
 {
     public interface IFoosRepository
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Example.Api.Model.Repositories.InMemory
+namespace Example.Mvc.Model.Repositories.InMemory
 {
     internal class Store
     {

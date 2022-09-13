@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Example.Api.Model.Models
+namespace Example.Mvc.Model.Models
 {
     public class Foo
     {

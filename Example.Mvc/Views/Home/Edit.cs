@@ -1,13 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Example.Api.Extensions;
-using Example.Api.Views.Components;
+using Example.Mvc.Extensions;
+using Example.Mvc.Views.Components;
 using JeyDotC.JustCs;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Example.Api.Views.Home
+namespace Example.Mvc.Views.Home
 {
     public record EditProps : IValidatedProps
     {

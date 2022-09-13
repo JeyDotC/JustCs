@@ -4,7 +4,7 @@ using System.Linq;
 using JeyDotC.JustCs.Html.Attributes;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Example.Api.Extensions
+namespace Example.Mvc.Extensions
 {
     internal interface IValidatedProps : IElementAttributes
     {

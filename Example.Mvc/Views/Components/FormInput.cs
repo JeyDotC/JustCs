@@ -5,7 +5,7 @@ using JeyDotC.JustCs;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 
-namespace Example.Api.Views.Components
+namespace Example.Mvc.Views.Components
 {
     public record FormInputProps : IElementAttributes
     {

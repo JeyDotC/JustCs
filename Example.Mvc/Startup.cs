@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Example.Api.Model.Repositories;
-using Example.Api.Model.Repositories.InMemory;
+using Example.Mvc.Model.Repositories;
+using Example.Mvc.Model.Repositories.InMemory;
 using JeyDotC.JustCs.Mvc;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Builder;
@@ -16,7 +16,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace MrPapaya.Api
+namespace Example.Mvc
 {
     public class Startup
     {

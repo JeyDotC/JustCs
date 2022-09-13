@@ -1,10 +1,10 @@
 ﻿using System;
-using Example.Api.Views.Components;
+using Example.Mvc.Views.Components;
 using JeyDotC.JustCs;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 
-namespace Example.Api.Views
+namespace Example.Mvc.Views
 {
     public struct PageProps : IElementAttributes
     {

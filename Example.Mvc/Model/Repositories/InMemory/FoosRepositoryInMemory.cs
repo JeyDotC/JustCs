@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Example.Api.Model.Models;
+using Example.Mvc.Model.Models;
 
-namespace Example.Api.Model.Repositories.InMemory
+namespace Example.Mvc.Model.Repositories.InMemory
 {
     internal class FoosRepositoryInMemory : IFoosRepository
     {

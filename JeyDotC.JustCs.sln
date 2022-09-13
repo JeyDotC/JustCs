@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.810.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Api", "Example.Api\Example.Api.csproj", "{726ED8BC-8586-4317-B1FF-8D610BDCB787}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Mvc", "Example.Mvc\Example.Mvc.csproj", "{726ED8BC-8586-4317-B1FF-8D610BDCB787}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JeyDotC.JustCs", "JeyDotC.JustCs\JeyDotC.JustCs.csproj", "{E47B008A-0FFF-4BC7-A9A8-B74F3B6D5380}"
 EndProject

@@ -1,13 +1,13 @@
 
 using System.Net;
-using Example.Api.Model.Models;
-using Example.Api.Model.Repositories;
-using Example.Api.Views.Home;
+using Example.Mvc.Model.Models;
+using Example.Mvc.Model.Repositories;
+using Example.Mvc.Views.Home;
 using JeyDotC.JustCs;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Example.Api.Controllers
+namespace Example.Mvc.Controllers
 {
     [Route("/")]
     public class HomeController : Controller

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Example.Api.Model.Models;
+using Example.Mvc.Model.Models;
 using JeyDotC.JustCs;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 
-namespace Example.Api.Views.Home
+namespace Example.Mvc.Views.Home
 {
     public record IndexProps : IElementAttributes
     {

@@ -1,5 +1,5 @@
 ﻿using System;
-namespace Example.Api.Model
+namespace Example.Mvc.Model
 {
     public class Data
     {
