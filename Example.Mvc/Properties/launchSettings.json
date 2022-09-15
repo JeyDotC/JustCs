@@ -35,7 +35,7 @@
     "Example.Mvc": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:60016;http://localhost:14394",
+      "applicationUrl": "https://localhost:6301;http://localhost:62372",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

@@ -26,12 +26,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{53D32D80
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeyDotC.JustCs.Mvc.Tests", "JeyDotC.JustCs.Mvc.Tests\JeyDotC.JustCs.Mvc.Tests.csproj", "{24C17E70-F0B9-4B40-9658-6251E4C68CEB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{2BA88A0C-4EA3-4CB6-830C-31599FD06ED9}"
-	ProjectSection(SolutionItems) = preProject
-		develop.yml = develop.yml
-		dotnet.yml = dotnet.yml
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
