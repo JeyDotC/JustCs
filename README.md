@@ -111,3 +111,39 @@ public class MyPageController : ControllerBase
                     .WithHeader("X-Some-Header", "some-value");
 }
 ```
+
+### Return as IActionResult
+
+If you're returning an IAction result instance, you can use the `MvcView<>` class instead.
+
+```csharp
+[Route("[controller]")]
+public class MyPageController : Controller
+{
+    [Route("Create")]
+    [HttpGet]
+    public IActionResult Create() => new MvcView<Create>(new CreateProps {});
+
+    [Route("Create")]
+    [HttpPost]
+    public IActionResult Create([FromForm] CreateProps createProps)
+    {
+        // You can use ModelState as long as the form follows the
+        // inputs naming rules and annotate the props with the
+        // necessary attributes.
+        // See https://github.com/JeyDotC/JustCs/tree/develop/Example.Mvc
+        // for a full example on basic MVC work flow.
+        if (!ControllerContext.ModelState.IsValid)
+        {
+            return new MvcView<Create>(createProps with
+            {
+                Validation = ControllerContext.ModelState,
+            }, HttpStatusCode.BadRequest);
+        }
+
+        // If everything is Ok, store your data and redirect.
+
+        return Redirect("/");
+    }
+}
+```
