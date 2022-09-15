@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'MrPapaya.Api' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Example.Api' " />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="Views\" />
     <None Remove="Controllers\" />

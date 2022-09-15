@@ -22,7 +22,7 @@ namespace Example.Mvc.Views.Home
         public ModelStateDictionary Validation { get; init; }
     }
 
-    public class New : ComponentElement<NewProps>
+    public sealed class New : ComponentElement<NewProps>
     {
         protected override Element Render(NewProps attributes)
             => _<Page>(new PageProps { Title = "Create Foo", Page = "Home/Index", },

@@ -17,7 +17,7 @@ namespace Example.Mvc.Views
         public string Page { get; init; }
     }
 
-    public class Page : ComponentElement<PageProps>
+    public sealed class Page : ComponentElement<PageProps>
     {
         protected override Element Render(PageProps props)
             => _<Html>(

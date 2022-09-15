@@ -18,7 +18,7 @@ namespace Example.Mvc.Views.Components
         public IEnumerable<string> Errors { get; init; } = Enumerable.Empty<string>();
     }
 
-    public class FormInput : ComponentElement<FormInputProps>
+    public sealed class FormInput : ComponentElement<FormInputProps>
     {
         protected override Element Render(FormInputProps attributes)
             => _<Div>(new Attrs { Class = "mb-3 has-validation" },
