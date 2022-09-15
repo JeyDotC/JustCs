@@ -4,6 +4,7 @@ using Example.Mvc.Model.Models;
 using Example.Mvc.Model.Repositories;
 using Example.Mvc.Views.Home;
 using JeyDotC.JustCs;
+using JeyDotC.JustCs.Mvc;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +31,7 @@ namespace Example.Mvc.Controllers
             {
                 Foos = allFoos,
                 // Manually add our antiforgery token
-                __RequestVerificationToken = _antiforgery.GetTokens(HttpContext).RequestToken
+                __RequestVerificationToken = _antiforgery.GetAndStoreTokens(HttpContext).RequestToken
             });
         }
 
@@ -38,23 +39,24 @@ namespace Example.Mvc.Controllers
         [HttpGet]
         public IView New()
         {
-            return new View<New>(new NewProps {
+            return new View<New>(new NewProps
+            {
                 // Manually add our antiforgery token
-                __RequestVerificationToken = _antiforgery.GetTokens(HttpContext).RequestToken
+                __RequestVerificationToken = _antiforgery.GetAndStoreTokens(HttpContext).RequestToken
             });
         }
 
         [Route("/New")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult New([FromForm]NewProps newProps)
+        public IActionResult New([FromForm] NewProps newProps)
         {
             if (!ControllerContext.ModelState.IsValid)
             {
-                return new ObjectResult(new View<New>(newProps with
+                return new MvcView<New>(newProps with
                 {
                     Validation = ControllerContext.ModelState,
-                }, HttpStatusCode.BadRequest));
+                }, HttpStatusCode.BadRequest);
             }
 
             _foosRepository.AddFoo(new Foo { Name = newProps.Name });
@@ -68,17 +70,18 @@ namespace Example.Mvc.Controllers
         {
             var foo = _foosRepository.FindById(id);
 
-            if(foo == null)
+            if (foo == null)
             {
                 return NotFound();
             }
 
-            return new ObjectResult(new View<Edit>(new EditProps {
+            return new MvcView<Edit>(new EditProps
+            {
                 Id = foo.FooId,
                 Name = foo.Name,
                 // Manually add our antiforgery token
-                __RequestVerificationToken = _antiforgery.GetTokens(HttpContext).RequestToken
-            }));
+                __RequestVerificationToken = _antiforgery.GetAndStoreTokens(HttpContext).RequestToken
+            });
         }
 
         [Route("/Edit")]
@@ -95,13 +98,14 @@ namespace Example.Mvc.Controllers
 
             if (!ControllerContext.ModelState.IsValid)
             {
-                return new ObjectResult(new View<Edit>(editProps with
+                return new MvcView<Edit>(editProps with
                 {
                     Validation = ControllerContext.ModelState,
-                }, HttpStatusCode.BadRequest));
+                }, HttpStatusCode.BadRequest);
             }
 
-            _foosRepository.UpdateFoo(new Foo {
+            _foosRepository.UpdateFoo(new Foo
+            {
                 FooId = editProps.Id,
                 Name = editProps.Name,
             });
@@ -116,7 +120,7 @@ namespace Example.Mvc.Controllers
         {
             var foo = _foosRepository.FindById(deleteData.Id);
 
-            if(foo == null)
+            if (foo == null)
             {
                 return NotFound();
             }

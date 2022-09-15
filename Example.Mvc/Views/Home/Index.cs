@@ -22,7 +22,7 @@ namespace Example.Mvc.Views.Home
         public string __RequestVerificationToken { get; init; }
     }
 
-    public class Index : ComponentElement<IndexProps>
+    public sealed class Index : ComponentElement<IndexProps>
     {
         protected override Element Render(IndexProps attributes)
             => _<Page>(new PageProps { Title = "List of Foos", Page = "Home/Index", },

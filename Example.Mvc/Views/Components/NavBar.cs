@@ -10,7 +10,7 @@ namespace Example.Mvc.Views.Components
         public string Page { get; init; }
     }
 
-    public class NavBar : ComponentElement<NavBarProps>
+    public sealed class NavBar : ComponentElement<NavBarProps>
     {
         protected override Element Render(NavBarProps props)
             => _<Nav>(new Attrs { Class = ClassNames.From("navbar navbar-expand-lg navbar-dark bg-dark") },
