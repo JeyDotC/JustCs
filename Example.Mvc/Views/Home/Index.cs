@@ -5,21 +5,18 @@ using Example.Mvc.Model.Models;
 using JeyDotC.JustCs;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
+using JeyDotC.JustCs.Mvc.Components;
 
 namespace Example.Mvc.Views.Home
 {
     public record IndexProps : IElementAttributes
     {
         public IEnumerable<Foo> Foos { get; init; }
-
-        public string __RequestVerificationToken { get; init; }
     }
 
     public record DeleteFooData
     {
         public int Id { get; init; }
-
-        public string __RequestVerificationToken { get; init; }
     }
 
     public sealed class Index : ComponentElement<IndexProps>
@@ -45,7 +42,9 @@ namespace Example.Mvc.Views.Home
                                         _<A>(new Attrs { Href = $"/Edit/{foo.FooId}", Class = "ms-auto"}, "Edit"),
                                         _<Div>(new Attrs { Class = "vr"}),
                                         _<Form>(new Attrs { Action = $"/Delete", Method = "POST" },
-                                            _<Input>(new Attrs { Type = "hidden", Value = attributes.__RequestVerificationToken, Name = nameof(attributes.__RequestVerificationToken) }),
+
+                                            _<AntiForgeryToken>(),
+
                                             _<Input>(new Attrs { Type = "hidden", Value = foo.FooId.ToString(), Name = "Id" }),
 
                                             _<Button>(new Attrs { Type="submit", Class="btn btn-danger btn-sm" }, "Delete")

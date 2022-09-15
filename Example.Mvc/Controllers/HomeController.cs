@@ -14,11 +14,9 @@ namespace Example.Mvc.Controllers
     public class HomeController : Controller
     {
         private readonly IFoosRepository _foosRepository;
-        private readonly IAntiforgery _antiforgery;
 
-        public HomeController(IFoosRepository foosRepository, IAntiforgery antiforgery)
+        public HomeController(IFoosRepository foosRepository)
         {
-            _antiforgery = antiforgery;
             _foosRepository = foosRepository;
         }
 
@@ -30,8 +28,6 @@ namespace Example.Mvc.Controllers
             return new View<Index>(new IndexProps
             {
                 Foos = allFoos,
-                // Manually add our antiforgery token
-                __RequestVerificationToken = _antiforgery.GetAndStoreTokens(HttpContext).RequestToken
             });
         }
 
@@ -39,11 +35,7 @@ namespace Example.Mvc.Controllers
         [HttpGet]
         public IView New()
         {
-            return new View<New>(new NewProps
-            {
-                // Manually add our antiforgery token
-                __RequestVerificationToken = _antiforgery.GetAndStoreTokens(HttpContext).RequestToken
-            });
+            return new View<New>(new NewProps());
         }
 
         [Route("/New")]
@@ -79,8 +71,6 @@ namespace Example.Mvc.Controllers
             {
                 Id = foo.FooId,
                 Name = foo.Name,
-                // Manually add our antiforgery token
-                __RequestVerificationToken = _antiforgery.GetAndStoreTokens(HttpContext).RequestToken
             });
         }
 
