@@ -14,14 +14,8 @@ namespace JeyDotC.JustCs.Mvc
         private readonly ObjectResult _implementation;
 
         public MvcView(IElementAttributes attributes, HttpStatusCode code = HttpStatusCode.OK)
-            : base(attributes, code)
-        {
-            _implementation = new ObjectResult(this);
-        }
+            : base(attributes, code) => _implementation = new ObjectResult(this);
 
-        public Task ExecuteResultAsync(ActionContext context)
-        {
-            return ((IActionResult)_implementation).ExecuteResultAsync(context);
-        }
+        public Task ExecuteResultAsync(ActionContext context) => ((IActionResult)_implementation).ExecuteResultAsync(context);
     }
 }
