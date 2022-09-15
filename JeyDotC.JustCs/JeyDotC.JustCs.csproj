@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Description>Library to render HTML using just C#. This is the core assembly that can be used to work with any web framework (e.g. Nancy, ASP). To work with ASP, install JeyDotC.JustCs.Mvc.</Description>
     <Copyright>Jeysson Guevara (JeyDotC) 2022</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
