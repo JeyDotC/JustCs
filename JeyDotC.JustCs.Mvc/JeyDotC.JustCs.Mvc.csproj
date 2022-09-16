@@ -19,9 +19,15 @@
     <None Remove="Microsoft.AspNetCore.Mvc.Abstractions" />
     <None Remove="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <None Remove="Microsoft.AspNetCore.Mvc.Core" />
+    <None Remove="Components\" />
+    <None Remove="Microsoft.AspNetCore.Antiforgery" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Antiforgery" Version="2.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\" />
   </ItemGroup>
 </Project>

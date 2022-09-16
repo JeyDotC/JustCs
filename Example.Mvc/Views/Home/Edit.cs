@@ -5,6 +5,7 @@ using Example.Mvc.Views.Components;
 using JeyDotC.JustCs;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
+using JeyDotC.JustCs.Mvc.Components;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Example.Mvc.Views.Home
@@ -15,8 +16,6 @@ namespace Example.Mvc.Views.Home
 
         [Required]
         public string Name { get; init; }
-
-        public string __RequestVerificationToken { get; init; }
 
         [BindNever]
         public ModelStateDictionary Validation { get; init; }
@@ -31,7 +30,7 @@ namespace Example.Mvc.Views.Home
                 _<H1>($"Edit '{attributes.Name}'"),
                 _<Form>(new Attrs { Action = "/Edit", Method = "POST" },
 
-                    _<Input>(new Attrs { Type = "hidden", Value = attributes.__RequestVerificationToken, Name = nameof(attributes.__RequestVerificationToken) }),
+                    _<AntiForgeryToken>(),
 
                     _<Input>(new Attrs { Type = "hidden", Name = "Id", Value = attributes.Id.ToString(), }),
                     _<FormInput>(new FormInputProps
