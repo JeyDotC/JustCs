@@ -8,12 +8,16 @@ namespace JeyDotC.JustCs.Mvc.Components
     public class AntiForgeryToken : ComponentElement
     {
         protected override Element Render(IElementAttributes attributes)
-            => _<Input>(new Attrs
+        {
+            var tokenStore = MvcContext.GetService<IAntiforgery>().GetAndStoreTokens(MvcContext.Context);
+
+            return _<Input>(new Attrs
             {
                 Type = "hidden",
-                Name = "__RequestVerificationToken",
-                Value = MvcContext.GetService<IAntiforgery>().GetAndStoreTokens(MvcContext.Context).RequestToken
+                Name = tokenStore.FormFieldName,
+                Value = tokenStore.RequestToken
             });
+        }
     }
 }
 
