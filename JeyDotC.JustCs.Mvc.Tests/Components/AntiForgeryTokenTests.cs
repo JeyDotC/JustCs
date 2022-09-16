@@ -9,7 +9,7 @@ using Xunit;
 
 namespace JeyDotC.JustCs.Mvc.Tests.Components
 {
-    public class AntiForgeryTokenTests
+    public class AntiForgeryTokenTests : IDisposable
     {
         [Fact]
         public void Render_ShouldProduceHiddenInputWithAntiforgeryToken()
@@ -46,6 +46,11 @@ namespace JeyDotC.JustCs.Mvc.Tests.Components
                 Name = antiForgeryTokenSet.FormFieldName,
                 Value = antiForgeryTokenSet.RequestToken,
             }, antiForgeryTokenInput.Attributes);
+        }
+
+        public void Dispose()
+        {
+            MvcContext.Context = null;
         }
     }
 }
