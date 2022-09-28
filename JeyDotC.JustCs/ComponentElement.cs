@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
+using JeyDotC.JustCs.Configuration;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 
@@ -36,7 +38,7 @@ namespace JeyDotC.JustCs
 
         protected static Element _<TElement>(IElementAttributes? attributes, params Element[] children)
             where TElement : Element, new()
-         => CreateElement<TElement>(attributes, children);
+            => CreateElement<TElement>(attributes, children);
 
         protected static Element _<TElement>(IEnumerable<Element> children)
             where TElement : Element, new()
@@ -44,11 +46,28 @@ namespace JeyDotC.JustCs
 
         protected static Element _<TElement>(IElementAttributes? attributes, IEnumerable<Element> children)
             where TElement : Element, new()
-         => CreateElement<TElement>(attributes, children);
+            => CreateElement<TElement>(attributes, children);
+
+        private static IElementAttributes? ExtractDefaultProps<TElement>()
+            where TElement : Element, new()
+        {
+            var value = typeof(TElement).GetProperty("DefaultAttributes")?.GetValue(null);
+            if (value is IElementAttributes)
+            {
+                return (IElementAttributes)value;
+            }
+            return null;
+        }
 
         private static Element CreateElement<TElement>(IElementAttributes? attributes, IEnumerable<Element> children)
-            where TElement : Element, new() 
-            => new TElement() { Attributes = attributes, Children = children };
+            where TElement : Element, new()
+        {
+            var processedAttributes = JustCsSettings.AttributeDecorators.Aggregate(
+                    attributes ?? ExtractDefaultProps<TElement>(),
+                    (accumulate, decorator) => decorator.Decorate(accumulate)
+                );
+            return new TElement() { Attributes = processedAttributes, Children = children };
+        }
     }
 
     public abstract class ComponentElement<TAttributes> : ComponentElement

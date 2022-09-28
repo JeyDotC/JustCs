@@ -17,8 +17,6 @@ namespace JeyDotC.JustCs.Mvc
 
         public Task WriteAsync(OutputFormatterWriteContext context)
         {
-            MvcContext.Context = context.HttpContext;
-
             context.ContentType = "text/html";
 
             var view = context.Object as IView;

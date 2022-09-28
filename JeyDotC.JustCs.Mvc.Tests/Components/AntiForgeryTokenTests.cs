@@ -9,14 +9,13 @@ using Xunit;
 
 namespace JeyDotC.JustCs.Mvc.Tests.Components
 {
-    public class AntiForgeryTokenTests : IDisposable
+    public class AntiForgeryTokenTests
     {
         [Fact]
         public void Render_ShouldProduceHiddenInputWithAntiforgeryToken()
         {
             // Arrange
             var httpContextMock = new Mock<HttpContext>();
-            var serviceProviderMock = new Mock<IServiceProvider>();
             var antiForgeryMock = new Mock<IAntiforgery>();
 
             var antiForgeryTokenSet = new AntiforgeryTokenSet(
@@ -28,14 +27,16 @@ namespace JeyDotC.JustCs.Mvc.Tests.Components
 
             antiForgeryMock.Setup(a => a.GetAndStoreTokens(It.IsAny<HttpContext>())).Returns(antiForgeryTokenSet);
 
-            serviceProviderMock.Setup(s => s.GetService(It.IsAny<Type>())).Returns(antiForgeryMock.Object);
-
-            httpContextMock.SetupGet(c => c.RequestServices).Returns(serviceProviderMock.Object);
-
-            MvcContext.Context = httpContextMock.Object;
 
             // Act
-            var antiForgeryTokenInput = new AntiForgeryToken().RenderAsElement();
+            var antiForgeryTokenInput = new AntiForgeryToken
+            {
+                Attributes = new AntiForgeryTokenProps
+                {
+                    AntiForgery = antiForgeryMock.Object,
+                    HttpContext = httpContextMock.Object,
+                }
+            }.RenderAsElement();
 
             // Assert
             Assert.Equal("input", antiForgeryTokenInput.Tag);
@@ -46,11 +47,6 @@ namespace JeyDotC.JustCs.Mvc.Tests.Components
                 Name = antiForgeryTokenSet.FormFieldName,
                 Value = antiForgeryTokenSet.RequestToken,
             }, antiForgeryTokenInput.Attributes);
-        }
-
-        public void Dispose()
-        {
-            MvcContext.Context = null;
         }
     }
 }
