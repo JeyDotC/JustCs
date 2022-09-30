@@ -20,7 +20,7 @@ namespace JeyDotC.JustCs.Mvc
                 new ServiceProviderAttributesDecorator(app.ApplicationServices)
             );
             JustCsSettings.AttributeDecorators.Add(
-                new HttpContextAccessor(app.ApplicationServices)
+                new HttpContextAccessorAttributesDecorator(app.ApplicationServices)
             );
 
             return app;

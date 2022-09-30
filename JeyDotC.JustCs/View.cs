@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using JeyDotC.JustCs.Html.Attributes;
@@ -22,11 +23,6 @@ namespace JeyDotC.JustCs
         }
 
         public Element GetElement()
-        {
-            return new TElement
-            {
-                Attributes = _props,
-            };
-        }
+            => ElementCreator.CreateElement<TElement>(_props, Enumerable.Empty<Element>());
     }
 }

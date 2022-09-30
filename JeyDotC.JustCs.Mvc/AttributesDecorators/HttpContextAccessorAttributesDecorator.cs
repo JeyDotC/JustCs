@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Http;
 namespace JeyDotC.JustCs.Mvc.AttributesDecorators
 {
 #nullable enable
-    public sealed class HttpContextAccessor : IAttributesDecorator
+    public sealed class HttpContextAccessorAttributesDecorator : IAttributesDecorator
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public HttpContextAccessor(IServiceProvider serviceProvider)
+        public HttpContextAccessorAttributesDecorator(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }

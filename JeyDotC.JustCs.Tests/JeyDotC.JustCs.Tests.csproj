@@ -17,6 +17,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Moq" Version="4.18.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,9 +26,12 @@
   <ItemGroup>
     <None Remove="Html\" />
     <None Remove="Html\Attributes\" />
+    <None Remove="Configuration\" />
+    <None Remove="Microsoft.AspNetCore.Mvc.Abstractions" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Html\" />
     <Folder Include="Html\Attributes\" />
+    <Folder Include="Configuration\" />
   </ItemGroup>
 </Project>
