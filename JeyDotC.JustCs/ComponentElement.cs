@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
+using JeyDotC.JustCs.Configuration;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 
@@ -25,30 +27,26 @@ namespace JeyDotC.JustCs
         protected abstract Element Render(IElementAttributes attributes);
 
         protected static Element _(params Element[] children)
-             => CreateElement<Fragment>(null, children);
+             => ElementCreator.CreateElement<Fragment>(null, children);
 
         protected static Element _(IEnumerable<Element> children)
-             => CreateElement<Fragment>(null, children);
+             => ElementCreator.CreateElement<Fragment>(null, children);
 
         protected static Element _<TElement>(params Element[] children)
             where TElement : Element, new()
-            => CreateElement<TElement>(null, children);
+            => ElementCreator.CreateElement<TElement>(null, children);
 
         protected static Element _<TElement>(IElementAttributes? attributes, params Element[] children)
             where TElement : Element, new()
-         => CreateElement<TElement>(attributes, children);
+            => ElementCreator.CreateElement<TElement>(attributes, children);
 
         protected static Element _<TElement>(IEnumerable<Element> children)
             where TElement : Element, new()
-            => CreateElement<TElement>(null, children);
+            => ElementCreator.CreateElement<TElement>(null, children);
 
         protected static Element _<TElement>(IElementAttributes? attributes, IEnumerable<Element> children)
             where TElement : Element, new()
-         => CreateElement<TElement>(attributes, children);
-
-        private static Element CreateElement<TElement>(IElementAttributes? attributes, IEnumerable<Element> children)
-            where TElement : Element, new() 
-            => new TElement() { Attributes = attributes, Children = children };
+            => ElementCreator.CreateElement<TElement>(attributes, children);
     }
 
     public abstract class ComponentElement<TAttributes> : ComponentElement

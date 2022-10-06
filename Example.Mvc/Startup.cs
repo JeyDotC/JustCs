@@ -41,6 +41,7 @@ namespace Example.Mvc
 
             // Necessary to add anti-forgery.
             services.AddControllersWithViews();
+            services.AddHttpContextAccessor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,6 +64,8 @@ namespace Example.Mvc
             });
 
             app.UseStaticFiles();
+
+            app.UseJustCs();
         }
     }
 }

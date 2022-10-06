@@ -1,10 +1,14 @@
 ﻿using System;
+using JeyDotC.JustCs.Configuration;
+using JeyDotC.JustCs.Mvc.AttributesDecorators;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
 using Xunit;
 
 namespace JeyDotC.JustCs.Mvc.Tests
 {
-    public class DependencyInjectionTests
+    public class DependencyInjectionTests : IDisposable
     {
         [Fact]
         public void WithJustCs_ShouldInsertTheHtmlOutputFormatterIntoMvcOptions()
@@ -17,6 +21,32 @@ namespace JeyDotC.JustCs.Mvc.Tests
 
             // Assert
             Assert.IsType<HtmlOutputFormatter>(mvcOptions.OutputFormatters[0]);
+        }
+
+        [Fact]
+        public void UseJustCs_ShouldAddTheNecessaryAttributesDecorators()
+        {
+            // Arrange
+            var applicationBuilderMock = new Mock<IApplicationBuilder>();
+            var applicationServicesMock = new Mock<IServiceProvider>();
+
+            applicationBuilderMock.SetupGet(app => app.ApplicationServices)
+                .Returns(applicationServicesMock.Object);
+
+            var app = applicationBuilderMock.Object;
+
+            // Act
+            app.UseJustCs();
+
+            // Assert
+            Assert.Equal(2, JustCsSettings.AttributeDecorators.Count);
+            Assert.IsType<ServiceProviderAttributesDecorator>(JustCsSettings.AttributeDecorators[0]);
+            Assert.IsType<HttpContextAccessorAttributesDecorator>(JustCsSettings.AttributeDecorators[1]);
+        }
+
+        public void Dispose()
+        {
+            JustCsSettings.AttributeDecorators.Clear();
         }
     }
 }
