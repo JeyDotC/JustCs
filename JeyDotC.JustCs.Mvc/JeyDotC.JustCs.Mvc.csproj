@@ -10,6 +10,16 @@
     <PackageProjectUrl>https://github.com/JeyDotC/JustCs</PackageProjectUrl>
     <RepositoryUrl>https://github.com/JeyDotC/JustCs</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
+    <PackageVersion>1.1.0</PackageVersion>
+    <Owners>Jeysson Guevara (JeyDotC)</Owners>
+    <PackageReleaseNotes>v1.1.0 Mvc intagration improvement
+            Added MvcView class to easilly return views as IActionResult instances.
+            Added DI integration through attributes decorators.
+            Added AntiForgeryToken component.
+    </PackageReleaseNotes>
+    <Summary>ASP.Net MVC integration of JustCs</Summary>
+    <PackageTags>HTML, Razor Alternative, React-Inspired, MVC</PackageTags>
+    <Title>JustCs.Mvc</Title>
   </PropertyGroup>
 
   <ItemGroup>

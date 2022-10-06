@@ -10,9 +10,13 @@
     <RepositoryType>Git</RepositoryType>
     <Authors>Jeysson Guevara (JeyDotC)</Authors>
     <Company>JeyDotC</Company>
-    <PackageVersion>1.1.0</PackageVersion>
-    <Owners>Jeysson Guevara (JeyDotC) </Owners>
-    <PackageReleaseNotes>v1.1.0 Names are now just lowercased by default.
+    <PackageVersion>1.2.0</PackageVersion>
+    <Owners>Jeysson Guevara (JeyDotC)</Owners>
+    <PackageReleaseNotes>v1.2.0 Attributes releated goodies.
+            Added Default props support.
+            Added Attributes decorators.A mechanism to inject values into attributes.
+            Added DI attributes decorator.A decorator that will inject any dependency that can be resolved with the provided IServiceProvider instance.
+v1.1.0 Names are now just lowercased by default.
             Added the Attr attribute that allows to override name transform behavior.
             Added name transform tuple machinsm to override name transform on dynamic properties e.g. (_).
             HtmlRenderer won't allow repeated attributes.
