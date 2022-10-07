@@ -113,7 +113,7 @@ namespace JeyDotC.JustCs.Tests
     class RenderElementWithDefaultProps : ComponentElement
     {
         protected override Element Render(IElementAttributes attributes)
-            => _<ElementWithDefaultProps>();
+            => _<ElementWithDefaultProps>(attributes);
     }
 
     public class ComponentElementTests : IDisposable
@@ -123,8 +123,6 @@ namespace JeyDotC.JustCs.Tests
         {
             JustCsSettings.AttributeDecorators.Add(new DummyDecorator());
         }
-
-
 
         public static IEnumerable<object[]> TestedComponents()
         {
@@ -182,6 +180,24 @@ namespace JeyDotC.JustCs.Tests
                 nameof(RenderElementWithDefaultProps), // Expected Tag
                 typeof(Div), // Expected Element
                 new Attrs { Id = "100" }, // Expected Attributes
+            };
+
+            yield return new object[] {
+                new RenderElementWithDefaultProps{
+                    Attributes = new PropsWithValues()
+                }, // Component
+                nameof(RenderElementWithDefaultProps), // Expected Tag
+                typeof(Div), // Expected Element
+                new Attrs { Id = "100" }, // Expected Attributes
+            };
+
+            yield return new object[] {
+                new RenderElementWithDefaultProps{
+                    Attributes = new PropsWithValues { Value = "200" }
+                }, // Component
+                nameof(RenderElementWithDefaultProps), // Expected Tag
+                typeof(Div), // Expected Element
+                new Attrs { Id = "200" }, // Expected Attributes
             };
         }
 
