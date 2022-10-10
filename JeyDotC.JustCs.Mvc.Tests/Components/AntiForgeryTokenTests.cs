@@ -12,6 +12,11 @@ namespace JeyDotC.JustCs.Mvc.Tests.Components
 {
     public class AntiForgeryTokenTests : IDisposable
     {
+        public AntiForgeryTokenTests()
+        {
+            JustCsSettings.AttributeDecorators.Add(new DefaultPropsDecorator());
+        }
+
         [Fact]
         public void Render_ShouldProduceHiddenInputWithAntiforgeryToken()
         {
@@ -72,7 +77,7 @@ namespace JeyDotC.JustCs.Mvc.Tests.Components
 
             antiForgeryMock.Setup(a => a.GetAndStoreTokens(It.IsAny<HttpContext>())).Returns(antiForgeryTokenSet);
 
-            JustCsSettings.AttributeDecorators.Add((attributes) =>
+            JustCsSettings.AttributeDecorators.Add((attributes, componentType) =>
             {
                 if (attributes is AntiForgeryTokenProps)
                 {

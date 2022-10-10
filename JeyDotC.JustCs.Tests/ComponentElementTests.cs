@@ -10,11 +10,12 @@ namespace JeyDotC.JustCs.Tests
 {
     class DummyDecorator : IAttributesDecorator
     {
-        public IElementAttributes Decorate(IElementAttributes attributes) => attributes;
+        public IElementAttributes Decorate(AttributesContext attributesContext) => attributesContext.Attributes;
     }
 
     struct MyComponentProps : IElementAttributes { }
-    record PropsWithValues : IElementAttributes {
+    record PropsWithValues : IElementAttributes
+    {
         public string Value { get; init; }
     }
 
@@ -72,7 +73,7 @@ namespace JeyDotC.JustCs.Tests
     class ElementFromIEnumerableWithAttributes : ComponentElement<MyComponentProps>
     {
         protected override Element Render(MyComponentProps props)
-        => _<Div>( new Attrs { Id = "some-div" },
+        => _<Div>(new Attrs { Id = "some-div" },
                 new List<Element>
                 {
                     _<A>(new Attrs { Href = "/index" }),
@@ -121,6 +122,7 @@ namespace JeyDotC.JustCs.Tests
 
         public ComponentElementTests()
         {
+            JustCsSettings.AttributeDecorators.Add(new DefaultPropsDecorator());
             JustCsSettings.AttributeDecorators.Add(new DummyDecorator());
         }
 

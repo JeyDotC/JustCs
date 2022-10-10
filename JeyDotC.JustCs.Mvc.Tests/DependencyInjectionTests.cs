@@ -39,9 +39,10 @@ namespace JeyDotC.JustCs.Mvc.Tests
             app.UseJustCs();
 
             // Assert
-            Assert.Equal(2, JustCsSettings.AttributeDecorators.Count);
-            Assert.IsType<ServiceProviderAttributesDecorator>(JustCsSettings.AttributeDecorators[0]);
-            Assert.IsType<HttpContextAccessorAttributesDecorator>(JustCsSettings.AttributeDecorators[1]);
+            Assert.Equal(3, JustCsSettings.AttributeDecorators.Count);
+            Assert.IsType<DefaultPropsDecorator>(JustCsSettings.AttributeDecorators[0]);
+            Assert.IsType<ServiceProviderAttributesDecorator>(JustCsSettings.AttributeDecorators[1]);
+            Assert.IsType<HttpContextAccessorAttributesDecorator>(JustCsSettings.AttributeDecorators[2]);
         }
 
         public void Dispose()

@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using JeyDotC.JustCs.Configuration;
+using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 using JeyDotC.JustCs.Mvc.AttributesDecorators;
 using Microsoft.AspNetCore.Http;
@@ -62,7 +64,11 @@ namespace JeyDotC.JustCs.Mvc.Tests.AttributesDecorators
             var decorator = new HttpContextAccessorAttributesDecorator(_serviceProviderMock.Object);
 
             // Act
-            var actualAttributes = decorator.Decorate(sourceAttributes);
+            var actualAttributes = decorator.Decorate(new AttributesContext
+            {
+                Attributes = sourceAttributes,
+                ElementType = typeof(Div),
+            });
 
             // Assert
             Assert.Equal(expectedAttributes, actualAttributes);
@@ -76,7 +82,11 @@ namespace JeyDotC.JustCs.Mvc.Tests.AttributesDecorators
             var decorator = new HttpContextAccessorAttributesDecorator(serviceProviderMock.Object);
 
             // Act
-            Action act = () => decorator.Decorate(new ShouldInjectHttpContext());
+            Action act = () => decorator.Decorate(new AttributesContext
+            {
+                Attributes = new ShouldInjectHttpContext(),
+                ElementType = typeof(Div),
+            });
 
             // Assert
             Assert.Throws<InvalidOperationException>(act);
