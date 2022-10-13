@@ -80,17 +80,11 @@ namespace JeyDotC.JustCs.Mvc.Tests.Components
 
             JustCsSettings.AttributeDecorators.Add((context) =>
             {
-                var (attributes, componentType) = context;
-
-                if (attributes is AntiForgeryTokenProps)
+                return new AntiForgeryTokenProps
                 {
-                    return new AntiForgeryTokenProps
-                    {
-                        AntiForgery = antiForgeryMock.Object,
-                        HttpContext = httpContextMock.Object,
-                    };
-                }
-                return attributes;
+                    AntiForgery = antiForgeryMock.Object,
+                    HttpContext = httpContextMock.Object,
+                };
             });
 
             var form = new DummyForm();

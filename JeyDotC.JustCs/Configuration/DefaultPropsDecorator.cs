@@ -27,19 +27,24 @@ namespace JeyDotC.JustCs.Configuration
         private static object ShallowClone(object self)
         {
             var clonedObjectType = self.GetType();
-            var clone = Activator.CreateInstance(clonedObjectType);
 
-            if (clone is null)
+            try {
+                var clone = Activator.CreateInstance(clonedObjectType) ?? throw new InvalidOperationException($"Object could not be cloned: Provide a parameterless constructor for {clonedObjectType.FullName} so it can be shallow cloned.");
+
+                foreach (var property in clonedObjectType.GetProperties())
+                {
+                    property.SetValue(clone, property.GetValue(self));
+                }
+
+                return clone;
+            } catch(Exception e) when (
+                e is MissingMethodException ||
+                e is MemberAccessException ||
+                e is MethodAccessException
+            )
             {
                 throw new InvalidOperationException($"Object could not be cloned: Provide a parameterless constructor for {clonedObjectType.FullName} so it can be shallow cloned.");
             }
-
-            foreach (var property in clonedObjectType.GetProperties())
-            {
-                property.SetValue(clone, property.GetValue(self));
-            }
-
-            return clone;
         }
 
         private static IElementAttributes? ExtractDefaultProps(Type elementType)

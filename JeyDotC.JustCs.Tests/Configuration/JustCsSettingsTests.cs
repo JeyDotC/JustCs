@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using JeyDotC.JustCs.Configuration;
 using Xunit;
 
@@ -34,10 +35,10 @@ namespace JeyDotC.JustCs.Tests.Configuration
         public void Add_ShouldAddMultipleDelegateDecorators()
         {
             // Arrange
-            DecorateImplementation implementation1 = (ctx) => ctx.Attributes;
-            DecorateImplementation implementation2 = (ctx) => ctx.Attributes;
-            DecorateImplementation implementation3 = (ctx) => ctx.Attributes;
-            DecorateImplementation implementation4 = (ctx) => ctx.Attributes;
+            DecorateImplementation implementation1 = [ExcludeFromCodeCoverage] (ctx) => ctx.Attributes;
+            DecorateImplementation implementation2 = [ExcludeFromCodeCoverage] (ctx) => ctx.Attributes;
+            DecorateImplementation implementation3 = [ExcludeFromCodeCoverage] (ctx) => ctx.Attributes;
+            DecorateImplementation implementation4 = [ExcludeFromCodeCoverage] (ctx) => ctx.Attributes;
 
             // Act
             var firstAdd = JustCsSettings.AttributeDecorators.Add(implementation1);
