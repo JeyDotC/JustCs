@@ -9,25 +9,24 @@ namespace JeyDotC.JustCs
 #nullable enable
     internal static class ElementCreator
     {
-        private static IElementAttributes? ExtractDefaultProps<TElement>()
+        internal static Element CreateElement<TElement>(IElementAttributes? providedAttributes, IEnumerable<Element> children)
             where TElement : Element, new()
         {
-            var value = typeof(TElement).GetProperty("DefaultAttributes")?.GetValue(null);
+            var elementType = typeof(TElement);
 
-            if (value is IElementAttributes)
+            // Only apply decorators to Component elements.
+            if (!elementType.IsAssignableTo(typeof(ComponentElement)))
             {
-                return (IElementAttributes)value;
+                return new TElement() { Attributes = providedAttributes, Children = children };
             }
 
-            return null;
-        }
-
-        internal static Element CreateElement<TElement>(IElementAttributes? attributes, IEnumerable<Element> children)
-            where TElement : Element, new()
-        {
             var processedAttributes = JustCsSettings.AttributeDecorators.ToArray().Aggregate(
-                    attributes ?? ExtractDefaultProps<TElement>(),
-                    (accumulate, decorator) => decorator.Decorate(accumulate)
+                    providedAttributes,
+                    (accumulate, decorator) => decorator.Decorate(new AttributesContext
+                    {
+                        Attributes = accumulate,
+                        ElementType = elementType,
+                    })
                 );
 
             return new TElement() { Attributes = processedAttributes, Children = children };

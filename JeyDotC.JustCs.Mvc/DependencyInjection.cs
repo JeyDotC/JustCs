@@ -17,6 +17,10 @@ namespace JeyDotC.JustCs.Mvc
         public static IApplicationBuilder UseJustCs(this IApplicationBuilder app)
         {
             JustCsSettings.AttributeDecorators.Add(
+                new DefaultPropsDecorator()
+            );
+
+            JustCsSettings.AttributeDecorators.Add(
                 new ServiceProviderAttributesDecorator(app.ApplicationServices)
             );
             JustCsSettings.AttributeDecorators.Add(

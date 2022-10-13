@@ -17,8 +17,10 @@ namespace JeyDotC.JustCs.Configuration
             _serviceProvider = serviceProvider;
         }
 
-        public IElementAttributes? Decorate(IElementAttributes? attributes)
+        public IElementAttributes? Decorate(AttributesContext attributesContext)
         {
+            var (attributes, _) = attributesContext;
+
             if(attributes == null)
             {
                 return attributes;

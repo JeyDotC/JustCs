@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace JeyDotC.JustCs.Configuration
 {
+#nullable enable
     public static class JustCsSettings
     {
-        public static IList<IAttributesDecorator> AttributeDecorators { get; } = new List<IAttributesDecorator>();
+        public static ISet<IAttributesDecorator> AttributeDecorators { get; } = new AttributesDecoratorSet();
     }
 }
 

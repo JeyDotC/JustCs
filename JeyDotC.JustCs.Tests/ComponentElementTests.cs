@@ -10,11 +10,12 @@ namespace JeyDotC.JustCs.Tests
 {
     class DummyDecorator : IAttributesDecorator
     {
-        public IElementAttributes Decorate(IElementAttributes attributes) => attributes;
+        public IElementAttributes Decorate(AttributesContext attributesContext) => attributesContext.Attributes;
     }
 
     struct MyComponentProps : IElementAttributes { }
-    record PropsWithValues : IElementAttributes {
+    record PropsWithValues : IElementAttributes
+    {
         public string Value { get; init; }
     }
 
@@ -72,7 +73,7 @@ namespace JeyDotC.JustCs.Tests
     class ElementFromIEnumerableWithAttributes : ComponentElement<MyComponentProps>
     {
         protected override Element Render(MyComponentProps props)
-        => _<Div>( new Attrs { Id = "some-div" },
+        => _<Div>(new Attrs { Id = "some-div" },
                 new List<Element>
                 {
                     _<A>(new Attrs { Href = "/index" }),
@@ -113,7 +114,7 @@ namespace JeyDotC.JustCs.Tests
     class RenderElementWithDefaultProps : ComponentElement
     {
         protected override Element Render(IElementAttributes attributes)
-            => _<ElementWithDefaultProps>();
+            => _<ElementWithDefaultProps>(attributes);
     }
 
     public class ComponentElementTests : IDisposable
@@ -121,10 +122,9 @@ namespace JeyDotC.JustCs.Tests
 
         public ComponentElementTests()
         {
+            JustCsSettings.AttributeDecorators.Add(new DefaultPropsDecorator());
             JustCsSettings.AttributeDecorators.Add(new DummyDecorator());
         }
-
-
 
         public static IEnumerable<object[]> TestedComponents()
         {
@@ -182,6 +182,24 @@ namespace JeyDotC.JustCs.Tests
                 nameof(RenderElementWithDefaultProps), // Expected Tag
                 typeof(Div), // Expected Element
                 new Attrs { Id = "100" }, // Expected Attributes
+            };
+
+            yield return new object[] {
+                new RenderElementWithDefaultProps{
+                    Attributes = new PropsWithValues()
+                }, // Component
+                nameof(RenderElementWithDefaultProps), // Expected Tag
+                typeof(Div), // Expected Element
+                new Attrs { Id = "100" }, // Expected Attributes
+            };
+
+            yield return new object[] {
+                new RenderElementWithDefaultProps{
+                    Attributes = new PropsWithValues { Value = "200" }
+                }, // Component
+                nameof(RenderElementWithDefaultProps), // Expected Tag
+                typeof(Div), // Expected Element
+                new Attrs { Id = "200" }, // Expected Attributes
             };
         }
 

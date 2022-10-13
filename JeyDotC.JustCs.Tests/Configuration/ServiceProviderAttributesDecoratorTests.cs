@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using JeyDotC.JustCs.Configuration;
+using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 using Moq;
 using Xunit;
@@ -69,7 +70,11 @@ namespace JeyDotC.JustCs.Tests.Configuration
             var decorator = new ServiceProviderAttributesDecorator(_serviceProviderMock.Object);
 
             // Act
-            var actualResultAttributes = decorator.Decorate(receivedAttributes);
+            var actualResultAttributes = decorator.Decorate(new AttributesContext
+            {
+                Attributes = receivedAttributes,
+                ElementType = typeof(Div),
+            });
 
             // Assert
             Assert.Equal(expectedResultAttributes, actualResultAttributes);

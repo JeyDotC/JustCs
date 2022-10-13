@@ -15,7 +15,7 @@ namespace JeyDotC.JustCs
 
         internal Element ToElement()
         {
-            var result = Render(Attributes ?? new EmptyProps());
+            var result = Render(Attributes);
             if (result is ComponentElement)
             {
                 return ((ComponentElement)result).ToElement();
@@ -56,7 +56,7 @@ namespace JeyDotC.JustCs
         {
             if (!(props is TAttributes))
             {
-                throw new InvalidOperationException($"{nameof(props)} Expected to be of type {typeof(TAttributes).FullName}");
+                throw new InvalidOperationException($"{nameof(props)} Expected to be of type {typeof(TAttributes).FullName} received {props?.GetType().FullName ?? "null"}");
             }
 
             return Render((TAttributes)props);

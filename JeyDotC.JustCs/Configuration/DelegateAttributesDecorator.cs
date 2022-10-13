@@ -4,17 +4,19 @@ using JeyDotC.JustCs.Html.Attributes;
 namespace JeyDotC.JustCs.Configuration
 {
 #nullable enable
-    public class DelegateAttributesDecorator : IAttributesDecorator
-    {
-        private readonly Func<IElementAttributes?, IElementAttributes?> _implementation;
+    public delegate IElementAttributes? DecorateImplementation(AttributesContext attributesContext);
 
-        public DelegateAttributesDecorator(Func<IElementAttributes?, IElementAttributes?> implementation)
+    public sealed class DelegateAttributesDecorator : IAttributesDecorator
+    {
+        private readonly DecorateImplementation _implementation;
+
+        public DelegateAttributesDecorator(DecorateImplementation implementation)
         {
             _implementation = implementation;
         }
 
-        public IElementAttributes? Decorate(IElementAttributes? attributes)
-            => _implementation(attributes);
+        public IElementAttributes? Decorate(AttributesContext attributesContext)
+            => _implementation(attributesContext);
     }
 }
 

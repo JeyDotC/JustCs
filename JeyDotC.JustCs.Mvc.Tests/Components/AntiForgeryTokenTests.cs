@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 using JeyDotC.JustCs.Configuration;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
@@ -12,6 +13,11 @@ namespace JeyDotC.JustCs.Mvc.Tests.Components
 {
     public class AntiForgeryTokenTests : IDisposable
     {
+        public AntiForgeryTokenTests()
+        {
+            JustCsSettings.AttributeDecorators.Add(new DefaultPropsDecorator());
+        }
+
         [Fact]
         public void Render_ShouldProduceHiddenInputWithAntiforgeryToken()
         {
@@ -72,17 +78,13 @@ namespace JeyDotC.JustCs.Mvc.Tests.Components
 
             antiForgeryMock.Setup(a => a.GetAndStoreTokens(It.IsAny<HttpContext>())).Returns(antiForgeryTokenSet);
 
-            JustCsSettings.AttributeDecorators.Add((attributes) =>
+            JustCsSettings.AttributeDecorators.Add((context) =>
             {
-                if (attributes is AntiForgeryTokenProps)
+                return new AntiForgeryTokenProps
                 {
-                    return new AntiForgeryTokenProps
-                    {
-                        AntiForgery = antiForgeryMock.Object,
-                        HttpContext = httpContextMock.Object,
-                    };
-                }
-                return attributes;
+                    AntiForgery = antiForgeryMock.Object,
+                    HttpContext = httpContextMock.Object,
+                };
             });
 
             var form = new DummyForm();
