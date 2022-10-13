@@ -4,9 +4,9 @@ using JeyDotC.JustCs.Html.Attributes;
 namespace JeyDotC.JustCs.Configuration
 {
 #nullable enable
-    public delegate IElementAttributes? DecorateImplementation(IElementAttributes? elementAttributes, Type elementType);
+    public delegate IElementAttributes? DecorateImplementation(AttributesContext attributesContext);
 
-    public class DelegateAttributesDecorator : IAttributesDecorator
+    public sealed class DelegateAttributesDecorator : IAttributesDecorator
     {
         private readonly DecorateImplementation _implementation;
 
@@ -16,7 +16,7 @@ namespace JeyDotC.JustCs.Configuration
         }
 
         public IElementAttributes? Decorate(AttributesContext attributesContext)
-            => _implementation(attributesContext.Attributes, attributesContext.ElementType);
+            => _implementation(attributesContext);
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml.Linq;
 using JeyDotC.JustCs.Configuration;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
@@ -77,8 +78,10 @@ namespace JeyDotC.JustCs.Mvc.Tests.Components
 
             antiForgeryMock.Setup(a => a.GetAndStoreTokens(It.IsAny<HttpContext>())).Returns(antiForgeryTokenSet);
 
-            JustCsSettings.AttributeDecorators.Add((attributes, componentType) =>
+            JustCsSettings.AttributeDecorators.Add((context) =>
             {
+                var (attributes, componentType) = context;
+
                 if (attributes is AntiForgeryTokenProps)
                 {
                     return new AntiForgeryTokenProps

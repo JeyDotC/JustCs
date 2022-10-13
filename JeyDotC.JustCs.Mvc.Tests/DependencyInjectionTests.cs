@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using JeyDotC.JustCs.Configuration;
 using JeyDotC.JustCs.Mvc.AttributesDecorators;
 using Microsoft.AspNetCore.Builder;
@@ -39,10 +40,11 @@ namespace JeyDotC.JustCs.Mvc.Tests
             app.UseJustCs();
 
             // Assert
-            Assert.Equal(3, JustCsSettings.AttributeDecorators.Count);
-            Assert.IsType<DefaultPropsDecorator>(JustCsSettings.AttributeDecorators[0]);
-            Assert.IsType<ServiceProviderAttributesDecorator>(JustCsSettings.AttributeDecorators[1]);
-            Assert.IsType<HttpContextAccessorAttributesDecorator>(JustCsSettings.AttributeDecorators[2]);
+            var decoratorsList = JustCsSettings.AttributeDecorators.ToArray();
+            Assert.Equal(3, decoratorsList.Length);
+            Assert.IsType<DefaultPropsDecorator>(decoratorsList[0]);
+            Assert.IsType<ServiceProviderAttributesDecorator>(decoratorsList[1]);
+            Assert.IsType<HttpContextAccessorAttributesDecorator>(decoratorsList[2]);
         }
 
         public void Dispose()

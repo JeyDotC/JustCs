@@ -9,6 +9,21 @@ namespace JeyDotC.JustCs.Configuration
 #nullable enable
     public class DefaultPropsDecorator : IAttributesDecorator
     {
+        public IElementAttributes? Decorate(AttributesContext attributesContext)
+        {
+            var (providedAttributes, elementType) = attributesContext;
+
+            // Only apply the process to Component elements.
+            if (!elementType.IsAssignableTo(typeof(ComponentElement)))
+            {
+                return providedAttributes;
+            }
+
+            var defaultAttributesClone = ExtractDefaultProps(elementType);
+
+            return AttemptMerge(providedAttributes, defaultAttributesClone);
+        }
+
         private static object ShallowClone(object self)
         {
             var clonedObjectType = self.GetType();
@@ -91,21 +106,6 @@ namespace JeyDotC.JustCs.Configuration
 
 
             return receivedAttributes;
-        }
-
-        public IElementAttributes? Decorate(AttributesContext attributesContext)
-        {
-            var (providedAttributes, elementType) = attributesContext;
-
-            // Only apply the process to Component elements.
-            if (!elementType.IsAssignableTo(typeof(ComponentElement)))
-            {
-                return providedAttributes;
-            }
-
-            var defaultAttributesClone = ExtractDefaultProps(elementType);
-
-            return AttemptMerge(providedAttributes, defaultAttributesClone);
         }
     }
 }
