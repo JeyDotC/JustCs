@@ -12,7 +12,7 @@ namespace JeyDotC.JustCs.Mvc.Components
         [Inject]
         public HttpContext HttpContext { get; set; }
 
-        [Inject]
+        [Inject(Required = true)]
         public IAntiforgery AntiForgery { get; init; }
     }
 

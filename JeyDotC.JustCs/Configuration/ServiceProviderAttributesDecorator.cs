@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using JeyDotC.JustCs.Html.Attributes;
 
 namespace JeyDotC.JustCs.Configuration
 {
 #nullable enable
-    [AttributeUsage(AttributeTargets.Property)]
-    public sealed class InjectAttribute : Attribute { }
-
     public sealed class ServiceProviderAttributesDecorator : IAttributesDecorator
     {
         private readonly IServiceProvider _serviceProvider;
@@ -19,9 +17,9 @@ namespace JeyDotC.JustCs.Configuration
 
         public IElementAttributes? Decorate(AttributesContext attributesContext)
         {
-            var (attributes, _) = attributesContext;
+            var (attributes, componentType) = attributesContext;
 
-            if(attributes == null)
+            if (attributes == null)
             {
                 return attributes;
             }
@@ -29,11 +27,22 @@ namespace JeyDotC.JustCs.Configuration
             var injectableAttributes = attributes
                 .GetType()
                 .GetProperties()
-                .Where(prop => prop.GetCustomAttributes(false).Any(attr => attr is InjectAttribute));
+                .Select(prop => (prop, prop.GetCustomAttribute<InjectAttribute>()));
 
-            foreach(var attr in injectableAttributes)
+            foreach (var (attr, annotation) in injectableAttributes)
             {
+                if(annotation is null)
+                {
+                    continue;
+                }
+
                 var resolvedValue = _serviceProvider.GetService(attr.PropertyType);
+
+                if(annotation.Required && resolvedValue is null)
+                {
+                    throw new InvalidOperationException($"{componentType.Name} attribute {attr.Name} is required, but could not be resolved.");
+                }
+
                 attr.SetValue(attributes, resolvedValue);
             }
 
