@@ -7,7 +7,7 @@ using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 using Xunit;
 
-namespace JeyDotC.JustCs.Tests.Configuration
+namespace JeyDotC.JustCs.Tests.Configuration.Decorators
 {
 #nullable enable
     public class DefaultPropsDecoratorTests
