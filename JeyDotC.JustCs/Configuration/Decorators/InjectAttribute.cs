@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace JeyDotC.JustCs.Configuration
+namespace JeyDotC.JustCs.Configuration.Decorators
 {
 #nullable enable
     [AttributeUsage(AttributeTargets.Property)]

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace JeyDotC.JustCs.Configuration
+namespace JeyDotC.JustCs.Configuration.Decorators
 {
 #nullable enable
     public class DefaultPropsDecorator : IAttributesDecorator

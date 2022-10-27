@@ -31,7 +31,7 @@
     <None Remove="Microsoft.AspNetCore.Mvc.Core" />
     <None Remove="Components\" />
     <None Remove="Microsoft.AspNetCore.Antiforgery" />
-    <None Remove="AttributesDecorators\" />
+    <None Remove="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
@@ -40,6 +40,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />
-    <Folder Include="AttributesDecorators\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

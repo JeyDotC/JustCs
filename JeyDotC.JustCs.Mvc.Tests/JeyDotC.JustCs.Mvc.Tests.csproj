@@ -25,13 +25,11 @@
     <None Remove="Moq" />
     <None Remove="Microsoft.AspNetCore.Mvc.Abstractions" />
     <None Remove="Components\" />
-    <None Remove="AttributesDecorators\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JeyDotC.JustCs.Mvc\JeyDotC.JustCs.Mvc.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />
-    <Folder Include="AttributesDecorators\" />
   </ItemGroup>
 </Project>

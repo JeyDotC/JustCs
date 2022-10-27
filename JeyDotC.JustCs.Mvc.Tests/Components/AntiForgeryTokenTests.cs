@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Xml.Linq;
 using JeyDotC.JustCs.Configuration;
+using JeyDotC.JustCs.Configuration.Decorators;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 using JeyDotC.JustCs.Mvc.Components;

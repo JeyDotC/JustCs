@@ -1,5 +1,6 @@
 ﻿using System;
 using JeyDotC.JustCs.Configuration;
+using JeyDotC.JustCs.Configuration.Decorators;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 using Microsoft.AspNetCore.Antiforgery;
@@ -9,7 +10,7 @@ namespace JeyDotC.JustCs.Mvc.Components
 {
     public record AntiForgeryTokenProps : IElementAttributes
     {
-        [Inject]
+        [Inject(Required = true)]
         public HttpContext HttpContext { get; set; }
 
         [Inject(Required = true)]

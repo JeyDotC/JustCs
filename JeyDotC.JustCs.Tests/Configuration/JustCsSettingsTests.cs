@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using JeyDotC.JustCs.Configuration;
+using JeyDotC.JustCs.Configuration.Decorators;
 using Xunit;
 
 namespace JeyDotC.JustCs.Tests.Configuration

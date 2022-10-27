@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using JeyDotC.JustCs.Configuration;
+using JeyDotC.JustCs.Configuration.Decorators;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 using Xunit;
