@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using JeyDotC.JustCs.Configuration.Decorators;
 using JeyDotC.JustCs.Mvc.Extensions;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +17,8 @@ namespace JeyDotC.JustCs.Mvc.Tests.Extensions
             var serviceProviderMock = new Mock<IServiceProvider>();
             var httpAccessorMock = new Mock<IHttpContextAccessor>();
             var httpContextMock = new Mock<HttpContext>();
+            var propertyInfoMock = new Mock<PropertyInfo>();
+            propertyInfoMock.SetupGet(p => p.PropertyType).Returns(typeof(HttpContext));
 
             serviceProviderMock.Setup(p => p.GetService(It.IsAny<Type>())).Returns(httpAccessorMock.Object);
             httpAccessorMock.SetupGet(a => a.HttpContext).Returns(httpContextMock.Object);
@@ -23,8 +26,9 @@ namespace JeyDotC.JustCs.Mvc.Tests.Extensions
             var context = new ResolutionContext
             {
                 InjectInfo = new InjectAttribute(),
-                PropertyType = typeof(HttpContext),
+                Property = propertyInfoMock.Object,
                 ServiceProvider = serviceProviderMock.Object,
+                ComponentType = typeof(ComponentElement),
             };
 
             // Act
@@ -39,11 +43,13 @@ namespace JeyDotC.JustCs.Mvc.Tests.Extensions
         {
             // Arrange
             var serviceProviderMock = new Mock<IServiceProvider>();
+            var propertyInfoMock = new Mock<PropertyInfo>();
+            propertyInfoMock.SetupGet(p => p.PropertyType).Returns(typeof(WithHttpContextAccessorTests));
 
             var context = new ResolutionContext
             {
                 InjectInfo = new InjectAttribute(),
-                PropertyType = typeof(WithHttpContextAccessorTests),
+                Property = propertyInfoMock.Object,
                 ServiceProvider = serviceProviderMock.Object,
             };
 
@@ -59,13 +65,15 @@ namespace JeyDotC.JustCs.Mvc.Tests.Extensions
         {
             // Arrange
             var serviceProviderMock = new Mock<IServiceProvider>();
+            var propertyInfoMock = new Mock<PropertyInfo>();
 
+            propertyInfoMock.SetupGet(p => p.PropertyType).Returns(typeof(HttpContext));
             serviceProviderMock.Setup(p => p.GetService(It.IsAny<Type>())).Returns(null);
 
             var context = new ResolutionContext
             {
                 InjectInfo = new InjectAttribute(),
-                PropertyType = typeof(HttpContext),
+                Property = propertyInfoMock.Object,
                 ServiceProvider = serviceProviderMock.Object,
             };
 

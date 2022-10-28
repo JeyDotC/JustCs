@@ -8,7 +8,6 @@ using JeyDotC.JustCs.Html.Attributes;
 namespace JeyDotC.JustCs
 {
     struct EmptyProps : IElementAttributes { }
-#nullable enable
     public abstract class ComponentElement : Element
     {
         public override string Tag => GetType().Name;
@@ -24,7 +23,7 @@ namespace JeyDotC.JustCs
             return result;
         }
 
-        protected abstract Element Render(IElementAttributes attributes);
+        protected abstract Element Render(IElementAttributes? attributes);
 
         protected static Element _(params Element[] children)
              => ElementCreator.CreateElement<Fragment>(null, children);
@@ -52,7 +51,7 @@ namespace JeyDotC.JustCs
     public abstract class ComponentElement<TAttributes> : ComponentElement
         where TAttributes : IElementAttributes
     {
-        protected override Element Render(IElementAttributes props)
+        protected override Element Render(IElementAttributes? props)
         {
             if (!(props is TAttributes))
             {

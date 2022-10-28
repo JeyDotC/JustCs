@@ -5,8 +5,6 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace JeyDotC.JustCs.Configuration
 {
-#nullable enable
-    
     internal sealed class AttributesDecoratorSet : ISet<IAttributesDecorator>
     {
         private sealed class ByTypeComparer : IEqualityComparer<IAttributesDecorator>

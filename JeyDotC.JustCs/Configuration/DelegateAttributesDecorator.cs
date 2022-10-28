@@ -3,7 +3,6 @@ using JeyDotC.JustCs.Html.Attributes;
 
 namespace JeyDotC.JustCs.Configuration
 {
-#nullable enable
     public delegate IElementAttributes? DecorateImplementation(AttributesContext attributesContext);
 
     public sealed class DelegateAttributesDecorator : IAttributesDecorator

@@ -2,7 +2,6 @@
 
 namespace JeyDotC.JustCs.Configuration.Decorators
 {
-#nullable enable
     [AttributeUsage(AttributeTargets.Property)]
     public sealed class InjectAttribute : Attribute
     {

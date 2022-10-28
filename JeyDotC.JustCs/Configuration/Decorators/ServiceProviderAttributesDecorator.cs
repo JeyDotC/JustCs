@@ -6,23 +6,6 @@ using JeyDotC.JustCs.Html.Attributes;
 
 namespace JeyDotC.JustCs.Configuration.Decorators
 {
-#nullable enable
-    public struct ResolutionContext
-    {
-        public IServiceProvider ServiceProvider { get; init; }
-
-        public Type PropertyType { get; init; }
-
-        public InjectAttribute InjectInfo { get; init; }
-
-        public void Deconstruct(out IServiceProvider serviceProvider, out Type propertyType, out InjectAttribute inject)
-        {
-            serviceProvider = ServiceProvider;
-            propertyType = PropertyType;
-            inject = InjectInfo;
-        }
-    }
-
     public delegate object? Resolve(ResolutionContext context);
 
     public sealed class ServiceProviderAttributesDecorator : IAttributesDecorator
@@ -35,15 +18,18 @@ namespace JeyDotC.JustCs.Configuration.Decorators
         };
 
         private static object? DefaultResolve(ResolutionContext context)
-            => context.ServiceProvider.GetService(context.PropertyType);
+            => context.ServiceProvider.GetService(context.Property.PropertyType);
 
         public ServiceProviderAttributesDecorator(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        public void WithResolver(Resolve resolver)
-            => _resolutionStack.Add(resolver);
+        public ServiceProviderAttributesDecorator WithResolver(Resolve resolver)
+        {
+            _resolutionStack.Add(resolver);
+            return this;
+        }
 
         public IElementAttributes? Decorate(AttributesContext attributesContext)
         {
@@ -69,8 +55,9 @@ namespace JeyDotC.JustCs.Configuration.Decorators
                 var resolvedValue = DoResolve(new ResolutionContext
                 {
                     InjectInfo = annotation,
-                    PropertyType = attr.PropertyType,
+                    Property = attr,
                     ServiceProvider = _serviceProvider,
+                    ComponentType = componentType,
                 });
 
                 if (annotation.Required && resolvedValue is null)

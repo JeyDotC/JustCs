@@ -6,7 +6,6 @@ using System.Xml.Linq;
 
 namespace JeyDotC.JustCs.Configuration.Decorators
 {
-#nullable enable
     public class DefaultPropsDecorator : IAttributesDecorator
     {
         public IElementAttributes? Decorate(AttributesContext attributesContext)

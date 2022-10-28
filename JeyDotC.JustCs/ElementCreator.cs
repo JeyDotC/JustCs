@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace JeyDotC.JustCs
 {
-#nullable enable
     internal static class ElementCreator
     {
         internal static Element CreateElement<TElement>(IElementAttributes? providedAttributes, IEnumerable<Element> children)

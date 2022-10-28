@@ -11,7 +11,7 @@ namespace JeyDotC.JustCs.Mvc.Components
     public record AntiForgeryTokenProps : IElementAttributes
     {
         [Inject(Required = true)]
-        public HttpContext HttpContext { get; set; }
+        public HttpContext HttpContext { get; init; }
 
         [Inject(Required = true)]
         public IAntiforgery AntiForgery { get; init; }

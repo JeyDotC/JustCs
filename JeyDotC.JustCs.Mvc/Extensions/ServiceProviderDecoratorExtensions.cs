@@ -8,11 +8,7 @@ namespace JeyDotC.JustCs.Mvc.Extensions
     public static class ServiceProviderDecoratorExtensions
     {
         public static ServiceProviderAttributesDecorator WithHttpContextAccessor(this ServiceProviderAttributesDecorator self)
-        {
-            self.WithResolver(ResolveHttpContext);
-
-            return self;
-        }
+             => self.WithResolver(ResolveHttpContext);
 
         /// <summary>
         /// Tries to extract the HttpContext from the provided IServiceProvider
@@ -22,11 +18,11 @@ namespace JeyDotC.JustCs.Mvc.Extensions
         /// <param name="context"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
-        public static object ResolveHttpContext(ResolutionContext context)
+        public static object? ResolveHttpContext(ResolutionContext context)
         {
-            var (serviceProvider, propertyType, _) = context;
+            var (serviceProvider, property) = context;
 
-            if (propertyType != typeof(HttpContext))
+            if (property.PropertyType != typeof(HttpContext))
             {
                 return null;
             }
