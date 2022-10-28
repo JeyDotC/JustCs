@@ -54,7 +54,7 @@ namespace JeyDotC.JustCs.Tests.Configuration.Decorators
             public static AttrWithoutDefaultConstructor DefaultAttributes => new AttrWithoutDefaultConstructor("Foo");
 
             [ExcludeFromCodeCoverage]
-            protected override Element Render(IElementAttributes attributes) => throw new NotImplementedException();
+            protected override Element Render(IElementAttributes? attributes) => throw new NotImplementedException();
         }
 
         record PropsWithMoreValues : PropsWithValues

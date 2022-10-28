@@ -22,9 +22,9 @@ namespace JeyDotC.JustCs.Html
 
         public static ValueTuple<object, PropertyAsClassBehavior> TransformToDashCase(this object classNamesDictionary) => (classNamesDictionary, PropertyAsClassBehavior.TransformToDashCase);
 
-        private static string ToClassName(object spec)
+        private static string ToClassName(object? spec)
         {
-            if (spec == null)
+            if (spec is null)
             {
                 return string.Empty;
             }
@@ -36,7 +36,7 @@ namespace JeyDotC.JustCs.Html
 
             if (spec.GetType().IsPrimitive || spec is Enum)
             {
-                return spec.ToString();
+                return spec.ToString() ?? string.Empty;
             }
 
             if (spec is ValueTuple<string, bool>)
@@ -47,7 +47,7 @@ namespace JeyDotC.JustCs.Html
 
             if (spec is ITuple)
             {
-                var tuple = spec as ITuple;
+                var tuple = (ITuple)spec;
                 var innerSpec = tuple[0];
                 var nameBehavior = (PropertyAsClassBehavior)tuple[1];
 

@@ -14,9 +14,9 @@ namespace JeyDotC.JustCs
     public class View<TElement> : HttpResponseMessage, IView
         where TElement : Element, new()
     {
-        private readonly IElementAttributes _props;
+        private readonly IElementAttributes? _props;
 
-        public View(IElementAttributes props = null, HttpStatusCode code = HttpStatusCode.OK)
+        public View(IElementAttributes? props = null, HttpStatusCode code = HttpStatusCode.OK)
             : base(code)
         {
             _props = props;

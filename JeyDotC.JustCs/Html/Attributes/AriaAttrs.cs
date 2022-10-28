@@ -6,7 +6,7 @@ namespace JeyDotC.JustCs.Html.Attributes
         /// <summary>
         /// Identifies the currently active descendant of a composite widget.
         /// </summary>
-        public string Activedescendant { get; init; }
+        public string? Activedescendant { get; init; }
 
         /// <summary>
         /// Indicates whether assistive technologies will present all, or only parts of, the changed region based on the change notifications defined by the aria-relevant attribute. See related aria-relevant.
@@ -31,12 +31,12 @@ namespace JeyDotC.JustCs.Html.Attributes
         /// <summary>
         /// Identifies the element (or elements) whose contents or presence are controlled by the current element. See related aria-owns.
         /// </summary>
-        public string Controls { get; init; }
+        public string? Controls { get; init; }
 
         /// <summary>
         /// Identifies the element (or elements) that describes the object. See related aria-labelledby.
         /// </summary>
-        public string Describedby { get; init; }
+        public string? Describedby { get; init; }
 
         /// <summary>
         /// Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable. See related aria-hidden and aria-readonly.
@@ -56,7 +56,7 @@ namespace JeyDotC.JustCs.Html.Attributes
         /// <summary>
         /// Identifies the next element (or elements) in an alternate reading order of content which, at the user's discretion, allows assistive technology to override the general default of reading in document source order.
         /// </summary>
-        public string Flowto { get; init; }
+        public string? Flowto { get; init; }
 
         /// <summary>
         /// Indicates an element's "grabbed" state in a drag-and-drop operation.
@@ -79,14 +79,14 @@ namespace JeyDotC.JustCs.Html.Attributes
         public AriaInvalidValues? Invalid { get; init; }
 
         /// <summary>
-        /// Defines a string value that labels the current element. See related aria-labelledby.
+        /// Defines a string? value that labels the current element. See related aria-labelledby.
         /// </summary>
-        public string Label { get; init; }
+        public string? Label { get; init; }
 
         /// <summary>
         /// Identifies the element (or elements) that labels the current element. See related aria-label and aria-describedby.
         /// </summary>
-        public string Labelledby { get; init; }
+        public string? Labelledby { get; init; }
 
         /// <summary>
         /// Defines the hierarchical level of an element within a structure.
@@ -116,7 +116,7 @@ namespace JeyDotC.JustCs.Html.Attributes
         /// <summary>
         /// Identifies an element (or elements) in order to define a visual, functional, or contextual parent/child relationship between DOM elements where the DOM hierarchy cannot be used to represent the relationship. See related aria-controls.
         /// </summary>
-        public string Owns { get; init; }
+        public string? Owns { get; init; }
 
         /// <summary>
         /// Defines an element's number or position in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM. See related aria-setsize.
@@ -136,7 +136,7 @@ namespace JeyDotC.JustCs.Html.Attributes
         /// <summary>
         /// Indicates what user agent change notifications (additions, removals, etc.) assistive technologies will receive within a live region. See related aria-atomic.
         /// </summary>
-        public string Relevant { get; init; }
+        public string? Relevant { get; init; }
 
         /// <summary>
         /// Indicates that user input is required on the element before a form may be submitted.
@@ -176,6 +176,6 @@ namespace JeyDotC.JustCs.Html.Attributes
         /// <summary>
         /// Defines the human readable text alternative of aria-valuenow for a range widget.
         /// </summary>
-        public string Valuetext { get; init; }
+        public string? Valuetext { get; init; }
     }
 }
