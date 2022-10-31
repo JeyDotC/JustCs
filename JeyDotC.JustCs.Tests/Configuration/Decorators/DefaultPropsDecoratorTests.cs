@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using JeyDotC.JustCs.Configuration;
+using JeyDotC.JustCs.Configuration.Decorators;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 using Xunit;
 
-namespace JeyDotC.JustCs.Tests.Configuration
+namespace JeyDotC.JustCs.Tests.Configuration.Decorators
 {
 #nullable enable
     public class DefaultPropsDecoratorTests
@@ -53,7 +54,7 @@ namespace JeyDotC.JustCs.Tests.Configuration
             public static AttrWithoutDefaultConstructor DefaultAttributes => new AttrWithoutDefaultConstructor("Foo");
 
             [ExcludeFromCodeCoverage]
-            protected override Element Render(IElementAttributes attributes) => throw new NotImplementedException();
+            protected override Element Render(IElementAttributes? attributes) => throw new NotImplementedException();
         }
 
         record PropsWithMoreValues : PropsWithValues

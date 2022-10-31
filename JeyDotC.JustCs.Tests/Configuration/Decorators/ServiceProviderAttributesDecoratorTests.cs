@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using JeyDotC.JustCs.Configuration;
+using JeyDotC.JustCs.Configuration.Decorators;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 using Moq;
 using Xunit;
 
-namespace JeyDotC.JustCs.Tests.Configuration
+namespace JeyDotC.JustCs.Tests.Configuration.Decorators
 {
 #nullable enable
     public class ServiceProviderAttributesDecoratorTests
@@ -78,6 +80,33 @@ namespace JeyDotC.JustCs.Tests.Configuration
 
             // Assert
             Assert.Equal(expectedResultAttributes, actualResultAttributes);
+        }
+
+        [ExcludeFromCodeCoverage]
+        record PropsWithRequiredInjectableAttrs : IElementAttributes
+        {
+            [Inject(Required = true)]
+            public int RequiredProp { get; init; }
+        }
+
+        [Fact]
+        public void Decorate_ShouldThrowWhenPropertycleIsRequiredButNotResolved()
+        {
+            // Arrange
+            var serviceProviderMock = new Mock<IServiceProvider>();
+            var decorator = new ServiceProviderAttributesDecorator(serviceProviderMock.Object);
+
+
+            // Act
+            var act = () => decorator.Decorate(new AttributesContext
+            {
+                Attributes = new PropsWithRequiredInjectableAttrs(),
+                ElementType = typeof(Div)
+            });
+
+            // Assert
+            var exception = Assert.Throws<InvalidOperationException>(act);
+            Assert.StartsWith("Div attribute RequiredProp is required", exception.Message);
         }
     }
 }

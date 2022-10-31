@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
     <Description>Library to render HTML using just C#. This is the core assembly that can be used to work with any web framework (e.g. Nancy, ASP). To work with ASP, install JeyDotC.JustCs.Mvc.</Description>
     <Copyright>Jeysson Guevara (JeyDotC) 2022</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -37,9 +38,11 @@ V1.0.1 Added support for WAI ARIA attributes.</PackageReleaseNotes>
     <None Remove="Html\Attributes\" />
     <None Remove="Microsoft.AspNetCore.Antiforgery" />
     <None Remove="Configuration\" />
+    <None Remove="Configuration\Decorators\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Html\Attributes\" />
     <Folder Include="Configuration\" />
+    <Folder Include="Configuration\Decorators\" />
   </ItemGroup>
 </Project>

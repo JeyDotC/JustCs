@@ -1,5 +1,6 @@
 ﻿using JeyDotC.JustCs.Configuration;
-using JeyDotC.JustCs.Mvc.AttributesDecorators;
+using JeyDotC.JustCs.Configuration.Decorators;
+using JeyDotC.JustCs.Mvc.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,10 +22,7 @@ namespace JeyDotC.JustCs.Mvc
             );
 
             JustCsSettings.AttributeDecorators.Add(
-                new ServiceProviderAttributesDecorator(app.ApplicationServices)
-            );
-            JustCsSettings.AttributeDecorators.Add(
-                new HttpContextAccessorAttributesDecorator(app.ApplicationServices)
+                new ServiceProviderAttributesDecorator(app.ApplicationServices).WithHttpContextAccessor()
             );
 
             return app;

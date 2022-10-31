@@ -3,7 +3,6 @@ using JeyDotC.JustCs.Html.Attributes;
 
 namespace JeyDotC.JustCs.Configuration
 {
-#nullable enable
     public struct AttributesContext
     {
         public IElementAttributes? Attributes { get; init; }

@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Authors>Jeysson Guevara (JeyDotC)</Authors>
+    <Nullable>enable</Nullable>
     <Company>JeyDotC</Company>
     <Description>Library to render HTML using just C#.</Description>
     <Copyright>Jeysson Guevara (JeyDotC) 2022</Copyright>
@@ -31,7 +32,7 @@
     <None Remove="Microsoft.AspNetCore.Mvc.Core" />
     <None Remove="Components\" />
     <None Remove="Microsoft.AspNetCore.Antiforgery" />
-    <None Remove="AttributesDecorators\" />
+    <None Remove="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
@@ -40,6 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Components\" />
-    <Folder Include="AttributesDecorators\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

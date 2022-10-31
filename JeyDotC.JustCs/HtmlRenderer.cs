@@ -44,9 +44,8 @@ namespace JeyDotC.JustCs
             }
 
             var textNode = node as TextElement;
-            var isTextNode = textNode != null;
 
-            if (isTextNode)
+            if (textNode is not null)
             {
                 builder.Append(textNode.Data);
                 return;
@@ -91,9 +90,9 @@ namespace JeyDotC.JustCs
             }
         }
 
-        private static void RenderAttributes(object attributes, StringBuilder builder)
+        private static void RenderAttributes(object? attributes, StringBuilder builder)
         {
-            if (attributes == null)
+            if (attributes is null)
             {
                 return;
             }
@@ -122,9 +121,9 @@ namespace JeyDotC.JustCs
             return attributesDictionary;
         }
 
-        private static void ProcessAttribute(string name, object value, AttrAttribute attributeMetadata, IDictionary<string, object> attributesDictionary)
+        private static void ProcessAttribute(string name, object? value, AttrAttribute attributeMetadata, IDictionary<string, object> attributesDictionary)
         {
-            if (value == null)
+            if (value is null)
             {
                 return;
             }
@@ -134,10 +133,21 @@ namespace JeyDotC.JustCs
                 return;
             }
 
-            var valueAstTuple = value as ITuple;
-            if(valueAstTuple != null && valueAstTuple.Length == 2 && valueAstTuple[1] is NameTransform)
+            var valueAsTuple = value as ITuple;
+            if(valueAsTuple is not null && valueAsTuple.Length == 2 )
             {
-                ProcessAttribute(name, valueAstTuple[0], new AttrAttribute((NameTransform)valueAstTuple[1]), attributesDictionary);
+                var nameTransform = valueAsTuple[1];
+
+                ProcessAttribute(
+                    name,
+                    valueAsTuple[0],
+                    new AttrAttribute(
+                        nameTransform is not null
+                        ? (NameTransform)nameTransform
+                        : default(NameTransform)
+                    ),
+                    attributesDictionary
+                );
                 return;
             }
 
@@ -207,7 +217,7 @@ namespace JeyDotC.JustCs
                     continue;
                 }
 
-                var stringValue = value.ToString();
+                var stringValue = value.ToString() ?? string.Empty;
 
                 var sanitizedValue = stringValue.Replace("\"", "&quot;");
 

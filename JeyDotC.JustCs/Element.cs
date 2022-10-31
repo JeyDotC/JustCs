@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 
@@ -9,11 +10,11 @@ namespace JeyDotC.JustCs
     {
         public abstract string Tag { get; }
 
-        public IElementAttributes Attributes { get; init; }
+        public IElementAttributes? Attributes { get; init; }
 
         public virtual bool SelfClosed { get; }
 
-        public IEnumerable<Element> Children { get; init; }
+        public IEnumerable<Element> Children { get; init; } = Enumerable.Empty<Element>();
 
         public static implicit operator Element(string data) => new TextElement { Data = data };
         public static implicit operator Element(bool data) => new TextElement { Data = FormattableString.Invariant($"{data}") };
