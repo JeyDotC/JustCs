@@ -49,9 +49,14 @@ namespace JeyDotC.JustCs.Html
             {
                 var tuple = (ITuple)spec;
                 var innerSpec = tuple[0];
-                var nameBehavior = (PropertyAsClassBehavior)tuple[1];
+                var nameBehavior = tuple[1];
 
-                return HandleClassNameDictionary(innerSpec, nameBehavior);
+                return HandleClassNameDictionary(
+                    innerSpec ?? new { },
+                    nameBehavior is not null
+                    ? (PropertyAsClassBehavior)nameBehavior
+                    : PropertyAsClassBehavior.TransformToDashCase
+                );
             }
 
             return HandleClassNameDictionary(spec);
@@ -62,7 +67,7 @@ namespace JeyDotC.JustCs.Html
 
         private static string HandleClassNameDictionary(object spec, PropertyAsClassBehavior behavior = PropertyAsClassBehavior.TransformToDashCase)
             => spec.GetType().GetProperties()
-                .Where(p => (bool)p.GetValue(spec))
+                .Where(p => (p.GetValue(spec) as bool?).GetValueOrDefault(false))
                 .Select(p => TransformName(p.Name, behavior))
                 .JoinNames();
 

@@ -133,10 +133,21 @@ namespace JeyDotC.JustCs
                 return;
             }
 
-            var valueAstTuple = value as ITuple;
-            if(valueAstTuple is not null && valueAstTuple.Length == 2 && valueAstTuple[1] is NameTransform)
+            var valueAsTuple = value as ITuple;
+            if(valueAsTuple is not null && valueAsTuple.Length == 2 )
             {
-                ProcessAttribute(name, valueAstTuple[0], new AttrAttribute((NameTransform)valueAstTuple[1]), attributesDictionary);
+                var nameTransform = valueAsTuple[1];
+
+                ProcessAttribute(
+                    name,
+                    valueAsTuple[0],
+                    new AttrAttribute(
+                        nameTransform is not null
+                        ? (NameTransform)nameTransform
+                        : default(NameTransform)
+                    ),
+                    attributesDictionary
+                );
                 return;
             }
 
@@ -206,7 +217,7 @@ namespace JeyDotC.JustCs
                     continue;
                 }
 
-                var stringValue = value.ToString();
+                var stringValue = value.ToString() ?? string.Empty;
 
                 var sanitizedValue = stringValue.Replace("\"", "&quot;");
 
