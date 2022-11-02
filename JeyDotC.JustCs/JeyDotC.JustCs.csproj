@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
     <Description>Library to render HTML using just C#. This is the core assembly that can be used to work with any web framework (e.g. Nancy, ASP). To work with ASP, install JeyDotC.JustCs.Mvc.</Description>
     <Copyright>Jeysson Guevara (JeyDotC) 2022</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -10,9 +11,13 @@
     <RepositoryType>Git</RepositoryType>
     <Authors>Jeysson Guevara (JeyDotC)</Authors>
     <Company>JeyDotC</Company>
-    <PackageVersion>1.1.0</PackageVersion>
-    <Owners>Jeysson Guevara (JeyDotC) </Owners>
-    <PackageReleaseNotes>v1.1.0 Names are now just lowercased by default.
+    <PackageVersion>1.2.0</PackageVersion>
+    <Owners>Jeysson Guevara (JeyDotC)</Owners>
+    <PackageReleaseNotes>v1.2.0 Attributes releated goodies.
+            Added Default props support.
+            Added Attributes decorators.A mechanism to inject values into attributes.
+            Added DI attributes decorator.A decorator that will inject any dependency that can be resolved with the provided IServiceProvider instance.
+v1.1.0 Names are now just lowercased by default.
             Added the Attr attribute that allows to override name transform behavior.
             Added name transform tuple machinsm to override name transform on dynamic properties e.g. (_).
             HtmlRenderer won't allow repeated attributes.
@@ -31,8 +36,13 @@ V1.0.1 Added support for WAI ARIA attributes.</PackageReleaseNotes>
     <None Remove="Html\" />
     <None Remove="Microsoft.AspNetCore.Mvc.Abstractions" />
     <None Remove="Html\Attributes\" />
+    <None Remove="Microsoft.AspNetCore.Antiforgery" />
+    <None Remove="Configuration\" />
+    <None Remove="Configuration\Decorators\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Html\Attributes\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Configuration\Decorators\" />
   </ItemGroup>
 </Project>

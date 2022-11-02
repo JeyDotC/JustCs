@@ -1,8 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Authors>Jeysson Guevara (JeyDotC)</Authors>
+    <Nullable>enable</Nullable>
     <Company>JeyDotC</Company>
     <Description>Library to render HTML using just C#.</Description>
     <Copyright>Jeysson Guevara (JeyDotC) 2022</Copyright>
@@ -10,6 +11,16 @@
     <PackageProjectUrl>https://github.com/JeyDotC/JustCs</PackageProjectUrl>
     <RepositoryUrl>https://github.com/JeyDotC/JustCs</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
+    <PackageVersion>1.1.0</PackageVersion>
+    <Owners>Jeysson Guevara (JeyDotC)</Owners>
+    <PackageReleaseNotes>v1.1.0 Mvc intagration improvement
+            Added MvcView class to easilly return views as IActionResult instances.
+            Added DI integration through attributes decorators.
+            Added AntiForgeryToken component.
+    </PackageReleaseNotes>
+    <Summary>ASP.Net MVC integration of JustCs</Summary>
+    <PackageTags>HTML, Razor Alternative, React-Inspired, MVC</PackageTags>
+    <Title>JustCs.Mvc</Title>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,9 +30,17 @@
     <None Remove="Microsoft.AspNetCore.Mvc.Abstractions" />
     <None Remove="Microsoft.Extensions.DependencyInjection.Abstractions" />
     <None Remove="Microsoft.AspNetCore.Mvc.Core" />
+    <None Remove="Components\" />
+    <None Remove="Microsoft.AspNetCore.Antiforgery" />
+    <None Remove="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Antiforgery" Version="2.2.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

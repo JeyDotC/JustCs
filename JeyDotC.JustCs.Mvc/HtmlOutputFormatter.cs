@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 
 namespace JeyDotC.JustCs.Mvc
 {
@@ -15,11 +16,12 @@ namespace JeyDotC.JustCs.Mvc
         public bool CanWriteResult(OutputFormatterCanWriteContext context)
             => typeof(IView).IsAssignableFrom(context.ObjectType) && context.Object != null;
 
+        
         public Task WriteAsync(OutputFormatterWriteContext context)
         {
-            context.ContentType = "text/html";
+            var view = (IView)context.Object;
 
-            var view = context.Object as IView;
+            context.ContentType = "text/html";
 
             context.HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;
 

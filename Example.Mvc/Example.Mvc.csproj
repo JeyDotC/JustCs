@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <UserSecretsId>f952fb0f-4906-4174-b26b-45d587f054f3</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'MrPapaya.Api' " />
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'Example.Api' " />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Views\" />
+    <None Remove="Controllers\" />
+    <None Remove="Views\App\" />
+    <None Remove="Views\Components\" />
+    <None Remove="Model\" />
+    <None Remove="Microsoft.VisualStudio.Web.CodeGeneration.Design" />
+    <None Remove="Model\Models\" />
+    <None Remove="Model\Repositories\" />
+    <None Remove="Extensions\" />
+    <None Remove="Model\Repositories\MemoryStore\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Views\Home\" />
+    <Folder Include="Views\Components\" />
+    <Folder Include="Model\" />
+    <Folder Include="Model\Models\" />
+    <Folder Include="Model\Repositories\" />
+    <Folder Include="Extensions\" />
+    <Folder Include="Model\Repositories\InMemory\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JeyDotC.JustCs.Mvc\JeyDotC.JustCs.Mvc.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.8" />
+  </ItemGroup>
+</Project>
