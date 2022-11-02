@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.810.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Example.Api", "Example.Api\Example.Api.csproj", "{726ED8BC-8586-4317-B1FF-8D610BDCB787}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example.Mvc", "Example.Mvc\Example.Mvc.csproj", "{726ED8BC-8586-4317-B1FF-8D610BDCB787}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JeyDotC.JustCs", "JeyDotC.JustCs\JeyDotC.JustCs.csproj", "{E47B008A-0FFF-4BC7-A9A8-B74F3B6D5380}"
 EndProject
@@ -20,11 +20,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Files", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{505F2A8A-F800-4902-A307-7BBCB3205E0A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JeyDotC.JustCs.Tests", "JeyDotC.JustCs.Tests\JeyDotC.JustCs.Tests.csproj", "{34499D72-B358-483D-9D61-C858AF16E42D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeyDotC.JustCs.Tests", "JeyDotC.JustCs.Tests\JeyDotC.JustCs.Tests.csproj", "{34499D72-B358-483D-9D61-C858AF16E42D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{53D32D80-97BF-4114-A19C-1ED3943AF588}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JeyDotC.JustCs.Mvc.Tests", "JeyDotC.JustCs.Mvc.Tests\JeyDotC.JustCs.Mvc.Tests.csproj", "{24C17E70-F0B9-4B40-9658-6251E4C68CEB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JeyDotC.JustCs.Mvc.Tests", "JeyDotC.JustCs.Mvc.Tests\JeyDotC.JustCs.Mvc.Tests.csproj", "{24C17E70-F0B9-4B40-9658-6251E4C68CEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,13 +1,24 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using JeyDotC.JustCs.Configuration;
+using JeyDotC.JustCs.Configuration.Decorators;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
 using Xunit;
 
 namespace JeyDotC.JustCs.Tests
 {
+    class DummyDecorator : IAttributesDecorator
+    {
+        public IElementAttributes Decorate(AttributesContext attributesContext) => attributesContext.Attributes;
+    }
+
     struct MyComponentProps : IElementAttributes { }
+    record PropsWithValues : IElementAttributes
+    {
+        public string Value { get; init; }
+    }
 
     class FragmentFromParams : ComponentElement<MyComponentProps>
     {
@@ -63,7 +74,7 @@ namespace JeyDotC.JustCs.Tests
     class ElementFromIEnumerableWithAttributes : ComponentElement<MyComponentProps>
     {
         protected override Element Render(MyComponentProps props)
-        => _<Div>( new Attrs { Id = "some-div" },
+        => _<Div>(new Attrs { Id = "some-div" },
                 new List<Element>
                 {
                     _<A>(new Attrs { Href = "/index" }),
@@ -90,8 +101,32 @@ namespace JeyDotC.JustCs.Tests
             => _<ElementFromIEnumerableWithAttributes>();
     }
 
-    public class ComponentElementTests
+    class ElementWithDefaultProps : ComponentElement<PropsWithValues>
     {
+        public static PropsWithValues DefaultAttributes => new PropsWithValues
+        {
+            Value = "100",
+        };
+
+        protected override Element Render(PropsWithValues props)
+            => _<Div>(new Attrs { Id = props.Value });
+    }
+
+    class RenderElementWithDefaultProps : ComponentElement
+    {
+        protected override Element Render(IElementAttributes attributes)
+            => _<ElementWithDefaultProps>(attributes);
+    }
+
+    public class ComponentElementTests : IDisposable
+    {
+
+        public ComponentElementTests()
+        {
+            JustCsSettings.AttributeDecorators.Add(new DefaultPropsDecorator());
+            JustCsSettings.AttributeDecorators.Add(new DummyDecorator());
+        }
+
         public static IEnumerable<object[]> TestedComponents()
         {
             yield return new object[] {
@@ -142,6 +177,31 @@ namespace JeyDotC.JustCs.Tests
                 typeof(Div), // Expected Element
                 null, // Expected Attributes
             };
+
+            yield return new object[] {
+                new RenderElementWithDefaultProps{}, // Component
+                nameof(RenderElementWithDefaultProps), // Expected Tag
+                typeof(Div), // Expected Element
+                new Attrs { Id = "100" }, // Expected Attributes
+            };
+
+            yield return new object[] {
+                new RenderElementWithDefaultProps{
+                    Attributes = new PropsWithValues()
+                }, // Component
+                nameof(RenderElementWithDefaultProps), // Expected Tag
+                typeof(Div), // Expected Element
+                new Attrs { Id = "100" }, // Expected Attributes
+            };
+
+            yield return new object[] {
+                new RenderElementWithDefaultProps{
+                    Attributes = new PropsWithValues { Value = "200" }
+                }, // Component
+                nameof(RenderElementWithDefaultProps), // Expected Tag
+                typeof(Div), // Expected Element
+                new Attrs { Id = "200" }, // Expected Attributes
+            };
         }
 
         [Theory]
@@ -181,6 +241,11 @@ namespace JeyDotC.JustCs.Tests
 
             // Assert
             Assert.Throws<InvalidOperationException>(action);
+        }
+
+        public void Dispose()
+        {
+            JustCsSettings.AttributeDecorators.Clear();
         }
     }
 }
