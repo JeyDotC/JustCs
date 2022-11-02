@@ -34,8 +34,8 @@ public class MyPageController : ControllerBase
 ## Installation
 
 ```shell
-dotnet add package JeyDotC.JustCs --version 1.1.0
-dotnet add package JeyDotC.JustCs.Mvc --version 1.0.0
+dotnet add package JeyDotC.JustCs --version 1.2.0
+dotnet add package JeyDotC.JustCs.Mvc --version 1.1.0
 ```
 
 ## Setup
@@ -112,7 +112,7 @@ public class MyPageController : ControllerBase
 }
 ```
 
-### Return as IActionResult (Work in progress)
+### Return as IActionResult
 
 If you're returning an IAction result instance, you can use the `MvcView<>` class instead.
 
