@@ -112,7 +112,7 @@ public class MyPageController : ControllerBase
 }
 ```
 
-### Return as IActionResult (Work in progress)
+### Return as IActionResult
 
 If you're returning an IAction result instance, you can use the `MvcView<>` class instead.
 
