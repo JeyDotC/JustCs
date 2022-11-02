@@ -23,11 +23,19 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Publish NuGet
+    - name: Publish NuGet For JeyDotC.JustCs
       uses: alirezanet/publish-nuget@v3.0.0
       with:
         PROJECT_FILE_PATH: JeyDotC.JustCs/JeyDotC.JustCs.csproj
         PACKAGE_NAME: JeyDotC.JustCs
+        VERSION_REGEX: ^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+        INCLUDE_SYMBOLS: true
+    - name: Publish NuGet For JeyDotC.JustCs.Mvc
+      uses: alirezanet/publish-nuget@v3.0.0
+      with:
+        PROJECT_FILE_PATH: JeyDotC.JustCs.Mvc/JeyDotC.JustCs.Mvc.csproj
+        PACKAGE_NAME: JeyDotC.JustCs.Mvc
         VERSION_REGEX: ^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
         INCLUDE_SYMBOLS: true
