@@ -82,6 +82,8 @@ public class MyPage : ComponentElement
 }
 ```
 
+> :information_source: **Pro tip:** We created a small tool to convert HTML into JustCs syntax, just follow [this link](https://jeydotc.github.io/csb-zlthyt/).
+
 ### Return the view as a response
 
 At your controller, just create a `View<>` instance which will serve as the HTTP response.
