@@ -1,11 +1,12 @@
 ﻿using System;
 using JeyDotC.JustCs.Html;
 using JeyDotC.JustCs.Html.Attributes;
+using JeyDotC.JustCs.Testing;
 using Xunit;
 
 namespace JeyDotC.JustCs.Tests
 {
-    public class ViewTests
+    public class ViewTests : JustCsTest
     {
         [Fact]
         public void View_ShouldRepresentAnHttpResponse()
@@ -17,7 +18,7 @@ namespace JeyDotC.JustCs.Tests
             // Assert
             Assert.Equal(new string[] { "some-value" }, view.Headers.GetValues("X-Header"));
             Assert.Equal(System.Net.HttpStatusCode.OK, view.StatusCode);
-            Assert.Equal("<div id=\"app\"></div>\n", view.GetElement().RenderAsHtml());
+            Assert.Equivalent(_<Div>(new Attrs { Id = "app" }), view.GetElement().RenderAsHtmlTree());
         }
 
         [Fact]
