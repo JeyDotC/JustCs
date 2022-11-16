@@ -39,3 +39,11 @@ jobs:
         VERSION_REGEX: ^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$
         NUGET_KEY: ${{secrets.NUGET_API_KEY}}
         INCLUDE_SYMBOLS: true
+    - name: Publish NuGet For JeyDotC.JustCs.Testing
+      uses: alirezanet/publish-nuget@v3.0.0
+      with:
+        PROJECT_FILE_PATH: JeyDotC.JustCs.Testing/JeyDotC.JustCs.Testing.csproj
+        PACKAGE_NAME: JeyDotC.JustCs.Testing
+        VERSION_REGEX: ^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$
+        NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+        INCLUDE_SYMBOLS: true

@@ -14,6 +14,14 @@ namespace JeyDotC.JustCs
     {
         private static readonly Regex _tagNameCheck = new Regex("^[A-Za-z]([A-Za-z0-9-]*[A-Za-z0-9])?$", RegexOptions.IgnoreCase);
 
+        /// <summary>
+        /// Invokes this component's Render method with its current Attributes.
+        /// This method doesn't affect the children which only get instantiated
+        /// (not rendered). This method is intended for testing and debugging
+        /// only.
+        /// </summary>
+        /// <param name="component"></param>
+        /// <returns></returns>
         public static Element RenderAsElement(this ComponentElement component)
             => component.ToElement();
 
