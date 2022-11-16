@@ -5,6 +5,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Description>A small set of unit test helpers.</Description>
+    <Copyright>Jeysson Guevara (JeyDotC) 2022</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/JeyDotC/JustCs</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/JeyDotC/JustCs</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <Authors>Jeysson Guevara (JeyDotC)</Authors>
+    <Company>JeyDotC</Company>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Owners>Jeysson Guevara (JeyDotC)</Owners>
+    <PackageReleaseNotes>First version.</PackageReleaseNotes>
+    <Summary>Library to help creating unit tests for JustCs</Summary>
+    <PackageTags>Unit Tests, JustCs</PackageTags>
+    <Title>JustCs.Testing</Title>
   </PropertyGroup>
 
   <ItemGroup>
