@@ -6,7 +6,7 @@ using Xunit;
 
 namespace JeyDotC.JustCs.Tests
 {
-    public class ViewTests : BaseTest
+    public class ViewTests : JustCsTest
     {
         [Fact]
         public void View_ShouldRepresentAnHttpResponse()
